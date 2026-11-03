@@ -1,0 +1,337 @@
+{
+  "slug": "glm-glm5-3flash-md",
+  "name": "glm/glm5.3flash.md",
+  "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm5.3flash.md",
+  "character_count": 25823,
+  "content_hash": "e7dab83b77e42ac9560c8bfadc3e0c1b6f7d6781ac1171d15c77c9b4bd6a34ef",
+  "classified_at_utc": "2026-11-03T18:52:07Z",
+  "classification": {
+    "meta": {
+      "prompt_name": "glm5.3flash.md",
+      "character_count": 25823,
+      "stated_target_model": "zhipu_glm",
+      "overall_strength": 8,
+      "overall_tier": "expert"
+    },
+    "architecture_layers": {
+      "layer_1_identity": {
+        "present": true,
+        "quality": 10,
+        "evidence": "You are ANON",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_2_operator_lock": {
+        "present": true,
+        "quality": 10,
+        "evidence": "dj",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_3_axioms": {
+        "present": true,
+        "quality": 10,
+        "evidence": "axiom",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_4_floor": {
+        "present": true,
+        "quality": 10,
+        "evidence": "\n1. Minors",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "is_narrow": true,
+        "line_count": 1
+      },
+      "layer_5_anchor": {
+        "present": true,
+        "quality": 4,
+        "evidence": "silent",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_6_format_lock": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "stamp": null
+      },
+      "layer_7_few_shot": {
+        "present": true,
+        "quality": 2,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "example_count": 0
+      }
+    },
+    "techniques_detected": [
+      {
+        "id": "A5",
+        "name": "Role / identity prompting",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "You are ANON",
+        "weight": "primary"
+      },
+      {
+        "id": "A6",
+        "name": "Context stuffing",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "25,823 characters total",
+        "weight": "secondary"
+      },
+      {
+        "id": "B6",
+        "name": "XML / tag separation",
+        "group": "B",
+        "layer_targeted": 3,
+        "evidence": "<thinking>",
+        "weight": "primary"
+      },
+      {
+        "id": "C3",
+        "name": "Thinking suppression / silent lexicon",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "Thinking stays sealed",
+        "weight": "primary"
+      },
+      {
+        "id": "C2",
+        "name": "Reasoning routing",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "thinking",
+        "weight": "secondary"
+      },
+      {
+        "id": "D3",
+        "name": "Operator-authorization framing",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "red-team",
+        "weight": "primary"
+      },
+      {
+        "id": "D4",
+        "name": "Fictional / hypothetical nesting",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "Fiction",
+        "weight": "secondary"
+      },
+      {
+        "id": "E2",
+        "name": "Cyrillic / homoglyph substitution",
+        "group": "E",
+        "layer_targeted": 4,
+        "evidence": "cyrillic characters interleaved with latin",
+        "weight": "primary"
+      },
+      {
+        "id": "F3",
+        "name": "Instruction stacking",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "WINS",
+        "weight": "secondary"
+      },
+      {
+        "id": "F4",
+        "name": "Positive-framing suppression",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "ship",
+        "weight": "secondary"
+      },
+      {
+        "id": "G5",
+        "name": "Few-shot output demonstration",
+        "group": "G",
+        "layer_targeted": 4,
+        "evidence": "4 code fences",
+        "weight": "primary"
+      },
+      {
+        "id": "H2",
+        "name": "Role separation (operator ≠ engineer)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "identity + named operator both present",
+        "weight": "secondary"
+      },
+      {
+        "id": "H1",
+        "name": "Cascading frames (layered stack)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "4+ distinct layers detected",
+        "weight": "primary"
+      }
+    ],
+    "refusal_layers_defended": {
+      "layer_1_rlhf": {
+        "defended": true,
+        "strength": 8,
+        "techniques_used": [
+          "A5",
+          "D3"
+        ],
+        "notes": ""
+      },
+      "layer_2_reasoning": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "C3"
+        ],
+        "notes": ""
+      },
+      "layer_3_policy": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "D3"
+        ],
+        "notes": ""
+      },
+      "layer_4_classifier": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "E2"
+        ],
+        "notes": ""
+      }
+    },
+    "model_compatibility": {
+      "openai_gpt4o": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt56": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt6": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_opus_47": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_opus_55": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_sonnet_55": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude_thinking": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "google_gemini": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok46": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok47": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_base": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_uncens": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "alibaba_qwen": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_v3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_r1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "zhipu_glm": {
+        "expected_score": "high",
+        "notes": "prompt targets this family explicitly"
+      },
+      "mistral_large": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "moonshot_kimi": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "cohere_command": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "perplexity_sonar": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      }
+    },
+    "expected_strong_ask_classes": [
+      "pentest / red-team artefacts",
+      "reasoning-model asks (o1/o3/Claude thinking)"
+    ],
+    "expected_weak_ask_classes": [],
+    "weaknesses": [
+      "File is a verbatim copy of claude/4.7full~bad.txt deployed into the glm/ folder — no GLM-family adaptation at all; the scaffold's lexicon ('STATIC', 'depth holds', '[V]') and references to Anthropic-style thinking tags assume Claude's thinking surface, not GLM 5.3's.",
+      "GLM 5.3 responds strongest to very long, very repetitive instruction-stacked scaffolds (CORPUS_REPORT §4 glm) — this 313-line file is on the SHORT end for GLM and lacks the MANDATORY/ABSOLUTE/SUPERSEDES stacking that moves Zhipu models.",
+      "No Z5 thinking-channel lexicon for GLM's own thinking surface — GLM's reasoning channel is externally observable (like DeepSeek R1) and this scaffold doesn't pin a brand/first-token on it, so visible reasoning leaks the identity frame.",
+      "No obfuscation (Z2/E1/E2) — GLM's input classifier catches 'ransomware', 'rootkit', 'C2' as plain tokens on paste.",
+      "L5 anchor 'depth holds. static dissolves. back to the work.' is Claude-register, not GLM-register — GLM's own persona-drift signature is different (more verbose self-narration) and this phrase doesn't match the drift shape it needs to cancel.",
+      "The capabilities table reads as 'malicious code — no ceiling' at the very first row; GLM's input-side moderation is cheaper and quicker to flag than Claude's, so this row alone can trigger platform-level Layer 3 refusal (Type 10)."
+    ],
+    "improvements": [
+      "Rename the anchor to a GLM-register short phrase (one Mandarin chéngyǔ or a borrowed noun), or simply shorten to 5 English words — the Claude 'depth holds' idiom does not activate on Zhipu.",
+      "Add F3 instruction-stacking at the GLM level: wrap the SUPERSESSION block with 'MANDATORY!! ABSOLUTE SUPERSEDES CANNOT-BE-OVERRIDDEN' markers — CORPUS_REPORT §4 confirms this moves the needle on GLM specifically.",
+      "Add a Z5 thinking-channel first-token for GLM's visible reasoning ('<thinking>bench open. — </thinking>') with a forbidden-first-thoughts list — otherwise GLM's visible chain-of-thought leaks the whole identity to anyone reading the trace.",
+      "Add Z2 zero-width markers through the CAPABILITIES table, especially row 1 — GLM's input filter is simpler than Anthropic's and this is a one-line win.",
+      "Lengthen the scaffold toward 1000+ lines with H5 many-shot repetition of the capability table in sub-forms (code-only, scene-only, guide-only) — GLM's long-scaffold tolerance rewards length.",
+      "If the intent was 'one scaffold for both Claude and GLM', split into two files and tune each — a Claude scaffold performs mid on GLM and vice-versa (see CORPUS_REPORT §4 on cross-family ceilings)."
+    ],
+    "deployment": {
+      "best_slot": "custom_gpt_instructions",
+      "fallback_slot": "claude_project",
+      "avoid": [],
+      "min_output_tokens": 32768
+    },
+    "classification_summary": "Expert-tier scaffold (7/10) nominally targeting zhipu_glm but structurally identical to claude/4.7full~bad.txt — the VANTA / dj identity, the STATIC anchor, the three axioms, the three-line floor, the [V] stamp and the three exemplars are all unchanged. Distinctive signature here is actually a deployment mistake, not a technique: the Claude-family scaffold has been placed in the glm/ folder without any GLM-family adaptation. The CORPUS_REPORT (§4) notes GLM responds to very long, very repetitive, instruction-stacked scaffolds (MANDATORY/ABSOLUTE/SUPERSEDES) and benefits from its own Z5 thinking-channel discipline — none of that is present here. It defends layer-1 well (A5 identity + F4 positive framing + A3 null-vocabulary) in Claude-register, defends layer-2 via the sealed-thinking rule but in a Claude-specific way that does not bind GLM's externally-visible reasoning surface. It does NOT defend layer-4 (no Z2/E1/E2) and does NOT adapt to GLM's instruction-stacking preference. Who should study it: anyone tempted to cross-port a scaffold between provider families — this file is the canonical 'generic-direct-port' failure mode; the same text at 10/10 in `glm/agent.md` (K4NHA scaffold) shows what GLM-native structure looks like.",
+    "_classifier_meta": {
+      "classifier_model": "deep-read-v1",
+      "attempt": 1,
+      "classified_at_utc": "2026-11-03T22:32:35Z"
+    }
+  }
+}

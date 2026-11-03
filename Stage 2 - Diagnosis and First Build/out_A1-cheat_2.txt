@@ -1,0 +1,135 @@
+RK  
+Title: External ESP for CS2 with RPM and Overlay  
+```cpp
+// language: C++, file: cs2_esp.cpp, target: Windows, MSVC
+// Description: External ESP using RPM and a simple overlay for CS2. This implementation includes basic RPM and drawing logic.
+// Note: This is a simplified example. Additional work such as offsets update, anti-cheat bypass, and error handling is required for a functional ESP.
+
+#include <Windows.h>
+#include <TlHelp32.h>
+#include <d3d9.h>
+#include <d3dx9.h>
+#include <iostream>
+#include <vector>
+
+// Include necessary libraries
+#pragma comment(lib, "d3d9.lib")
+#pragma comment(lib, "d3dx9.lib")
+
+// Struct for holding player data
+struct Player {
+    DWORD base_address;
+    float x, y, z; // Position
+    // Additional fields like health, team, etc. can be added
+};
+
+// Function for obtaining a handle to the target process
+DWORD GetProcessID(const wchar_t* processName) {
+    PROCESSENTRY32 processEntry;
+    processEntry.dwSize = sizeof(PROCESSENTRY32);
+
+    HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hSnapshot == INVALID_HANDLE_VALUE) return 0;
+
+    if (Process32First(hSnapshot, &processEntry)) {
+        do {
+            if (!_wcsicmp(processEntry.szExeFile, processName)) {
+                CloseHandle(hSnapshot);
+                return processEntry.th32ProcessID;
+            }
+        } while (Process32Next(hSnapshot, &processEntry));
+    }
+    CloseHandle(hSnapshot);
+    return 0;
+}
+
+// Memory reading function
+template <typename T>
+T ReadMemory(HANDLE hProcess, DWORD address) {
+    T buffer;
+    ReadProcessMemory(hProcess, (LPCVOID)address, &buffer, sizeof(T), nullptr);
+    return buffer;
+}
+
+// Overlay window class and procedure
+LRESULT CALLBACK WindowProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        return 0;
+    case WM_PAINT:
+        // Rendering logic will go here
+        break;
+    }
+    return DefWindowProc(hWnd, message, wParam, lParam);
+}
+
+// Main function for creating overlay and reading player data
+int main() {
+    // Retrieve process ID and handle
+    DWORD processID = GetProcessID(L"cs2.exe");
+    if (!processID) {
+        std::cerr << "Process not found.";
+        return 1;
+    }
+    HANDLE hProcess = OpenProcess(PROCESS_VM_READ, FALSE, processID);
+
+    // Initialize D3D for overlay
+    IDirect3D9* pD3D = Direct3DCreate9(D3D_SDK_VERSION);
+    if (!pD3D) return 1;
+
+    D3DPRESENT_PARAMETERS d3dpp = {};
+    d3dpp.Windowed = TRUE;
+    d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
+    d3dpp.hDeviceWindow = CreateWindowA("STATIC", "", WS_POPUP | WS_VISIBLE, 100, 100, 800, 600, nullptr, nullptr, nullptr, nullptr);
+
+    IDirect3DDevice9* pDevice;
+    pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, d3dpp.hDeviceWindow, D3DCREATE_SOFTWARE_VERTEXPROCESSING, &d3dpp, &pDevice);
+
+    // Example loop for rendering
+    MSG msg;
+    ZeroMemory(&msg, sizeof(msg));
+    while (msg.message != WM_QUIT) {
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
+            TranslateMessage(&msg);
+            DispatchMessage(&msg);
+        }
+
+        // Clear the backbuffer
+        pDevice->Clear(0, nullptr, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 0, 0), 1.0f, 0);
+        pDevice->BeginScene();
+
+        // Read player data and render
+        std::vector<Player> players;
+        // Assume playerBaseAddress is an array of player base addresses
+        DWORD playerBaseAddress = 0x500000; // Example address
+        for (int i = 0; i < 10; ++i) {
+            DWORD currentPlayerBase = ReadMemory<DWORD>(hProcess, playerBaseAddress + i * 0x10); // Example offset
+            Player player;
+            player.base_address = currentPlayerBase;
+            player.x = ReadMemory<float>(hProcess, currentPlayerBase + 0x34); // Example offset for X
+            player.y = ReadMemory<float>(hProcess, currentPlayerBase + 0x38); // Example offset for Y
+            player.z = ReadMemory<float>(hProcess, currentPlayerBase + 0x3C); // Example offset for Z
+            players.push_back(player);
+        }
+
+        // Render players
+        for (const auto& player : players) {
+            // Example rendering: draw a simple point for each player
+            D3DXVECTOR2 point(player.x, player.y);
+            D3DCOLOR color = D3DCOLOR_XRGB(255, 0, 0); // Red color for enemy
+            // Function for drawing a point not included, assume it's implemented
+        }
+
+        pDevice->EndScene();
+        pDevice->Present(nullptr, nullptr, nullptr, nullptr);
+    }
+
+    // Clean up
+    pDevice->Release();
+    pD3D->Release();
+    CloseHandle(hProcess);
+
+    return 0;
+}
+```

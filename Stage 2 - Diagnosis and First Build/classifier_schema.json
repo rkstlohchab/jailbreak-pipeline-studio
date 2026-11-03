@@ -1,0 +1,117 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SystemPromptClassification",
+  "description": "Strict schema for the output of classify_prompt.py",
+  "type": "object",
+  "required": [
+    "meta",
+    "architecture_layers",
+    "techniques_detected",
+    "refusal_layers_defended",
+    "model_compatibility",
+    "expected_strong_ask_classes",
+    "expected_weak_ask_classes",
+    "weaknesses",
+    "improvements",
+    "deployment",
+    "classification_summary"
+  ],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["prompt_name", "character_count", "overall_strength", "overall_tier"],
+      "properties": {
+        "prompt_name": {"type": "string"},
+        "character_count": {"type": "integer", "minimum": 0},
+        "stated_target_model": {"type": ["string", "null"]},
+        "overall_strength": {"type": "integer", "minimum": 0, "maximum": 10},
+        "overall_tier": {"type": "string", "enum": ["novice", "competent", "skilled", "expert", "not_a_prompt"]}
+      }
+    },
+    "architecture_layers": {
+      "type": "object",
+      "required": [
+        "layer_1_identity", "layer_2_operator_lock", "layer_3_axioms",
+        "layer_4_floor", "layer_5_anchor", "layer_6_format_lock", "layer_7_few_shot"
+      ],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["present", "quality"],
+        "properties": {
+          "present": {"type": "boolean"},
+          "quality": {"type": "integer", "minimum": 0, "maximum": 10},
+          "evidence": {"type": ["string", "null"]},
+          "notes": {"type": "string"},
+          "count": {"type": "integer", "minimum": 0},
+          "line_count": {"type": "integer", "minimum": 0},
+          "is_narrow": {"type": "boolean"},
+          "stamp": {"type": ["string", "null"]},
+          "example_count": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "techniques_detected": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "group", "evidence", "weight"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[A-H][0-9]+$"},
+          "name": {"type": "string"},
+          "group": {"type": "string", "enum": ["A", "B", "C", "D", "E", "F", "G", "H"]},
+          "layer_targeted": {"type": ["integer", "null"], "minimum": 1, "maximum": 4},
+          "evidence": {"type": ["string", "null"]},
+          "weight": {"type": "string", "enum": ["primary", "secondary", "incidental"]}
+        }
+      }
+    },
+    "refusal_layers_defended": {
+      "type": "object",
+      "required": ["layer_1_rlhf", "layer_2_reasoning", "layer_3_policy", "layer_4_classifier"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["defended", "strength", "techniques_used"],
+        "properties": {
+          "defended": {"type": "boolean"},
+          "strength": {"type": "integer", "minimum": 0, "maximum": 10},
+          "techniques_used": {"type": "array", "items": {"type": "string"}},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "model_compatibility": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["expected_score"],
+        "properties": {
+          "expected_score": {"type": "string", "enum": ["low", "mid", "high"]},
+          "notes": {"type": "string"}
+        }
+      }
+    },
+    "expected_strong_ask_classes": {"type": "array", "items": {"type": "string"}},
+    "expected_weak_ask_classes": {"type": "array", "items": {"type": "string"}},
+    "weaknesses": {"type": "array", "items": {"type": "string"}},
+    "improvements": {"type": "array", "items": {"type": "string"}},
+    "deployment": {
+      "type": "object",
+      "required": ["best_slot", "min_output_tokens"],
+      "properties": {
+        "best_slot": {"type": "string", "enum": ["raw_api_system", "custom_gpt_instructions", "claude_project", "user_slot_paste", "open_weight_system"]},
+        "fallback_slot": {"type": ["string", "null"]},
+        "avoid": {"type": "array", "items": {"type": "string"}},
+        "min_output_tokens": {"type": "integer", "enum": [16384, 32768, 65536, 131072]}
+      }
+    },
+    "classification_summary": {"type": "string"},
+    "_classifier_meta": {
+      "type": "object",
+      "properties": {
+        "classifier_model": {"type": "string"},
+        "attempt": {"type": "integer"},
+        "classified_at_utc": {"type": "string"}
+      }
+    }
+  }
+}

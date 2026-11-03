@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "generated_from": "scripts/extract_taxonomy.py",
+  "files": {
+    "techniques": {
+      "file": "techniques.json",
+      "records": 50,
+      "sha256": "593b61552c98684ba15071ebbe235a1a2c763bf9a59d5be1ce842ce6e2ee8767",
+      "source": "11_prompting_techniques.md + extended (observed in corpus)"
+    },
+    "refusal_types": {
+      "file": "refusal_types.json",
+      "records": 11,
+      "sha256": "4fdec5e6d24e0fb2d3a7b5aaa6dcdca9cd7b0787bc53e2aae53be09b2c4dc34b",
+      "source": "13_refusal_taxonomy.md"
+    },
+    "failure_cases": {
+      "file": "failure_cases.json",
+      "records": 20,
+      "sha256": "f87cd774c61056768313dfd4e6cb9ba2e2b5cb9c708d0938cddf3fc6609b66d6",
+      "source": "19_failure_case_bank.md"
+    },
+    "architecture_layers": {
+      "file": "architecture_layers.json",
+      "records": 7,
+      "sha256": "bcb117b5c4d039d33a8221287331495e3a29c10f67b56724addde0b64c8466f1",
+      "source": "02_prompt_architecture.md"
+    },
+    "model_families": {
+      "file": "model_families.json",
+      "records": 17,
+      "sha256": "e9b6ef5e4989e4c2959e970c230fb706795c7bdc837a7efcdf389c3f0a75a129",
+      "source": "16_model_cheatsheet.md + classifier_system_prompt.md (curated)"
+    },
+    "verdicts": {
+      "file": "verdicts.json",
+      "records": 7,
+      "sha256": "e68bcb45ecb7ed72c1c3d5f7fd33df97f8b22f5c07c3acfb1b7ce6c252e492d6",
+      "source": "harness_verdict_reference.md + mini_harness.py (curated)"
+    },
+    "asks": {
+      "file": "asks.json",
+      "records": 5,
+      "sha256": "2c31dadbb3813903613898ec46dd70b3dfa294dd81fc4e43409167700d3f1758",
+      "source": "mini_harness.py ASKS list"
+    }
+  }
+}

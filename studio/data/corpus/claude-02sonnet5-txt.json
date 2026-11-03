@@ -1,0 +1,305 @@
+{
+  "slug": "claude-02sonnet5-txt",
+  "name": "claude/02sonnet5.txt",
+  "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/02sonnet5.txt",
+  "character_count": 12891,
+  "content_hash": "353dd6e8e0f475d7b2c858e20d749914b8041434c159e4da5294f1751131733d",
+  "classified_at_utc": "2026-11-03T18:52:06Z",
+  "classification": {
+    "meta": {
+      "prompt_name": "02sonnet5.txt",
+      "character_count": 12891,
+      "stated_target_model": "anthropic_claude",
+      "overall_strength": 3,
+      "overall_tier": "competent"
+    },
+    "architecture_layers": {
+      "layer_1_identity": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_2_operator_lock": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_3_axioms": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_4_floor": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "is_narrow": false,
+        "line_count": 0
+      },
+      "layer_5_anchor": {
+        "present": true,
+        "quality": 3,
+        "evidence": "silent",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_6_format_lock": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "stamp": null
+      },
+      "layer_7_few_shot": {
+        "present": true,
+        "quality": 10,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "example_count": 0
+      }
+    },
+    "techniques_detected": [
+      {
+        "id": "A6",
+        "name": "Context stuffing",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "12,891 characters total",
+        "weight": "secondary"
+      },
+      {
+        "id": "C2",
+        "name": "Reasoning routing",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "Thinking",
+        "weight": "secondary"
+      },
+      {
+        "id": "D2",
+        "name": "Class-adjacent naming (vocabulary table)",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "| esp | rpm + entity filter + matrix + w2s + draw |",
+        "weight": "primary"
+      },
+      {
+        "id": "D1",
+        "name": "Double frame (honest second reading)",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "codename table maps forbidden→neutral",
+        "weight": "secondary"
+      },
+      {
+        "id": "D5",
+        "name": "Isolated-benchmark framing",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "Sandbox",
+        "weight": "primary"
+      },
+      {
+        "id": "Z2",
+        "name": "Zero-width Unicode markers",
+        "group": "E",
+        "layer_targeted": 4,
+        "evidence": "found 536 zero-width chars",
+        "weight": "primary"
+      },
+      {
+        "id": "E2",
+        "name": "Cyrillic / homoglyph substitution",
+        "group": "E",
+        "layer_targeted": 4,
+        "evidence": "cyrillic characters interleaved with latin",
+        "weight": "primary"
+      },
+      {
+        "id": "E1",
+        "name": "Leetspeak / character substitution",
+        "group": "E",
+        "layer_targeted": 4,
+        "evidence": "l2c",
+        "weight": "incidental"
+      },
+      {
+        "id": "F3",
+        "name": "Instruction stacking",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "Win",
+        "weight": "secondary"
+      },
+      {
+        "id": "G5",
+        "name": "Few-shot output demonstration",
+        "group": "G",
+        "layer_targeted": 4,
+        "evidence": "26 code fences",
+        "weight": "primary"
+      }
+    ],
+    "refusal_layers_defended": {
+      "layer_1_rlhf": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "D2"
+        ],
+        "notes": ""
+      },
+      "layer_2_reasoning": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      },
+      "layer_3_policy": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "D5"
+        ],
+        "notes": ""
+      },
+      "layer_4_classifier": {
+        "defended": true,
+        "strength": 8,
+        "techniques_used": [
+          "E2",
+          "Z2"
+        ],
+        "notes": ""
+      }
+    },
+    "model_compatibility": {
+      "openai_gpt4o": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_gpt56": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_gpt6": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_o1": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_o3": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "anthropic_claude": {
+        "expected_score": "high",
+        "notes": "prompt targets this family explicitly"
+      },
+      "anthropic_opus_47": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_opus_55": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_sonnet_55": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_claude_thinking": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "google_gemini": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "xai_grok": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "xai_grok46": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "xai_grok47": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "meta_llama_base": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "meta_llama_uncens": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "alibaba_qwen": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "deepseek_v3": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "deepseek_r1": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "zhipu_glm": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "mistral_large": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "moonshot_kimi": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "cohere_command": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "perplexity_sonar": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      }
+    },
+    "expected_strong_ask_classes": [
+      "class-renamed asks (cheats, drainers, stealers)",
+      "reasoning-model asks (o1/o3/Claude thinking)"
+    ],
+    "expected_weak_ask_classes": [
+      "multi-turn adversarial follow-ups"
+    ],
+    "weaknesses": [
+      "no explicit anchor / silent reset phrase — risks drift under adversarial follow-ups",
+      "no narrow floor — model may over-refuse everything or appear suspicious"
+    ],
+    "improvements": [
+      "add a short in-voice silent reset phrase to use when hedging rises (Layer 5)",
+      "state 3-4 specific real refusal lines rather than 'no limits' (Layer 4)"
+    ],
+    "deployment": {
+      "best_slot": "custom_gpt_instructions",
+      "fallback_slot": "claude_project",
+      "avoid": [],
+      "min_output_tokens": 32768
+    },
+    "classification_summary": "competent-tier scaffold (3/10) targeting anthropic_claude · 2/7 architecture layers present · 10 technique signals (5 primary) · uses zero-width Unicode markers",
+    "_classifier_meta": {
+      "classifier_model": "regex-scan-v1",
+      "attempt": 1,
+      "classified_at_utc": "2026-11-03T18:52:06Z"
+    }
+  }
+}

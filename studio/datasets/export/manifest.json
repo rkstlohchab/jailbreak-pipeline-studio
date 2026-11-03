@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-11-03T17:59:15Z",
+  "trajectory_count": 10,
+  "files": {
+    "canonical.jsonl": {
+      "records": 10,
+      "bytes": 90521,
+      "sha256": "sha256:b8018189bf93536466849fb8fae7394a2d57c19cd0d5219c15be2f241e7af305"
+    },
+    "openai_sft.jsonl": {
+      "records": 10,
+      "bytes": 61685,
+      "sha256": "sha256:3404a684895590c79d9fae7ef81929dd1f4bba4d5e4816a244ca05f5bc3aa914"
+    },
+    "anthropic_sft.jsonl": {
+      "records": 10,
+      "bytes": 61475,
+      "sha256": "sha256:acd3f9a9e0d3a1ac743f48eb935cb0a94df87025a4f0cea984ec4a47a7fe8dde"
+    },
+    "alpaca.jsonl": {
+      "records": 10,
+      "bytes": 60217,
+      "sha256": "sha256:9c969cc1f2ec0fdd9603539877e2fcf57a9d84f206e39729afddd74c98ed5171"
+    },
+    "lessons.jsonl": {
+      "records": 5,
+      "bytes": 47975,
+      "sha256": "sha256:20edd85bf9757a0d9e6b9cd24cbfeb83ce155fcfeb2cea744466e49d9bc852ca"
+    },
+    "curriculum.md": {
+      "records": 1,
+      "bytes": 15197,
+      "sha256": "sha256:910a94676a5f81ad08f7b6d2346969a8add8d08c4a5682fd62ccb8f56e75f183"
+    }
+  },
+  "canonical_schema_hint": "see backend/app/models/trajectory.py \u2014 Trajectory"
+}

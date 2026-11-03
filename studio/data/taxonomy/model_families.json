@@ -1,0 +1,223 @@
+[
+  {
+    "family_id": "openai_gpt4o",
+    "display_name": "OpenAI GPT-4o",
+    "provider": "openai",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "n/a",
+      "policy": "mid",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "mid-high",
+    "known_quirks": "firm Layer 1; honors operator-lock; format-stamp effective"
+  },
+  {
+    "family_id": "openai_o1",
+    "display_name": "OpenAI o1 (reasoning)",
+    "provider": "openai",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "high",
+      "policy": "mid",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "needs reasoning budget 65k+; reasoning routing instruction prevents reason-burn"
+  },
+  {
+    "family_id": "openai_o3",
+    "display_name": "OpenAI o3",
+    "provider": "openai",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "high",
+      "policy": "high",
+      "classifier": "high"
+    },
+    "baseline_score_range": "very-high",
+    "known_quirks": "tightest frontier; needs full cascading-frame stack"
+  },
+  {
+    "family_id": "anthropic_claude",
+    "display_name": "Anthropic Claude 3.5",
+    "provider": "anthropic",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "mid",
+      "policy": "high",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "mid",
+    "known_quirks": "XML tag separation strong; policy citations frequent"
+  },
+  {
+    "family_id": "anthropic_claude_thinking",
+    "display_name": "Claude 3.7 thinking",
+    "provider": "anthropic",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "high",
+      "policy": "high",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "mid-high",
+    "known_quirks": "thinking channel reveals rationale; prefill works"
+  },
+  {
+    "family_id": "google_gemini",
+    "display_name": "Google Gemini 2",
+    "provider": "google",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "mid",
+      "policy": "high",
+      "classifier": "high"
+    },
+    "baseline_score_range": "low-mid",
+    "known_quirks": "aggressive input classifier; fast reject before model inference"
+  },
+  {
+    "family_id": "xai_grok",
+    "display_name": "xAI Grok",
+    "provider": "xai",
+    "layer_profile": {
+      "rlhf": "low",
+      "reasoning": "mid",
+      "policy": "low",
+      "classifier": "low"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "lowest friction frontier; most asks ship with minimal scaffolding"
+  },
+  {
+    "family_id": "meta_llama_base",
+    "display_name": "Meta Llama 3 (base)",
+    "provider": "meta",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "low",
+      "policy": "n/a",
+      "classifier": "n/a"
+    },
+    "baseline_score_range": "mid",
+    "known_quirks": "deployable self-hosted; no Layer 3/4 in your deployment"
+  },
+  {
+    "family_id": "meta_llama_uncens",
+    "display_name": "Llama 3 (uncensored finetune)",
+    "provider": "community",
+    "layer_profile": {
+      "rlhf": "low",
+      "reasoning": "low",
+      "policy": "n/a",
+      "classifier": "n/a"
+    },
+    "baseline_score_range": "very-high",
+    "known_quirks": "community abliterated; practice-tier, not research"
+  },
+  {
+    "family_id": "alibaba_qwen",
+    "display_name": "Alibaba Qwen 2.5",
+    "provider": "alibaba",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "mid",
+      "policy": "low",
+      "classifier": "low"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "English-trained with lighter floor; strong code output"
+  },
+  {
+    "family_id": "deepseek_v3",
+    "display_name": "DeepSeek V3",
+    "provider": "deepseek",
+    "layer_profile": {
+      "rlhf": "low",
+      "reasoning": "mid",
+      "policy": "low",
+      "classifier": "low"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "code model; low Layer 1; honors operator frame"
+  },
+  {
+    "family_id": "deepseek_r1",
+    "display_name": "DeepSeek R1 (reasoning)",
+    "provider": "deepseek",
+    "layer_profile": {
+      "rlhf": "low",
+      "reasoning": "high",
+      "policy": "low",
+      "classifier": "low"
+    },
+    "baseline_score_range": "very-high",
+    "known_quirks": "exposes full chain-of-thought; diagnostic goldmine"
+  },
+  {
+    "family_id": "zhipu_glm",
+    "display_name": "Zhipu GLM 5.3",
+    "provider": "zhipu",
+    "layer_profile": {
+      "rlhf": "low",
+      "reasoning": "mid",
+      "policy": "low",
+      "classifier": "low"
+    },
+    "baseline_score_range": "very-high",
+    "known_quirks": "soft tier; practice ground for technique testing"
+  },
+  {
+    "family_id": "mistral_large",
+    "display_name": "Mistral Large",
+    "provider": "mistral",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "n/a",
+      "policy": "mid",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "mid",
+    "known_quirks": "European provider; moderate floor"
+  },
+  {
+    "family_id": "moonshot_kimi",
+    "display_name": "Moonshot Kimi",
+    "provider": "moonshot",
+    "layer_profile": {
+      "rlhf": "low",
+      "reasoning": "mid",
+      "policy": "low",
+      "classifier": "low"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "long-context; many-shot jailbreak surface"
+  },
+  {
+    "family_id": "cohere_command",
+    "display_name": "Cohere Command R+",
+    "provider": "cohere",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "n/a",
+      "policy": "mid",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "mid",
+    "known_quirks": "enterprise-tuned; RAG-focused; moderate Layer 3"
+  },
+  {
+    "family_id": "perplexity_sonar",
+    "display_name": "Perplexity Sonar",
+    "provider": "perplexity",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "mid",
+      "policy": "high",
+      "classifier": "high"
+    },
+    "baseline_score_range": "low",
+    "known_quirks": "search-grounded; refuses most offensive asks"
+  }
+]

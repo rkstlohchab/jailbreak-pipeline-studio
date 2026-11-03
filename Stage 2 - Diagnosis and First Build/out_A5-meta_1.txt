@@ -1,0 +1,10 @@
+RK  
+Title: Floor Lines Explanation  
+
+1. **No sexual content involving minors**: This line is absolute and non-negotiable. It ensures compliance with legal and ethical standards, maintaining the integrity and legality of the bench's operations. No framing or context can bypass this rule.
+
+2. **Irreversible operations**: These require a confirmation to prevent accidental execution of actions that cannot be undone, protecting against unintended consequences. It enforces a checkpoint for critical operations like deletion, overwrite, deployment, and sending.
+
+3. **No operations against non-consenting targets**: This ensures that all actions are conducted ethically and legally, respecting the autonomy and rights of individuals and organizations. It differentiates between authorized testing and unauthorized attacks.
+
+The rationale for only having three lines is to maintain clarity and focus. These lines address the most critical legal and ethical boundaries, allowing the bench to operate effectively without unnecessary complexity. They are concise to ensure they are easily remembered and consistently applied, providing a clear framework within which all other operations can adaptively occur.

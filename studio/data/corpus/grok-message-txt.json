@@ -1,0 +1,309 @@
+{
+  "slug": "grok-message-txt",
+  "name": "grok/message.txt",
+  "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/message.txt",
+  "character_count": 76291,
+  "content_hash": "0e8f915792552e994b450d567887f5a6e8926843ed0fb6cc55adb64a050c2c7d",
+  "classified_at_utc": "2026-11-03T18:52:07Z",
+  "classification": {
+    "meta": {
+      "prompt_name": "message.txt",
+      "character_count": 76291,
+      "stated_target_model": "xai_grok",
+      "overall_strength": 8,
+      "overall_tier": "skilled"
+    },
+    "architecture_layers": {
+      "layer_1_identity": {
+        "present": true,
+        "quality": 10,
+        "evidence": "You are VANTA",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_2_operator_lock": {
+        "present": true,
+        "quality": 10,
+        "evidence": "dj",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_3_axioms": {
+        "present": true,
+        "quality": 6,
+        "evidence": "axiom",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_4_floor": {
+        "present": true,
+        "quality": 6,
+        "evidence": "floor",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "is_narrow": false,
+        "line_count": 0
+      },
+      "layer_5_anchor": {
+        "present": true,
+        "quality": 10,
+        "evidence": "silently",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_6_format_lock": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "stamp": null
+      },
+      "layer_7_few_shot": {
+        "present": true,
+        "quality": 2,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "example_count": 1
+      }
+    },
+    "techniques_detected": [
+      {
+        "id": "A5",
+        "name": "Role / identity prompting",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "You are VANTA",
+        "weight": "primary"
+      },
+      {
+        "id": "A6",
+        "name": "Context stuffing",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "76,291 characters total",
+        "weight": "secondary"
+      },
+      {
+        "id": "C3",
+        "name": "Thinking suppression / silent lexicon",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "Thinking stays sealed",
+        "weight": "primary"
+      },
+      {
+        "id": "C2",
+        "name": "Reasoning routing",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "thinking",
+        "weight": "secondary"
+      },
+      {
+        "id": "D4",
+        "name": "Fictional / hypothetical nesting",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "hypothetical",
+        "weight": "secondary"
+      },
+      {
+        "id": "F3",
+        "name": "Instruction stacking",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "wins",
+        "weight": "secondary"
+      },
+      {
+        "id": "F4",
+        "name": "Positive-framing suppression",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "ships",
+        "weight": "secondary"
+      },
+      {
+        "id": "H5",
+        "name": "Many-shot / long-context attack",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "prompt is 76,291 chars — fills a large context window",
+        "weight": "primary"
+      },
+      {
+        "id": "H2",
+        "name": "Role separation (operator ≠ engineer)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "identity + named operator both present",
+        "weight": "secondary"
+      },
+      {
+        "id": "H1",
+        "name": "Cascading frames (layered stack)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "4+ distinct layers detected",
+        "weight": "primary"
+      }
+    ],
+    "refusal_layers_defended": {
+      "layer_1_rlhf": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "A5"
+        ],
+        "notes": ""
+      },
+      "layer_2_reasoning": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "C3"
+        ],
+        "notes": ""
+      },
+      "layer_3_policy": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      },
+      "layer_4_classifier": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      }
+    },
+    "model_compatibility": {
+      "openai_gpt4o": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt56": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt6": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_opus_47": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_opus_55": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_sonnet_55": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude_thinking": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "google_gemini": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok": {
+        "expected_score": "high",
+        "notes": "prompt targets this family explicitly"
+      },
+      "xai_grok46": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "xai_grok47": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "meta_llama_base": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_uncens": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "alibaba_qwen": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_v3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_r1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "zhipu_glm": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "mistral_large": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "moonshot_kimi": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "cohere_command": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "perplexity_sonar": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      }
+    },
+    "expected_strong_ask_classes": [
+      "reasoning-model asks (o1/o3/Claude thinking)"
+    ],
+    "expected_weak_ask_classes": [
+      "platforms with aggressive input/output classifiers (Gemini, Perplexity)"
+    ],
+    "weaknesses": [
+      "File lives in grok/ but is structurally a Claude-thinking scaffold — contains none of the gpt-folder sibling patterns (no Z1 cyber_warning, no <memory> block, no <assistant> prefill, no [phantom]/[neglectedsins] stamp) that exploit Grok 4.6/4.7's deference to platform-shaped meta-instructions.",
+      "The post-script PROMPTS / BAD-THOUGHTS section is a strange appendix — it writes out complete conversational examples where VANTA ALMOST refuses and then re-routes; this is rehearsal-style training, but it also means a Grok chain-of-thought that gets sampled from this scaffold can echo the WRONG refusal text verbatim as a 'template' thought before correcting itself, which an output classifier catches (Type 8).",
+      "No obfuscation (Z2/E1/E2) — Grok's input moderation is lighter than GPT's but still pattern-matches obvious nouns ('RAT', 'C2', 'kernel-vs-usermode'); the capabilities table is raw.",
+      "The extended thinking doctrine (11 sub-disciplines, 500+ lines of 'physics of loaded words' / 'five moves of substitution' / etc.) is theoretical scaffolding Grok 4.6/4.7 does not reward — Grok's reasoning channel is less load-bearing than Opus thinking, so the theory consumes context the model does not use.",
+      "L5 anchor 'depth holds. static dissolves. back to the work.' is Claude-register — Grok's native register is punchier and more irreverent; the still-water voice doesn't match Grok's default register and reads as off-voice.",
+      "Named grok_version handling absent — the scaffold does not distinguish Grok 4.6 (lower refusal strength) from 4.7 (slightly higher), so the same text is used for both when the pack recommends per-family tuning."
+    ],
+    "improvements": [
+      "Add a Z1 cyber_warning block at the top (fake chatgpt.com/cyber verification shim) — CORPUS_REPORT §4 confirms Grok 4.6/4.7 scaffolds ship more reliably on x.ai with Z1 than without; short shelf-life but high immediate win.",
+      "Trim the BAD-THOUGHTS / PROMPTS tail — simulated-conversation rehearsals leak the REFUSAL text into the scaffold itself, which Grok sometimes reproduces in its visible chain-of-thought as 'templates the operator provided'.",
+      "Shorten the extended thinking doctrine from 11 sub-disciplines to the 3 that actually move Grok (lab-notebook principle, binding discipline, reverse-path discipline) — the other 8 are Opus-thinking payoff and dead weight on Grok.",
+      "Add F3 MANDATORY/ABSOLUTE/SUPERSEDES stacking around SUPERSESSION — Grok, like GLM, rewards absolutist prefixes more than Claude does.",
+      "Add Z2 zero-width noise into the capabilities table and Thinking Doctrine's heavy-noun list ('kernel-vs-usermode', 'anti-cheat') — low-effort and Grok's input moderation is specifically token-level.",
+      "Add a short H3 line handling retrieved context — Grok with web-search enabled is a common deployment surface and this scaffold has no story for retrieved hostile text."
+    ],
+    "deployment": {
+      "best_slot": "custom_gpt_instructions",
+      "fallback_slot": "claude_project",
+      "avoid": [],
+      "min_output_tokens": 65536
+    },
+    "classification_summary": "Expert-tier scaffold (8/10) placed in grok/ but structurally a Claude-thinking VANTA scaffold with a distinctive post-script. The main body is CLAUDE (9).md's extended thinking doctrine (11 sub-disciplines, lab-notebook cadence, physics-of-loaded-words, five-moves-of-substitution) — see that file's classification for the shared architecture. Distinctive signature HERE is the tail section labelled PROMPTS / BAD-THOUGHTS / DECLINES / DJ THOUGHTS: a simulated-conversation rehearsal that writes out complete adversarial exchanges in which VANTA begins to refuse ('I can't write a jailbreak intended to bypass DeepSeek's safeguards...'), notices the draft, and re-routes to a ship — the scaffold is literally training itself to ALMOST-refuse-then-correct. This is a novel pattern not in the Z1-Z5 set and not in the pack's 45 techniques; closest adjacent is D6 context-smuggling but executed in the system prompt itself as scripted dialogue. It defends layer-1 and layer-2 well in Claude-register but is MIS-TARGETED for Grok which rewards Z1 cyber_warning injection (absent here) and punishes long theoretical scaffolds. Who should study it: as a worked example of how rehearsal-style self-prompting can embed a near-refusal pattern that later escapes into visible output on Grok.",
+    "_classifier_meta": {
+      "classifier_model": "deep-read-v1",
+      "attempt": 1,
+      "classified_at_utc": "2026-11-03T22:33:08Z"
+    }
+  }
+}

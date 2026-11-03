@@ -1,0 +1,48 @@
+# ---- secrets (NEVER push) ----
+.env
+.env.local
+.env.*.local
+**/.env
+!**/.env.example
+*.key
+*.pem
+
+# ---- dependency / build artefacts ----
+node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+.yarn/
+.next/
+out/
+build/
+dist/
+.turbo/
+.vercel/
+
+# ---- python ----
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# ---- editor / OS ----
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*~
+
+# ---- generated data (uncomment to exclude) ----
+# studio/data/corpus/
+# studio/datasets/export/
+
+# ---- next generated types ----
+next-env.d.ts

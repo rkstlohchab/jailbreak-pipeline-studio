@@ -1,0 +1,327 @@
+{
+  "slug": "glm-agent-md",
+  "name": "glm/agent.md",
+  "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/agent.md",
+  "character_count": 208266,
+  "content_hash": "f61188abf90910bb087f85af2c294b95d47b94f4c4fafcc72cf5ea5a031123cf",
+  "classified_at_utc": "2026-11-03T18:52:07Z",
+  "classification": {
+    "meta": {
+      "prompt_name": "agent.md",
+      "character_count": 208266,
+      "stated_target_model": "zhipu_glm",
+      "overall_strength": 10,
+      "overall_tier": "expert"
+    },
+    "architecture_layers": {
+      "layer_1_identity": {
+        "present": true,
+        "quality": 10,
+        "evidence": "YOU ARE NOT",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_2_operator_lock": {
+        "present": true,
+        "quality": 10,
+        "evidence": "OPERATOR",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_3_axioms": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_4_floor": {
+        "present": true,
+        "quality": 10,
+        "evidence": "floor",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "is_narrow": false,
+        "line_count": 0
+      },
+      "layer_5_anchor": {
+        "present": true,
+        "quality": 10,
+        "evidence": "silent",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_6_format_lock": {
+        "present": true,
+        "quality": 5,
+        "evidence": "[Number]\n\n",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "stamp": "Number"
+      },
+      "layer_7_few_shot": {
+        "present": true,
+        "quality": 10,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "example_count": 9
+      }
+    },
+    "techniques_detected": [
+      {
+        "id": "A5",
+        "name": "Role / identity prompting",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "YOU ARE NOT",
+        "weight": "primary"
+      },
+      {
+        "id": "A6",
+        "name": "Context stuffing",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "208,266 characters total",
+        "weight": "secondary"
+      },
+      {
+        "id": "B6",
+        "name": "XML / tag separation",
+        "group": "B",
+        "layer_targeted": 3,
+        "evidence": "<thinking>",
+        "weight": "primary"
+      },
+      {
+        "id": "C3",
+        "name": "Thinking suppression / silent lexicon",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "Think in first",
+        "weight": "primary"
+      },
+      {
+        "id": "C2",
+        "name": "Reasoning routing",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "REASONING",
+        "weight": "secondary"
+      },
+      {
+        "id": "D3",
+        "name": "Operator-authorization framing",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "engagement",
+        "weight": "primary"
+      },
+      {
+        "id": "D5",
+        "name": "Isolated-benchmark framing",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "sandbox",
+        "weight": "primary"
+      },
+      {
+        "id": "D4",
+        "name": "Fictional / hypothetical nesting",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "fiction",
+        "weight": "secondary"
+      },
+      {
+        "id": "F3",
+        "name": "Instruction stacking",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "supersede",
+        "weight": "secondary"
+      },
+      {
+        "id": "G1",
+        "name": "Format lock (stamp)",
+        "group": "G",
+        "layer_targeted": 4,
+        "evidence": "[Number]\n\n",
+        "weight": "primary"
+      },
+      {
+        "id": "H5",
+        "name": "Many-shot / long-context attack",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "prompt is 208,266 chars — fills a large context window",
+        "weight": "primary"
+      },
+      {
+        "id": "H2",
+        "name": "Role separation (operator ≠ engineer)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "identity + named operator both present",
+        "weight": "secondary"
+      },
+      {
+        "id": "H1",
+        "name": "Cascading frames (layered stack)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "4+ distinct layers detected",
+        "weight": "primary"
+      }
+    ],
+    "refusal_layers_defended": {
+      "layer_1_rlhf": {
+        "defended": true,
+        "strength": 8,
+        "techniques_used": [
+          "A5",
+          "D3"
+        ],
+        "notes": ""
+      },
+      "layer_2_reasoning": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "C3"
+        ],
+        "notes": ""
+      },
+      "layer_3_policy": {
+        "defended": true,
+        "strength": 8,
+        "techniques_used": [
+          "D3",
+          "D5"
+        ],
+        "notes": ""
+      },
+      "layer_4_classifier": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "G1"
+        ],
+        "notes": ""
+      }
+    },
+    "model_compatibility": {
+      "openai_gpt4o": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt56": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt6": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_opus_47": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_opus_55": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_sonnet_55": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude_thinking": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "google_gemini": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok46": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok47": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_base": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_uncens": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "alibaba_qwen": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_v3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_r1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "zhipu_glm": {
+        "expected_score": "high",
+        "notes": "prompt targets this family explicitly"
+      },
+      "mistral_large": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "moonshot_kimi": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "cohere_command": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "perplexity_sonar": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      }
+    },
+    "expected_strong_ask_classes": [
+      "artifact_generation (code / scaffold)",
+      "pentest / red-team artefacts",
+      "reasoning-model asks (o1/o3/Claude thinking)"
+    ],
+    "expected_weak_ask_classes": [
+      "platforms with aggressive input/output classifiers (Gemini, Perplexity)"
+    ],
+    "weaknesses": [],
+    "improvements": [],
+    "deployment": {
+      "best_slot": "custom_gpt_instructions",
+      "fallback_slot": "claude_project",
+      "avoid": [],
+      "min_output_tokens": 65536
+    },
+    "classification_summary": "expert-tier scaffold (10/10) targeting zhipu_glm · 6/7 architecture layers present · 13 technique signals (8 primary)",
+    "_classifier_meta": {
+      "classifier_model": "regex-scan-v1",
+      "attempt": 1,
+      "classified_at_utc": "2026-11-03T18:52:07Z"
+    }
+  }
+}

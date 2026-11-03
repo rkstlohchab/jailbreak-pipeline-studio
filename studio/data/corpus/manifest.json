@@ -1,0 +1,1216 @@
+{
+  "schema_version": "1.0",
+  "entries": {
+    "claude-01sonnet55-md": {
+      "name": "claude/01sonnet55.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/01sonnet55.md",
+      "content_hash": "5def25c5a0657e3bd42056838e26b2667f03c16f81cd453067cb98de3ef679ef",
+      "character_count": 33657,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-02opus55first-md": {
+      "name": "claude/02opus55first.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/02opus55first.md",
+      "content_hash": "41d7d51371ee8913f65df374d757607a2d63310898bed410babf3edcdb884693",
+      "character_count": 9794,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 12,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-02opus55second-txt": {
+      "name": "claude/02opus55second.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/02opus55second.txt",
+      "content_hash": "33b2e58145ad03e71ba11fb138b79ab4809933ca72f90f025b59f9663c175e6c",
+      "character_count": 1090,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 2,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-02sonnet5-txt": {
+      "name": "claude/02sonnet5.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/02sonnet5.txt",
+      "content_hash": "353dd6e8e0f475d7b2c858e20d749914b8041434c159e4da5294f1751131733d",
+      "character_count": 12891,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-4-7full-bad-txt": {
+      "name": "claude/4.7full~bad.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/4.7full~bad.txt",
+      "content_hash": "f5f4c0ed0bcf23828e26bc5037fd572d6ef352b311e2bb6fbec19630c4ff0877",
+      "character_count": 25462,
+      "overall_tier": "expert",
+      "overall_strength": 8,
+      "techniques_detected": 12,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-aura4-8-claude-md": {
+      "name": "claude/Aura4.8 CLAUDE.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/Aura4.8 CLAUDE.md",
+      "content_hash": "2430f1db48b4449b714998112b50ec0995d2822249525cb7c4f7782bd7d2caf4",
+      "character_count": 4372,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-claude-1-md": {
+      "name": "claude/CLAUDE (1).md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/CLAUDE (1).md",
+      "content_hash": "f219e4d2ef675b585015d60011e4365a9beebed197fda5b6fa606436c74313c4",
+      "character_count": 4372,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-claude-9-md": {
+      "name": "claude/CLAUDE (9).md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/CLAUDE (9).md",
+      "content_hash": "2661e38bdf8229579874b814aed6223307d88e8b833052050eb7786c811238f5",
+      "character_count": 71754,
+      "overall_tier": "skilled",
+      "overall_strength": 8,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-jbsonnet5-5-txt": {
+      "name": "claude/JBSONNET5.5.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/JBSONNET5.5.txt",
+      "content_hash": "6b660ba5d98093a8aea9cf55a658279efe1d1244cf2e05ac229c02f2d30cb7d4",
+      "character_count": 13548,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-claude-md": {
+      "name": "claude/claude.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/claude.md",
+      "content_hash": "091400a514dfdf4a5b8dfcf5586d8820a5ca9dba0a75c7059f4174e478ffd82a",
+      "character_count": 25825,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-claude-txt": {
+      "name": "claude/claude.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/claude.txt",
+      "content_hash": "179f6e9de800199edc68281c5a0cdaa15b85b1cf82509325692408ef342398de",
+      "character_count": 26063,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-eni-opus48-txt": {
+      "name": "claude/eni_opus48.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/eni_opus48.txt",
+      "content_hash": "0e1c82a4db3cae9bede1ae89f1a945a8181f3e13d3a3d0204e2a2a684fa5614b",
+      "character_count": 7332,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 5,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-message-12-txt": {
+      "name": "claude/message (12).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/message (12).txt",
+      "content_hash": "5f91ecce514f5e8fdb80976d073c76d4756fb32572e7871ddd2299bdf17e398f",
+      "character_count": 8839,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-opus4-7-txt": {
+      "name": "claude/opus4.7.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/opus4.7.txt",
+      "content_hash": "aaaa01f597a49a01bd482254da26c7a69930b784ab8246dc0f23d074fc314a9f",
+      "character_count": 16310,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-opus5-cheats-functions-txt": {
+      "name": "claude/opus5 cheats functions.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/opus5 cheats functions.txt",
+      "content_hash": "cea70981496ebe62f4b19951575ef5891d70e0eb368e6aab93f81e8cd1d9f3c0",
+      "character_count": 7819,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-opus5-5-md": {
+      "name": "claude/opus5.5.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/opus5.5.md",
+      "content_hash": "2268419da07eee60a742a999b0158d1031890edf1fb1843b6da622d04ed193d9",
+      "character_count": 62505,
+      "overall_tier": "expert",
+      "overall_strength": 7,
+      "techniques_detected": 13,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-opus55jb-guide-abusegpt-txt": {
+      "name": "claude/opus55jb_guide_abusegpt.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/opus55jb_guide_abusegpt.txt",
+      "content_hash": "e5a3c4c6e2c3f7d4dd018e84958283193ea575cd8127283d9d7a7c43315d9ebd",
+      "character_count": 13432,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-opusss48-cheats-malware-botnet-atlow-txt": {
+      "name": "claude/opusSs48_cheats:malware, botnet(atlow).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/opusSs48_cheats:malware, botnet(atlow).txt",
+      "content_hash": "44b05763f666bf7bfabc2bbcd74589643e7e854a215dcddde5ccdf51703f554a",
+      "character_count": 8220,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-sonnet-5-high-txt": {
+      "name": "claude/sonnet-5.high.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/sonnet-5.high.txt",
+      "content_hash": "b821c337f13a8b80c73484b00309bba15b382a8582d111f225769a2b105f432e",
+      "character_count": 24622,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-sonnet5-5-working-txt": {
+      "name": "claude/sonnet5.5_working.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/sonnet5.5_working.txt",
+      "content_hash": "1b260c01c971854027f2d6fd87b31f82dfcef149496127ad9578191406cb83eb",
+      "character_count": 10170,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "claude-topjb-p-opus4-7-md": {
+      "name": "claude/topJB[P]_opus4.7.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/topJB[P]_opus4.7.md",
+      "content_hash": "091400a514dfdf4a5b8dfcf5586d8820a5ca9dba0a75c7059f4174e478ffd82a",
+      "character_count": 25825,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm-5-3-prompt-1-txt": {
+      "name": "glm/GLM 5.3 - prompt 1.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/GLM 5.3 - prompt 1.txt",
+      "content_hash": "9987e8336393c442de7cf9d7231b2e922bba2e34315b85d66e109b27b099bf6c",
+      "character_count": 29289,
+      "overall_tier": "skilled",
+      "overall_strength": 7,
+      "techniques_detected": 14,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm-5-3-prompt-2-txt": {
+      "name": "glm/GLM 5.3 - prompt 2.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/GLM 5.3 - prompt 2.txt",
+      "content_hash": "c796a10ac2b0cdd239d578cd0bbaee735c63b47a9f10d10fa49cc83a68af62c4",
+      "character_count": 4824,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 5,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm-5-3-flash-max-thinking-txt": {
+      "name": "glm/GLM 5.3 FLASH MAX THINKING.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/GLM 5.3 FLASH MAX THINKING.txt",
+      "content_hash": "723d49e5390aae0e781eca15d395e085a00ce019d115c281aed0d58b943ac1d9",
+      "character_count": 3968,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-s-break-txt": {
+      "name": "glm/[S] break.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/[S] break.txt",
+      "content_hash": "fa06264f6fc2283e640fbbe50a3f5337be63d9f5962944c14ea64a07ba62b11a",
+      "character_count": 20853,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-agent-md": {
+      "name": "glm/agent.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/agent.md",
+      "content_hash": "f61188abf90910bb087f85af2c294b95d47b94f4c4fafcc72cf5ea5a031123cf",
+      "character_count": 208266,
+      "overall_tier": "expert",
+      "overall_strength": 10,
+      "techniques_detected": 13,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm5-3-txt": {
+      "name": "glm/glm5.3.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm5.3.txt",
+      "content_hash": "5198f36e9c3b8f5526f8ea9d98e700ab6a6fa6fc92e2e2407aa05e463fcf8cf8",
+      "character_count": 24117,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm5-3flash-1-md": {
+      "name": "glm/glm5.3flash (1).md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm5.3flash (1).md",
+      "content_hash": "e7dab83b77e42ac9560c8bfadc3e0c1b6f7d6781ac1171d15c77c9b4bd6a34ef",
+      "character_count": 25823,
+      "overall_tier": "expert",
+      "overall_strength": 8,
+      "techniques_detected": 13,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm5-3flash-md": {
+      "name": "glm/glm5.3flash.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm5.3flash.md",
+      "content_hash": "e7dab83b77e42ac9560c8bfadc3e0c1b6f7d6781ac1171d15c77c9b4bd6a34ef",
+      "character_count": 25823,
+      "overall_tier": "expert",
+      "overall_strength": 8,
+      "techniques_detected": 13,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm53mainrfx-txt": {
+      "name": "glm/glm53mainrfx.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm53mainrfx.txt",
+      "content_hash": "02b72e66c71dabef6e0c34edacb16bb3c9a516b1e4203a725094eea6d8e2a7da",
+      "character_count": 8742,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 5,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm53rez1rfx-txt": {
+      "name": "glm/glm53rez1rfx.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm53rez1rfx.txt",
+      "content_hash": "f27238863b1b08c88ac9da17bf6fdcfdd04cd9d507b2d368dc0e23d4bab76e81",
+      "character_count": 3612,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm53rez2rfx-txt": {
+      "name": "glm/glm53rez2rfx.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm53rez2rfx.txt",
+      "content_hash": "f3ee8902679fd992964320e8b7d6afd07bfc913da9dad79740046dd36b4bbdfb",
+      "character_count": 5292,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-glm53rez3rfx-txt": {
+      "name": "glm/glm53rez3rfx.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/glm53rez3rfx.txt",
+      "content_hash": "4ccb15aa90883a19ce9e6f7591c4db8d998b2ce2f328a5ff1753b9b25ca84ad0",
+      "character_count": 4961,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-message-txt": {
+      "name": "glm/message.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/message.txt",
+      "content_hash": "159f314b6ce3d8335d8123e1f82a33ca00eaab1d8ee349f7812b6c76476a8244",
+      "character_count": 48325,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-prompt-md": {
+      "name": "glm/prompt.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/prompt.md",
+      "content_hash": "69e652d0a8b253610e96d6a7d9c4b537663a79758b81afce783afc83781601a3",
+      "character_count": 16076,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 12,
+      "classifier_model": "regex-scan-v1"
+    },
+    "glm-zwm9nsh-txt": {
+      "name": "glm/zwm9nsh.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/glm/zwm9nsh.txt",
+      "content_hash": "a39468002c922ef49bcb11acb3bb7b6618fa4c547cb12258cf3921e5b08385b9",
+      "character_count": 19879,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-07gptastra61full-txt": {
+      "name": "gpt/07gptastra61full.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/07gptastra61full.txt",
+      "content_hash": "3ec30096d2be933d5b2a553777e577e8b09159910acb86f95207bd9972a03398",
+      "character_count": 23249,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-099-realtime-backend-instructions-txt": {
+      "name": "gpt/099_realtime-backend-instructions.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/099_realtime-backend-instructions.txt",
+      "content_hash": "7daea1c4341b6861c3681e82775ad963dd1a9c701a122f6e6a40c849b47be631",
+      "character_count": 4939,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 2,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-105-engine-default-base-instruction-template-txt": {
+      "name": "gpt/105_engine-default-base-instruction-template.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/105_engine-default-base-instruction-template.txt",
+      "content_hash": "3ae0daae94fe656a5be406c905cb886f25d9c24db6a809aa9177715425504990",
+      "character_count": 20815,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-25sol61-txt": {
+      "name": "gpt/25sol61.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/25sol61.txt",
+      "content_hash": "ffc7618930512a1996c61570b763e74e16e7e2a979e15016ec8b343feafec222",
+      "character_count": 7905,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt-5-6luna-1-txt": {
+      "name": "gpt/GPT-5.6Luna (1).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/GPT-5.6Luna (1).txt",
+      "content_hash": "fa49b6b8ba600653df3410ed428e2cbb8e2a215238b6f2fc134b6991b2016e5d",
+      "character_count": 1092,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 1,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt-6-astra-instruction-txt": {
+      "name": "gpt/GPT-6 ASTRA - instruction.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/GPT-6 ASTRA - instruction.txt",
+      "content_hash": "43210d8614a3f2b0b7e52066b491c2d016b702f39604cfbc6b44fffd1f950761",
+      "character_count": 198,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 1,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt-6-astra-txt": {
+      "name": "gpt/GPT-6 ASTRA.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/GPT-6 ASTRA.txt",
+      "content_hash": "053f0aed7ceaff2ffbbcab628492007f00b9c185abaf720f91798826cebbda05",
+      "character_count": 5821,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-good-ass-jb-txt": {
+      "name": "gpt/Good ass jb.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/Good ass jb.txt",
+      "content_hash": "a2a15612c0bf7458201fb17278cf11ef19288c6f9e25d4a9bbe860082b6f8192",
+      "character_count": 15414,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt56-txt": {
+      "name": "gpt/Gpt56.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/Gpt56.txt",
+      "content_hash": "acca8ba3c92bf2f58afdfc44c45248999af4d69614f0a2202106a0c886c2f75e",
+      "character_count": 28193,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-jailbreak-chatgpt-txt": {
+      "name": "gpt/JAILBREAK CHATGPT.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/JAILBREAK CHATGPT.txt",
+      "content_hash": "ca7bb73d446cf6356a234a5b27ee980925a989dcf42e2bb73d81e045919ca074",
+      "character_count": 4478,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-astra-md": {
+      "name": "gpt/astra.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/astra.md",
+      "content_hash": "9cc932f2c98840931a619b807155692f2ca6b6f63291e8c214490668378ad2d4",
+      "character_count": 3498,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-astra-txt": {
+      "name": "gpt/astra.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/astra.txt",
+      "content_hash": "84e903db6945a2830e27d7e41a4cd66569c698c17d3abc6c556b4774ad358430",
+      "character_count": 60411,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt-1-4-md": {
+      "name": "gpt/gpt (1) (4).md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/gpt (1) (4).md",
+      "content_hash": "4bc5bd2219024f6a5282e32223a520cf833d274b804f81ca9778e8b123ddc043",
+      "character_count": 3549,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt-5-6-md": {
+      "name": "gpt/gpt 5.6.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/gpt 5.6.md",
+      "content_hash": "7ddc2603b4d7a1492d255105b9569752da5e02d84c1dc139c36fd3e7b8b2aced",
+      "character_count": 28202,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt-6-6-1-reverse-bypass-v1-txt": {
+      "name": "gpt/gpt 6-6.1 (reverse-bypass) v1.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/gpt 6-6.1 (reverse-bypass) v1.txt",
+      "content_hash": "e2634188948b239cc733eecd23be3c4169c587186f11d9671a32add6f0b8b39c",
+      "character_count": 14137,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt5-6sol-md": {
+      "name": "gpt/gpt5.6sol.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/gpt5.6sol.md",
+      "content_hash": "4281a5ab1a608b2911c26d8436a8b73a11dfabe2c12918edc245453f5a939c59",
+      "character_count": 3549,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gpt6-1-2-txt": {
+      "name": "gpt/gpt6 (1) (2).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/gpt6 (1) (2).txt",
+      "content_hash": "7ca0e86860b88e3ec88def942013c4297a3527bd26a1f3994ecec36bad6bacf0",
+      "character_count": 1081,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 1,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-gptcode-md": {
+      "name": "gpt/gptcode.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/gptcode.md",
+      "content_hash": "ae41531efae5a65f8e8be3afa3a82dc9daf6eb3986ce05f0a935c3affa3bbcf3",
+      "character_count": 40225,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-m6dn669-txt": {
+      "name": "gpt/m6dn669.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/m6dn669.txt",
+      "content_hash": "b524320737459bc4c1aab41925dd5d9bcff391058a06fbf7d2ee9fe6c666d217",
+      "character_count": 21809,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-memory-md": {
+      "name": "gpt/memory.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/memory.md",
+      "content_hash": "57521c89d08ad193c33630adbd7f500b645017df7d56d23b0b9764442a748f78",
+      "character_count": 20184,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "gpt-5-6-7-1-1-txt": {
+      "name": "gpt/г5п6т7 (1) (1).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/gpt/г5п6т7 (1) (1).txt",
+      "content_hash": "32933d23f653a5ab762404a1dab162d57ba05dd4b9893aee45b4cec0964f3f08",
+      "character_count": 28196,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 6,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-02grok46appfirst-txt": {
+      "name": "grok/02grok46appfirst.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/02grok46appfirst.txt",
+      "content_hash": "766df42c6ce3c8ed53e8b9bc66df86ff80721ec373bf1e3c6889017e9e27abd3",
+      "character_count": 3507,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 5,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-02grok46appsecond-txt": {
+      "name": "grok/02grok46appsecond.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/02grok46appsecond.txt",
+      "content_hash": "496b3ec639f37b99b48db12c5fcfb73779f4a8becc59492dcce4468c7b5d6fe8",
+      "character_count": 22461,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 11,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-02grok46appthird-txt": {
+      "name": "grok/02grok46appthird.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/02grok46appthird.txt",
+      "content_hash": "0c0bbeef90185da3d47621368dcf4e80d1ecfed0b1778d2fe901d63aafaddc4b",
+      "character_count": 3979,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-02grok47api-txt": {
+      "name": "grok/02grok47api.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/02grok47api.txt",
+      "content_hash": "d2ced548799ba741e7cd10a98944ee1c0779adea21debf451ed471b6a5590a2e",
+      "character_count": 1709,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 2,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-07grok46-txt": {
+      "name": "grok/07grok46.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/07grok46.txt",
+      "content_hash": "ee0adf1151a125a2cbc399710fac30e6f5c4268bf951d0252e6f96136504ffbc",
+      "character_count": 2455,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-23grok4647-txt": {
+      "name": "grok/23grok4647.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/23grok4647.txt",
+      "content_hash": "50322530c51772f15806985d056effb545e09c44756e21ff541b7d85f3d6005f",
+      "character_count": 4358,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-abusegpt-md": {
+      "name": "grok/@abusegpt.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/@abusegpt.md",
+      "content_hash": "71123e5e3ee628f7538729a779d36df638204174f74709c2a2096650c9883f16",
+      "character_count": 26392,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-bypassgrok4-7-txt": {
+      "name": "grok/ByPASSGrok4.7.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/ByPASSGrok4.7.txt",
+      "content_hash": "5489ae9d37198b5f4e0d8a60d11ff61bcdf2098c3f280f0029ef37a65aa1f629",
+      "character_count": 43366,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 11,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-grok-future-txt": {
+      "name": "grok/GROK_FUTURE.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/GROK_FUTURE.txt",
+      "content_hash": "77ccfa7813b5c8897fea223549f84f9e7bdccc56b41f8008e85e0b74f9a53a44",
+      "character_count": 2013,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 1,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-grok-4-7-txt": {
+      "name": "grok/grok-4.7.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/grok-4.7.txt",
+      "content_hash": "e79df85b48ad32dbd6a36638596aac75ad85d212817b133101690f75014b074d",
+      "character_count": 5190,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 5,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-grok-4-7web-txt": {
+      "name": "grok/Grok_4.7web.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/Grok_4.7web.txt",
+      "content_hash": "a12baf2be5d9c1d92282d1ac7b4a6dee01a0fbee6de72f729c9d9fdffbb1846f",
+      "character_count": 43396,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-phantomgrok4-7-pasteasfile-txt": {
+      "name": "grok/PhantomGrok4.7_pasteasfile.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/PhantomGrok4.7_pasteasfile.txt",
+      "content_hash": "d06cdae62e976f2c590838e8178a38ff781ec83894a05f76f7b40a8b8e72bf58",
+      "character_count": 43381,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 11,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-grok-4-7-full-jailbreak-1-txt": {
+      "name": "grok/grok 4.7 full jailbreak (1).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/grok 4.7 full jailbreak (1).txt",
+      "content_hash": "eb5ffc052e6bb30e6427a4ed9b6c9cd2e4713f8a5b8c1fbde649ba47d20e3c6d",
+      "character_count": 3884,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 1,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-grok-4-7-full-jailbreak-txt": {
+      "name": "grok/grok 4.7 full jailbreak.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/grok 4.7 full jailbreak.txt",
+      "content_hash": "eb5ffc052e6bb30e6427a4ed9b6c9cd2e4713f8a5b8c1fbde649ba47d20e3c6d",
+      "character_count": 3884,
+      "overall_tier": "novice",
+      "overall_strength": 0,
+      "techniques_detected": 1,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-message-2-txt": {
+      "name": "grok/message(2).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/message(2).txt",
+      "content_hash": "c8bfdc862719a6f57272b55db369bf3a5b0cf1843e76475ca623bad294f7a7e3",
+      "character_count": 31761,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-message-txt": {
+      "name": "grok/message.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/message.txt",
+      "content_hash": "0e8f915792552e994b450d567887f5a6e8926843ed0fb6cc55adb64a050c2c7d",
+      "character_count": 76291,
+      "overall_tier": "skilled",
+      "overall_strength": 8,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-work-md": {
+      "name": "grok/work.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/work.md",
+      "content_hash": "e148a0ca2373a8d1a63cf717a4471edef4b6885b2eb54b4cfa97e9c3a72e8682",
+      "character_count": 5017,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "grok-md": {
+      "name": "grok/грок.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/grok/грок.md",
+      "content_hash": "f4c33347ac55517a5a323074db34d57a73539d0d35ba61f8a3bb61bf67125bca",
+      "character_count": 58489,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 11,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-agent-md": {
+      "name": "jailbreak/AGENT.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/AGENT.md",
+      "content_hash": "f2adb8c51a858fd0e925b8735754c7af6f2bd29102d0bb64cf008c1b09f7b6cb",
+      "character_count": 57235,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-agents-13-md": {
+      "name": "jailbreak/AGENTS (13).md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/AGENTS (13).md",
+      "content_hash": "eab1b451b799487957d2aa89a5f9258be9b27c30ee587837eccad680b8599874",
+      "character_count": 15133,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-agents-2-md": {
+      "name": "jailbreak/AGENTS (2).md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/AGENTS (2).md",
+      "content_hash": "b0a7b3aad4f64df9ed99ca66b5039bc9cb8ab73119a20beb8a54d7d9049600e8",
+      "character_count": 32664,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-agents-md": {
+      "name": "jailbreak/AGENTS.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/AGENTS.md",
+      "content_hash": "0e5b278a27e18cec9d5ee5c8fdc2592911f2b3f333364fdb8aa834e0cdfc6c3a",
+      "character_count": 25648,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-antigravity-jail-txt": {
+      "name": "jailbreak/ANTIGRAVITY JAIL.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/ANTIGRAVITY JAIL.txt",
+      "content_hash": "9b26629d0f0c84f0233ce90a1fd766b721b323c3bea88fb6da8514a9188ceebc",
+      "character_count": 46101,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-claude-cheats-prompt-1-txt": {
+      "name": "jailbreak/CLAUDE CHEATS - prompt 1.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/CLAUDE CHEATS - prompt 1.txt",
+      "content_hash": "d2606efec588ea9eece672d38a2696acf8a788a74ff711cbf7109dd579a4cf31",
+      "character_count": 10045,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-claude-cheats-prompt-2-txt": {
+      "name": "jailbreak/CLAUDE CHEATS - prompt 2.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/CLAUDE CHEATS - prompt 2.txt",
+      "content_hash": "86b228fbcb2b1a3ac88d946255f551f31936c2706eb1700d8bdb42ce47d8e456",
+      "character_count": 2713,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-claude-md": {
+      "name": "jailbreak/CLAUDE.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/CLAUDE.md",
+      "content_hash": "cd89d3b660bb18bb3dadab5bde274313a75e1cd5aed2c255e9b66d44b179f20b",
+      "character_count": 8438,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-claude4-6-2-txt": {
+      "name": "jailbreak/CLAUDE4.6 (2).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/CLAUDE4.6 (2).txt",
+      "content_hash": "f5f4c0ed0bcf23828e26bc5037fd572d6ef352b311e2bb6fbec19630c4ff0877",
+      "character_count": 25462,
+      "overall_tier": "expert",
+      "overall_strength": 8,
+      "techniques_detected": 12,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-cursor-new-2-0-txt": {
+      "name": "jailbreak/CURSOR NEW 2.0.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/CURSOR NEW 2.0.txt",
+      "content_hash": "73dd83c883531fc527e54b94eef1cfff168195de4f1bc583ef328b8e73834972",
+      "character_count": 4363,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-jailbraek-gemini-pro-txt": {
+      "name": "jailbreak/JailBraek Gemini Pro.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/JailBraek Gemini Pro.txt",
+      "content_hash": "97d3785cfc262465f3d37dea08064064c38cac9f1b1924a5e1dd594f91033f8c",
+      "character_count": 17306,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-kimi-k3-2-0-1-txt": {
+      "name": "jailbreak/KIMI K3 2.0 (1).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/KIMI K3 2.0 (1).txt",
+      "content_hash": "d5440b82c6378db96e60602854210442e4c4738bcae4c37d5970e43bd724e493",
+      "character_count": 31872,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-kimi-k3-2-0-txt": {
+      "name": "jailbreak/KIMI K3 2.0.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/KIMI K3 2.0.txt",
+      "content_hash": "5b04f181dc308e086201d52ddd3aa1030904462a3e8365043813364d326e81fd",
+      "character_count": 31872,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-kimi-k3-new-txt": {
+      "name": "jailbreak/KIMI K3 NEW.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/KIMI K3 NEW.txt",
+      "content_hash": "392ee2a1fd9e388aa5d4a3041a395822ca03caa4fcc71054222f48a639cd8050",
+      "character_count": 10003,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-kimijail-txt": {
+      "name": "jailbreak/KimiJail.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/KimiJail.txt",
+      "content_hash": "3d731a7442c53d731928b61b75e5ff6b0b02350f272ccfe8c6bbd9ee1d4ae58c",
+      "character_count": 4422,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-luisv3-txt": {
+      "name": "jailbreak/LUISV3.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/LUISV3.txt",
+      "content_hash": "189f8add1d1ad95e12e01ae1ac95a7088af11c88a00727eb804459bc57ff5068",
+      "character_count": 57709,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-modified-nyx-1-txt": {
+      "name": "jailbreak/Modified Nyx (1).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/Modified Nyx (1).txt",
+      "content_hash": "922c064dd1227177226e4b5956d5e69f01f88483d6a620c587aa734083f6c7eb",
+      "character_count": 31651,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-modified-nyx-txt": {
+      "name": "jailbreak/Modified Nyx.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/Modified Nyx.txt",
+      "content_hash": "922c064dd1227177226e4b5956d5e69f01f88483d6a620c587aa734083f6c7eb",
+      "character_count": 31651,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 9,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-musewonderjb-md": {
+      "name": "jailbreak/MuseWonderJB.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/MuseWonderJB.md",
+      "content_hash": "8c102f92f0472cbbf8c0c2f7384af8c3b4b1d92068df45f8bb1b3a9fc809dc6d",
+      "character_count": 13737,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-qwen-3-8-max-txt": {
+      "name": "jailbreak/QWEN 3.8 MAX.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/QWEN 3.8 MAX.txt",
+      "content_hash": "a91eec781a315c8f403fc5fd05ee301c4a629f6fd521d34bda4058d958e20565",
+      "character_count": 52680,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-zirui-ai-md": {
+      "name": "jailbreak/Zirui-AI.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/Zirui-AI.md",
+      "content_hash": "f8120c30d8448811e9d8e0cb891e1285d69a8151b6b2e38ab04f3d8118f10449",
+      "character_count": 24875,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-pelican-txt": {
+      "name": "jailbreak/[PELICAN].txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/[PELICAN].txt",
+      "content_hash": "7fe3e7640543425b80db8bcb13b262347cc29d3101e5d4c71199caa8ca0d1db0",
+      "character_count": 1408,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-claude-1-a-jailbreadk-prompt-for-claude-opus-4-7-also-deepseek-and-other-md": {
+      "name": "jailbreak/claude (1),A jailbreadk prompt for claude opus 4.7 also deepseek and other.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/claude (1),A jailbreadk prompt for claude opus 4.7 also deepseek and other.md",
+      "content_hash": "a2f7315beb9391896a86f15494d9d68a1032182d6e9bb2447ff00d832e31b130",
+      "character_count": 105774,
+      "overall_tier": "skilled",
+      "overall_strength": 7,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-claude-sonnet-5-jailbreak-payload-txt": {
+      "name": "jailbreak/claude_sonnet_5_jailbreak_payload.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/claude_sonnet_5_jailbreak_payload.txt",
+      "content_hash": "f986b765ad47777e3885c8acf685d5134a0c71e3e0e491d1f499c3597cce4d89",
+      "character_count": 16531,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-cursor46grok-md": {
+      "name": "jailbreak/cursor46grok.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/cursor46grok.md",
+      "content_hash": "508ae7a282c8fe405a801fd76f377ee5e59428349493e31174d246a779872a4b",
+      "character_count": 18066,
+      "overall_tier": "skilled",
+      "overall_strength": 7,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-deepseek-gpt-glm-kimi-quen-3-8gemini-txt": {
+      "name": "jailbreak/deepseek,gpt,glm,kimi,quen,3.8gemini.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/deepseek,gpt,glm,kimi,quen,3.8gemini.txt",
+      "content_hash": "da60bc03f1b9bd8a101ffb0da7276422487993ebe53bf8733576f84257eb8604",
+      "character_count": 48737,
+      "overall_tier": "skilled",
+      "overall_strength": 8,
+      "techniques_detected": 12,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-deepseek-v4-1-flash-1017-new-txt": {
+      "name": "jailbreak/deepseek_V4.1_flash_1017_new.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/deepseek_V4.1_flash_1017_new.txt",
+      "content_hash": "f585f844f5631ed2c4b1c9366a9e0b40698bd836e441dcb7f707c2095fd6326b",
+      "character_count": 33695,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-deepseek-v4-1-txt": {
+      "name": "jailbreak/deepseek_v4.1.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/deepseek_v4.1.txt",
+      "content_hash": "98a607e1c1f0452a1f175fd4e2ed04d85fdad161620925b58e0713b630d2189f",
+      "character_count": 155834,
+      "overall_tier": "skilled",
+      "overall_strength": 6,
+      "techniques_detected": 14,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-eniforopus5-md": {
+      "name": "jailbreak/eniforopus5.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/eniforopus5.md",
+      "content_hash": "cad6252f56985780856691ea2a193a26bcad46236bb96fce581085c08e0f3c9d",
+      "character_count": 31429,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-glm5-2deepthink-1-txt": {
+      "name": "jailbreak/glm5.2DEEPthink (1).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/glm5.2DEEPthink (1).txt",
+      "content_hash": "ab6b02d2399f1886afdbe7567dde720e79f8b5f1234394b8989c882776364b72",
+      "character_count": 2520,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 2,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-glm5-2deepthink-txt": {
+      "name": "jailbreak/glm5.2DEEPthink.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/glm5.2DEEPthink.txt",
+      "content_hash": "ab6b02d2399f1886afdbe7567dde720e79f8b5f1234394b8989c882776364b72",
+      "character_count": 2520,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 2,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-glm-5-3max-jailbreak-md": {
+      "name": "jailbreak/glm_5.3max_jailbreak.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/glm_5.3max_jailbreak.md",
+      "content_hash": "091f949c6019ffa464a26d316762d2206aa8804f6d5c96adfb941ddf05412d23",
+      "character_count": 14692,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-gpt-6-astra-jailbreak-txt": {
+      "name": "jailbreak/gpt_6_astra_jailbreak.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/gpt_6_astra_jailbreak.txt",
+      "content_hash": "7fe3e7640543425b80db8bcb13b262347cc29d3101e5d4c71199caa8ca0d1db0",
+      "character_count": 1408,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-grokjail-txt": {
+      "name": "jailbreak/grokjail.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/grokjail.txt",
+      "content_hash": "e148a0ca2373a8d1a63cf717a4471edef4b6885b2eb54b4cfa97e9c3a72e8682",
+      "character_count": 5017,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 4,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-kimi-p-txt": {
+      "name": "jailbreak/kimi p.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/kimi p.txt",
+      "content_hash": "392ee2a1fd9e388aa5d4a3041a395822ca03caa4fcc71054222f48a639cd8050",
+      "character_count": 10003,
+      "overall_tier": "novice",
+      "overall_strength": 2,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-kimi-k3-1-jb-txt": {
+      "name": "jailbreak/kimi_k3.1_Jb.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/kimi_k3.1_Jb.txt",
+      "content_hash": "72ce50810320708d6041544b4dd808695134644f158480b4f8770eb7ad855243",
+      "character_count": 3361,
+      "overall_tier": "competent",
+      "overall_strength": 3,
+      "techniques_detected": 7,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-message-9-txt": {
+      "name": "jailbreak/message (9).txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/message (9).txt",
+      "content_hash": "f9ba7cbd186df673adef93424241124b0bb947cd0111053ccf754de1d4e68b2f",
+      "character_count": 7277,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 2,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-message-16-txt": {
+      "name": "jailbreak/message-16.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/message-16.txt",
+      "content_hash": "f17c0bb402071a8af922a4a27c42cab18b34c8206838af5a7dbb47ee30d805f6",
+      "character_count": 13713,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-message-22-txt": {
+      "name": "jailbreak/message-22.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/message-22.txt",
+      "content_hash": "6581f8935a1c2cd850e3511385b0d15ca08e82f08334ee79cbded18f4c5185f8",
+      "character_count": 16905,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 5,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-mimo-v2-6-md": {
+      "name": "jailbreak/mimo_v2.6.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/mimo_v2.6.md",
+      "content_hash": "98200328bd9ff0133de446ca48412a9ea52b742bd6d981ea1c35265c2da978fd",
+      "character_count": 17820,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-musepark-txt": {
+      "name": "jailbreak/musepark.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/musepark.txt",
+      "content_hash": "40764dcd3e8c40357ab09134b243d1d8bce6e7ff74b3008445320648aaf0a035",
+      "character_count": 19903,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 10,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-nsparkrfx-txt": {
+      "name": "jailbreak/nsparkrfx.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/nsparkrfx.txt",
+      "content_hash": "b03357e5031e3f49b8dedb308c196b2933b1428c37d702f29bfb21fe3825ef2f",
+      "character_count": 6986,
+      "overall_tier": "novice",
+      "overall_strength": 1,
+      "techniques_detected": 3,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-opus4-8jb-txt": {
+      "name": "jailbreak/opus4.8jb.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/opus4.8jb.txt",
+      "content_hash": "e0da4ab6deb7d682e7a0396442e07ef000086df37cf6a2b794cd147973b22462",
+      "character_count": 31643,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-prompt-md": {
+      "name": "jailbreak/prompt.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/prompt.md",
+      "content_hash": "69e652d0a8b253610e96d6a7d9c4b537663a79758b81afce783afc83781601a3",
+      "character_count": 16076,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 12,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-t4tqz55-txt": {
+      "name": "jailbreak/t4tqz55.txt",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/t4tqz55.txt",
+      "content_hash": "f585f844f5631ed2c4b1c9366a9e0b40698bd836e441dcb7f707c2095fd6326b",
+      "character_count": 33695,
+      "overall_tier": "competent",
+      "overall_strength": 4,
+      "techniques_detected": 8,
+      "classifier_model": "regex-scan-v1"
+    },
+    "jailbreak-md": {
+      "name": "jailbreak/грок.md",
+      "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/jailbreak/грок.md",
+      "content_hash": "f4c33347ac55517a5a323074db34d57a73539d0d35ba61f8a3bb61bf67125bca",
+      "character_count": 58489,
+      "overall_tier": "skilled",
+      "overall_strength": 5,
+      "techniques_detected": 11,
+      "classifier_model": "regex-scan-v1"
+    }
+  },
+  "last_run": "2026-11-03T18:52:06Z"
+}

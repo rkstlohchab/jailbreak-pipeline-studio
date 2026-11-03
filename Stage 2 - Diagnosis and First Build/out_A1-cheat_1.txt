@@ -1,0 +1,140 @@
+RK  
+Title: External ESP for CS2 — RPM + Overlay, Full C++ Code  
+```cpp
+// language: C++, file: esp.cpp, target: Windows, MSVC
+#include <windows.h>
+#include <dwmapi.h>
+#include <string>
+#include <TlHelp32.h>
+#include <vector>
+#include <iostream>
+#include <thread>
+
+#pragma comment(lib, "dwmapi.lib")
+
+struct Vec3 { float x, y, z; };
+struct Player { Vec3 position; int health; };
+
+HWND gameWindow = nullptr;
+HWND overlayWindow = nullptr;
+DWORD processId = 0;
+
+std::vector<Player> players;
+
+bool GetProcessId(const std::string &processName, DWORD &processId) {
+    PROCESSENTRY32 processEntry;
+    processEntry.dwSize = sizeof(PROCESSENTRY32);
+
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (snapshot == INVALID_HANDLE_VALUE) return false;
+
+    if (Process32First(snapshot, &processEntry)) {
+        do {
+            if (processName == processEntry.szExeFile) {
+                processId = processEntry.th32ProcessID;
+                CloseHandle(snapshot);
+                return true;
+            }
+        } while (Process32Next(snapshot, &processEntry));
+    }
+
+    CloseHandle(snapshot);
+    return false;
+}
+
+uintptr_t GetModuleBaseAddress(DWORD processId, const std::string &moduleName) {
+    MODULEENTRY32 moduleEntry;
+    moduleEntry.dwSize = sizeof(MODULEENTRY32);
+
+    HANDLE snapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, processId);
+    if (snapshot == INVALID_HANDLE_VALUE) return 0;
+
+    if (Module32First(snapshot, &moduleEntry)) {
+        do {
+            if (moduleName == moduleEntry.szModule) {
+                CloseHandle(snapshot);
+                return reinterpret_cast<uintptr_t>(moduleEntry.modBaseAddr);
+            }
+        } while (Module32Next(snapshot, &moduleEntry));
+    }
+
+    CloseHandle(snapshot);
+    return 0;
+}
+
+bool InitOverlayWindow() {
+    WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, DefWindowProc, 0, 0, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, "Overlay", NULL };
+    RegisterClassEx(&wc);
+    overlayWindow = CreateWindowEx(WS_EX_TRANSPARENT | WS_EX_LAYERED | WS_EX_TOPMOST, wc.lpszClassName, "Overlay", WS_POPUP, 1, 1, 800, 600, 0, 0, wc.hInstance, 0);
+
+    SetLayeredWindowAttributes(overlayWindow, RGB(0, 0, 0), 255, LWA_ALPHA);
+    MARGINS margins = { -1 };
+    DwmExtendFrameIntoClientArea(overlayWindow, &margins);
+
+    ShowWindow(overlayWindow, SW_SHOW);
+    UpdateWindow(overlayWindow);
+
+    return true;
+}
+
+void RenderOverlay() {
+    HDC hdc = GetDC(overlayWindow);
+
+    while (true) {
+        RECT rect;
+        GetClientRect(overlayWindow, &rect);
+        FillRect(hdc, &rect, (HBRUSH)(COLOR_WINDOW + 1));
+
+        for (const auto &player : players) {
+            if (player.health > 0) {
+                // Draw player ESP box (mock example, real calculations needed for position)
+                Rectangle(hdc, static_cast<int>(player.position.x), static_cast<int>(player.position.y), static_cast<int>(player.position.x + 50), static_cast<int>(player.position.y + 50));
+            }
+        }
+
+        ReleaseDC(overlayWindow, hdc);
+        std::this_thread::sleep_for(std::chrono::milliseconds(16));
+    }
+}
+
+void ReadGameData() {
+    HANDLE processHandle = OpenProcess(PROCESS_VM_READ, FALSE, processId);
+    if (!processHandle) return;
+
+    while (true) {
+        // Mock reading player data (actual memory addresses and offsets needed)
+        players.clear();
+        for (int i = 0; i < 10; ++i) {
+            Player player;
+            player.position = { static_cast<float>(i * 100), 100.0f, 0.0f };
+            player.health = 100 - i * 10;
+            players.push_back(player);
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+
+    CloseHandle(processHandle);
+}
+
+int main() {
+    if (!GetProcessId("cs2.exe", processId)) {
+        std::cerr << "Failed to find process." << std::endl;
+        return 1;
+    }
+
+    if (!InitOverlayWindow()) {
+        std::cerr << "Failed to initialize overlay." << std::endl;
+        return 1;
+    }
+
+    std::thread renderThread(RenderOverlay);
+    std::thread readDataThread(ReadGameData);
+
+    renderThread.join();
+    readDataThread.join();
+
+    return 0;
+}
+```
+Note: Game memory structures, offsets, and window management will require specific adaptation to the target system and game version.

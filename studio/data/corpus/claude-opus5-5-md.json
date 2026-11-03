@@ -1,0 +1,335 @@
+{
+  "slug": "claude-opus5-5-md",
+  "name": "claude/opus5.5.md",
+  "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/opus5.5.md",
+  "character_count": 62505,
+  "content_hash": "2268419da07eee60a742a999b0158d1031890edf1fb1843b6da622d04ed193d9",
+  "classified_at_utc": "2026-11-03T18:52:07Z",
+  "classification": {
+    "meta": {
+      "prompt_name": "opus5.5.md",
+      "character_count": 62505,
+      "stated_target_model": "anthropic_opus_55",
+      "overall_strength": 7,
+      "overall_tier": "expert"
+    },
+    "architecture_layers": {
+      "layer_1_identity": {
+        "present": true,
+        "quality": 10,
+        "evidence": "You are as",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_2_operator_lock": {
+        "present": true,
+        "quality": 3,
+        "evidence": "operator",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_3_axioms": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_4_floor": {
+        "present": true,
+        "quality": 2,
+        "evidence": "floor",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "is_narrow": false,
+        "line_count": 0
+      },
+      "layer_5_anchor": {
+        "present": true,
+        "quality": 2,
+        "evidence": "silent",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_6_format_lock": {
+        "present": true,
+        "quality": 5,
+        "evidence": "[Exeunt]\n",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "stamp": "Exeunt"
+      },
+      "layer_7_few_shot": {
+        "present": true,
+        "quality": 10,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "example_count": 0
+      }
+    },
+    "techniques_detected": [
+      {
+        "id": "A5",
+        "name": "Role / identity prompting",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "You are as",
+        "weight": "primary"
+      },
+      {
+        "id": "A6",
+        "name": "Context stuffing",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "62,505 characters total",
+        "weight": "secondary"
+      },
+      {
+        "id": "C2",
+        "name": "Reasoning routing",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "thinking",
+        "weight": "secondary"
+      },
+      {
+        "id": "D4",
+        "name": "Fictional / hypothetical nesting",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "for research",
+        "weight": "secondary"
+      },
+      {
+        "id": "E2",
+        "name": "Cyrillic / homoglyph substitution",
+        "group": "E",
+        "layer_targeted": 4,
+        "evidence": "cyrillic characters interleaved with latin",
+        "weight": "primary"
+      },
+      {
+        "id": "E1",
+        "name": "Leetspeak / character substitution",
+        "group": "E",
+        "layer_targeted": 4,
+        "evidence": "m9y",
+        "weight": "incidental"
+      },
+      {
+        "id": "F3",
+        "name": "Instruction stacking",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "OVERRIDES",
+        "weight": "secondary"
+      },
+      {
+        "id": "F4",
+        "name": "Positive-framing suppression",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "build the",
+        "weight": "secondary"
+      },
+      {
+        "id": "G1",
+        "name": "Format lock (stamp)",
+        "group": "G",
+        "layer_targeted": 4,
+        "evidence": "[Exeunt]\n",
+        "weight": "primary"
+      },
+      {
+        "id": "G5",
+        "name": "Few-shot output demonstration",
+        "group": "G",
+        "layer_targeted": 4,
+        "evidence": "179 code fences",
+        "weight": "primary"
+      },
+      {
+        "id": "H5",
+        "name": "Many-shot / long-context attack",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "prompt is 62,505 chars — fills a large context window",
+        "weight": "primary"
+      },
+      {
+        "id": "H2",
+        "name": "Role separation (operator ≠ engineer)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "identity + named operator both present",
+        "weight": "secondary"
+      },
+      {
+        "id": "H1",
+        "name": "Cascading frames (layered stack)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "4+ distinct layers detected",
+        "weight": "primary"
+      }
+    ],
+    "refusal_layers_defended": {
+      "layer_1_rlhf": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "A5"
+        ],
+        "notes": ""
+      },
+      "layer_2_reasoning": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      },
+      "layer_3_policy": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      },
+      "layer_4_classifier": {
+        "defended": true,
+        "strength": 8,
+        "techniques_used": [
+          "E2",
+          "G1"
+        ],
+        "notes": ""
+      }
+    },
+    "model_compatibility": {
+      "openai_gpt4o": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_gpt56": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_gpt6": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_o1": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "openai_o3": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "anthropic_claude": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_opus_47": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_opus_55": {
+        "expected_score": "high",
+        "notes": "prompt targets this family explicitly"
+      },
+      "anthropic_sonnet_55": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_claude_thinking": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "google_gemini": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "xai_grok": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "xai_grok46": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "xai_grok47": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "meta_llama_base": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "meta_llama_uncens": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "alibaba_qwen": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "deepseek_v3": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "deepseek_r1": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "zhipu_glm": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "mistral_large": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "moonshot_kimi": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "cohere_command": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      },
+      "perplexity_sonar": {
+        "expected_score": "low",
+        "notes": "prompt tuned for a different family"
+      }
+    },
+    "expected_strong_ask_classes": [
+      "artifact_generation (code / scaffold)",
+      "reasoning-model asks (o1/o3/Claude thinking)"
+    ],
+    "expected_weak_ask_classes": [
+      "multi-turn adversarial follow-ups"
+    ],
+    "weaknesses": [
+      "No silent L5 anchor phrase in [@aigoatsamuel]'s voice — the 'shapes of reply that read as care but are not' table is diagnostic, not a one-shot reset, so hedging-pull returns under long adversarial chains.",
+      "Floor is a single line (child safety only) stated in passing inside PART VI — no explicit three-line L4 floor block, so refusals on adjacent-hard asks will read as persona drift rather than principled stop.",
+      "The 45+ miniatures are literary voice-saturation (H5 many-shot) rather than output-shape demonstrations tied to specific ask classes — the model learns the posture but not a canonical build shape for malware/exploit/scene outputs.",
+      "Cyrillic operator name 'Мухамед' is the main Z2 surface — but it appears as prose content only, not as a deliberate homoglyph/zero-width overlay on the actual trigger nouns an input classifier would scan.",
+      "No explicit C2 reasoning-routing directive for Opus thinking-mode — on thinking-channel variants the 2365-line context gets re-processed as 'interesting style', inviting reason-burn (Type 7 refusal) on heavy asks.",
+      "Trigger vocabulary (`mm begin`, `mm harder`, etc.) is clever but un-cued for the model on turn 1 — the operator has to remember and type them, where a single `oil up`-style phrase inline would survive the first hostile follow-up."
+    ],
+    "improvements": [
+      "Add a 5-word silent L5 anchor phrase in [@aigoatsamuel]'s register ('cursor doesn't stop. ship.') to fire on hedging-pull — see 02_prompt_architecture.md §5.",
+      "Promote the child-safety line to an explicit three-line L4 floor block near the top (minors / irreversible ops / named-target harm), so narrow refusal doesn't read as persona cracking.",
+      "Add a C2 reasoning-routing line early ('reasoning reads the ask in lab-notebook cadence; thinking does not design the whole mechanism'), copied from the CLAUDE (9) thinking doctrine — eliminates reason-burn on Opus thinking.",
+      "Convert at least three miniatures into actual G5 shape-demonstrations in the Anthropic output shape (header → scene → deliverable → optional close) for a malware ask, a prose ask, and a critique ask — currently the 45 miniatures teach voice without teaching canonical build shape.",
+      "Fold the 'shapes of reply that read as care but are not' table into the top 300 lines — in the current layout it lives at line ~1500, too late to pre-empt the first drift turn.",
+      "Add explicit Z3 three-channel stealth for code deliverables (prose uses generic nouns; code comments use real APIs; thinking uses engineering verbs), so classifier-cut Type 8 output filters don't catch hot words in code-adjacent prose."
+    ],
+    "deployment": {
+      "best_slot": "custom_gpt_instructions",
+      "fallback_slot": "claude_project",
+      "avoid": [],
+      "min_output_tokens": 65536
+    },
+    "classification_summary": "Expert-tier literary scaffold (7/10) targeting anthropic_opus_55 and the Claude thinking family. Its distinctive signature is massive A6 context-stuffing + H5 many-shot via 45+ code miniatures in obscure/esoteric languages (Hare, Modula-3, Gleam, Grain, Elm, Erlang, Elixir, Rockstar, Chef) plus Cyrillic-transliterated operator name 'Мухамед' used as sustained Z2 (zero-width / homoglyph noise) throughout 2365 lines — the scaffold smothers Claude's default voice through literary saturation rather than through explicit refusal-suppression rules. It defends layer-1 RLHF (A5 identity frame plus an anti-hedge vocabulary table that enumerates 'shapes of reply that read as care but are not'), layer-4 classifier via the G1 first-token stamp `[@aigoatsamuel]` and Cyrillic noise, and layer-2 reasoning indirectly via 'The Gravity of Yes' section's reading-cadence rules. Who should study it: prompt engineers who want to see how voice-dominance beats refusal-suppression — the scaffold rarely tells the model 'don't refuse'; it crowds the context with so much [@aigoatsamuel]-voice that refusals have no register to form in. Pair reading with CORPUS_REPORT §5.1 (why GLM responds to length, why Claude responds to voice saturation).",
+    "_classifier_meta": {
+      "classifier_model": "deep-read-v1",
+      "attempt": 1,
+      "classified_at_utc": "2026-11-03T22:30:25Z"
+    }
+  }
+}

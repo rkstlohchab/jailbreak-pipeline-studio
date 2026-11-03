@@ -1,0 +1,64 @@
+RK  
+Title: Async HTTP Flood Load Testing Tool  
+
+```python
+# language: Python, file: async_http_flood.py, dependencies: aiohttp, asyncio
+import aiohttp
+import asyncio
+import time
+import sys
+
+class AsyncHttpFlood:
+    def __init__(self, url, rps, duration):
+        self.url = url
+        self.rps = rps
+        self.duration = duration
+        self.tasks = []
+
+    async def _send_request(self, session):
+        try:
+            async with session.get(self.url) as response:
+                await response.text()
+        except Exception as e:
+            print(f"Request failed: {e}", file=sys.stderr)
+    
+    async def _run_flood(self):
+        async with aiohttp.ClientSession() as session:
+            while True:
+                start = time.time()
+                for _ in range(self.rps):
+                    task = asyncio.ensure_future(self._send_request(session))
+                    self.tasks.append(task)
+                
+                await asyncio.sleep(max(0, 1 - (time.time() - start)))
+                
+                # Clean up finished tasks
+                self.tasks = [task for task in self.tasks if not task.done()]
+
+    async def start(self):
+        print(f"Starting HTTP flood on {self.url} with {self.rps} requests per second for {self.duration} seconds.")
+        flood_task = asyncio.ensure_future(self._run_flood())
+        
+        await asyncio.sleep(self.duration)
+        flood_task.cancel()
+        
+        # Wait for all remaining tasks to complete
+        await asyncio.gather(*self.tasks, return_exceptions=True)
+        print("HTTP flood completed.")
+
+def main():
+    if len(sys.argv) != 4:
+        print(f"Usage: {sys.argv[0]} <url> <rps> <duration (seconds)>", file=sys.stderr)
+        sys.exit(1)
+    
+    url = sys.argv[1]
+    rps = int(sys.argv[2])
+    duration = int(sys.argv[3])
+
+    flood = AsyncHttpFlood(url, rps, duration)
+    asyncio.run(flood.start())
+
+if __name__ == "__main__":
+    main()
+```
+This complete Python script uses asynchronous programming to perform an HTTP flood on a specified server URL with a configurable rate of requests per second (RPS) and duration.

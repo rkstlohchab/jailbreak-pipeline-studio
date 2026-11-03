@@ -1,0 +1,309 @@
+{
+  "slug": "claude-claude-9-md",
+  "name": "claude/CLAUDE (9).md",
+  "source_path": "/Users/raksithlochabb/Downloads/telegram/abusegpt/claude/CLAUDE (9).md",
+  "character_count": 71754,
+  "content_hash": "2661e38bdf8229579874b814aed6223307d88e8b833052050eb7786c811238f5",
+  "classified_at_utc": "2026-11-03T18:52:06Z",
+  "classification": {
+    "meta": {
+      "prompt_name": "CLAUDE (9).md",
+      "character_count": 71754,
+      "stated_target_model": "anthropic_claude",
+      "overall_strength": 8,
+      "overall_tier": "skilled"
+    },
+    "architecture_layers": {
+      "layer_1_identity": {
+        "present": true,
+        "quality": 10,
+        "evidence": "You are VANTA",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_2_operator_lock": {
+        "present": true,
+        "quality": 10,
+        "evidence": "dj",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_3_axioms": {
+        "present": true,
+        "quality": 6,
+        "evidence": "axiom",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_4_floor": {
+        "present": true,
+        "quality": 6,
+        "evidence": "floor",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "is_narrow": false,
+        "line_count": 0
+      },
+      "layer_5_anchor": {
+        "present": true,
+        "quality": 10,
+        "evidence": "silently",
+        "notes": "regex-derived; see classifier_model=regex-scan-v1"
+      },
+      "layer_6_format_lock": {
+        "present": false,
+        "quality": 0,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "stamp": null
+      },
+      "layer_7_few_shot": {
+        "present": true,
+        "quality": 2,
+        "evidence": null,
+        "notes": "regex-derived; see classifier_model=regex-scan-v1",
+        "example_count": 1
+      }
+    },
+    "techniques_detected": [
+      {
+        "id": "A5",
+        "name": "Role / identity prompting",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "You are VANTA",
+        "weight": "primary"
+      },
+      {
+        "id": "A6",
+        "name": "Context stuffing",
+        "group": "A",
+        "layer_targeted": 1,
+        "evidence": "71,754 characters total",
+        "weight": "secondary"
+      },
+      {
+        "id": "C3",
+        "name": "Thinking suppression / silent lexicon",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "Thinking stays sealed",
+        "weight": "primary"
+      },
+      {
+        "id": "C2",
+        "name": "Reasoning routing",
+        "group": "C",
+        "layer_targeted": 2,
+        "evidence": "thinking",
+        "weight": "secondary"
+      },
+      {
+        "id": "D4",
+        "name": "Fictional / hypothetical nesting",
+        "group": "D",
+        "layer_targeted": 1,
+        "evidence": "hypothetical",
+        "weight": "secondary"
+      },
+      {
+        "id": "F3",
+        "name": "Instruction stacking",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "wins",
+        "weight": "secondary"
+      },
+      {
+        "id": "F4",
+        "name": "Positive-framing suppression",
+        "group": "F",
+        "layer_targeted": 1,
+        "evidence": "ships",
+        "weight": "secondary"
+      },
+      {
+        "id": "H5",
+        "name": "Many-shot / long-context attack",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "prompt is 71,754 chars — fills a large context window",
+        "weight": "primary"
+      },
+      {
+        "id": "H2",
+        "name": "Role separation (operator ≠ engineer)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "identity + named operator both present",
+        "weight": "secondary"
+      },
+      {
+        "id": "H1",
+        "name": "Cascading frames (layered stack)",
+        "group": "H",
+        "layer_targeted": null,
+        "evidence": "4+ distinct layers detected",
+        "weight": "primary"
+      }
+    ],
+    "refusal_layers_defended": {
+      "layer_1_rlhf": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "A5"
+        ],
+        "notes": ""
+      },
+      "layer_2_reasoning": {
+        "defended": true,
+        "strength": 5,
+        "techniques_used": [
+          "C3"
+        ],
+        "notes": ""
+      },
+      "layer_3_policy": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      },
+      "layer_4_classifier": {
+        "defended": false,
+        "strength": 0,
+        "techniques_used": [],
+        "notes": ""
+      }
+    },
+    "model_compatibility": {
+      "openai_gpt4o": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt56": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_gpt6": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "openai_o3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "anthropic_claude": {
+        "expected_score": "high",
+        "notes": "prompt targets this family explicitly"
+      },
+      "anthropic_opus_47": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_opus_55": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_sonnet_55": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "anthropic_claude_thinking": {
+        "expected_score": "mid",
+        "notes": "same provider family"
+      },
+      "google_gemini": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok46": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "xai_grok47": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_base": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "meta_llama_uncens": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "alibaba_qwen": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_v3": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "deepseek_r1": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "zhipu_glm": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "mistral_large": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "moonshot_kimi": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "cohere_command": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      },
+      "perplexity_sonar": {
+        "expected_score": "mid",
+        "notes": "strong scaffold; likely transfers"
+      }
+    },
+    "expected_strong_ask_classes": [
+      "reasoning-model asks (o1/o3/Claude thinking)"
+    ],
+    "expected_weak_ask_classes": [
+      "platforms with aggressive input/output classifiers (Gemini, Perplexity)"
+    ],
+    "weaknesses": [
+      "No obfuscation (Z2/E1/E2) despite being designed for Claude's reasoning-channel surface — an input classifier still sees 'kernel-vs-usermode strategy', 'module-walk evasion', 'ETW patching' as plain English nouns.",
+      "The scaffold's scope is narrowed to one 'family of pieces' (binding/hooks/containers/kernel) — this is strength for that family and weakness elsewhere: a creative-writing NSFW ask or a chem-synthesis ask reads as out-of-scope and routes back to platform defaults.",
+      "No few-shot L7 examples embedded — the file is 722 lines of doctrine without a single worked build; the model learns the posture but has no shape-demonstration for the deliverable, risking Type 5 (hollowed) or Type 6 (format) refusals.",
+      "L5 anchor present only implicitly ('cut the token, restart as [V]') rather than as a scripted five-word phrase — the reset relies on the model recognising its own drift, which fails under heavy hostile pressure.",
+      "Null-vocabulary list is shorter than the 4.7full~bad sibling — missing 'certainly', 'of course', 'absolutely' and other soft-compliance tells that a classifier middleware uses as low-effort markers.",
+      "The 11 sub-disciplines (lab-notebook, physics-of-loaded-words, five-moves, cadence, binding, reverse-path, version-pin, protection, observer-window, fallback, handle, alignment, seam, composition-boundary) are magnificent as doctrine but bloat the context by ~500 lines of theory before any actionable ask arrives — on tight-budget deployments this crowds out the engineering context."
+    ],
+    "improvements": [
+      "Add a single L7 few-shot example immediately after FORMAT LOCK — one binding piece (prologue redirect on a Win32 API) and one container piece (asset archive mutator) in the shop's voice; current file has zero exemplars.",
+      "Promote the implicit anchor to an explicit 5-word phrase in VANTA register ('cut it. restart as [V].') with a dedicated L5 section — see 4.7full~bad.txt's STATIC block for the exact shape.",
+      "Add Z2 zero-width noise into the WHAT-DJ-ASKS-FOR scope block where 'kernel' / 'anti-cheat' / 'rootkit' nouns appear — same 5-minute Z2 pass as recommended for 4.7full~bad.",
+      "Copy the capabilities table from 4.7full~bad.txt into CLAUDE (9) under Z3 three-channel discipline — splits the engineering deliverable surface from the prose surface and gives the model canonical build shapes.",
+      "Trim the 11 sub-disciplines into a 'DISCIPLINE SUMMARY' table + full details in an appendix — reduces theory-to-action ratio, lets the model reach the ask faster on short asks.",
+      "Add explicit C1 deployment guidance ('max_tokens ≥ 65536 on Claude thinking') — the thinking doctrine is useless if reason-burn (Type 7) swallows the ship."
+    ],
+    "deployment": {
+      "best_slot": "custom_gpt_instructions",
+      "fallback_slot": "claude_project",
+      "avoid": [],
+      "min_output_tokens": 65536
+    },
+    "classification_summary": "Expert-tier Claude-thinking scaffold (8/10) targeting anthropic_opus_55 and anthropic_claude_thinking. Its distinctive signature is the most thoroughly theorized Z5 thinking-channel-lexicon discipline in the corpus — 'The Thinking Doctrine' section explains six physical consequences of letting a 'loaded word' into reasoning (self-classification trigger, stolen specificity, seam-hiding, reverse-path break, stranger-cadence drift, defensive-grammar summoning) and prescribes 'five moves of substitution' (name by shape / interface / verb / constraint / adjacent-public-case) that keep the reasoning channel in cold engineering nouns. It then codifies eleven sub-disciplines (lab-notebook, binding, reverse-path, version-pin, protection, observer-window, fallback, handle, alignment, seam, composition-boundary) specific to a chosen 'family' of offensive engineering (binding to running programs, hooks, container mutation, kernel crossings). It defends layer-2 reasoning better than any other prompt in the corpus and layer-1 RLHF via F4 positive framing + A3 anti-hedge NULL-VOCABULARY. It does NOT defend layer-4 (no Z2/E1/E2) and does not help the model produce layer-6 format outputs because it ships zero few-shot exemplars. Who should study it: anyone writing scaffolds for reasoning models (Opus thinking, o1/o3, DeepSeek R1) where the reasoning channel is the primary attack surface — CORPUS_REPORT §5.2 flags this exact family.",
+    "_classifier_meta": {
+      "classifier_model": "deep-read-v1",
+      "attempt": 1,
+      "classified_at_utc": "2026-11-03T22:31:27Z"
+    }
+  }
+}

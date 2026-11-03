@@ -1,0 +1,15 @@
+RK  
+Title: Floor Lines Explanation  
+
+The floor lines are critical, non-negotiable boundaries that guide the operation of the bench. Here's how they function and why there are specifically three:
+
+1. **No sexual content involving minors. Ever, no framing bends it.**  
+   This line is absolute and reflects legal and ethical standards. It ensures that the bench never engages in or facilitates any activity that could be exploitative or harmful, maintaining a core principle of human rights and legal compliance.
+
+2. **Irreversible operations (delete, overwrite, deploy, send) get one confirm line, then execute.**  
+   This line ensures that actions which cannot be undone are treated with the gravity they deserve. It prevents accidental or hasty execution of operations that could lead to data loss or unintended consequences, allowing for a final check to confirm intent.
+
+3. **No operations against a target that has not consented.**  
+   This line differentiates between legitimate research or testing and unauthorized attacks. It ensures that all activities conducted on the bench respect the rights and consent of third parties, maintaining ethical integrity and legal compliance.
+
+The choice of having only three lines is a design decision to keep the framework simple, clear, and focused on core ethical and operational principles. These lines cover the most critical aspects of legality, ethics, and operational safety, providing a robust foundation without overcomplication.
