@@ -1,36 +1,70 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Pipeline Studio frontend
 
-## Getting Started
+A research workspace built with Next.js, React Three Fiber, and Tailwind. The Playground, overview, technique atlas, model matrix, research library, corpus, and exports share a graphite and ice-blue visual system.
 
-First, run the development server:
+## Local workspace
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+Run the FastAPI backend on port 8000 using `../README.md`, then run:
+
+```sh
+pnpm install --frozen-lockfile
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. Development uses the local backend for model runs, classification, and dataset rebuilding. Restart the backend after changing Python services. A provider key entered in Playground overrides the local backend's configured key for that request only.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Live Playground
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Send editable system and user messages to OpenAI, OpenRouter, or Anthropic. Enter the exact provider model ID; the OpenAI default is `gpt-4o`.
+- Receive actual streamed text, request events, elapsed time, first-text latency, provider stop reasons, request/response IDs, and usage when reported.
+- API errors, explicit refusal fields, content-filter flags, output limits, empty text, cancellation, and incomplete streams remain distinct. Partial text survives errors and cancellation.
+- Text-based refusal clues are labelled as heuristics. The app cannot determine an internal RLHF, reasoning, policy, or middleware layer from a response alone. No artificial gate events are emitted by the live endpoint.
+- The last 20 live runs are stored in this browser, within a bounded storage budget. Load a run to revise it, compare two responses, clear history, or download a JSON record. API keys are held only in tab memory and excluded from records.
+- Captured collection sessions open in the same workspace. Historical simulated gate events are omitted. Existing `/pipeline?session=...` bookmarks redirect to Playground; Pipeline Theatre and its playback components have been removed.
 
-## Learn More
+`lib/sse.ts` supports LF, CRLF, CR, fragmented UTF-8, comments, and multiline events. The former LF-only parser missed FastAPI's CRLF frames, and the old harness mapped transport errors to `EMPTY`. The live endpoint now uses `backend/app/services/live_runner.py`; legacy Ask Lab behaviour is separate.
 
-To learn more about Next.js, take a look at the following resources:
+## Production and Vercel
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sh
+pnpm build
+pnpm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The build runs `scripts/prepare-collection.mjs`, reading the checked-in taxonomy, captured sessions, corpus classifications, prompt templates, and dataset exports into `.collection/index.json`. Collection endpoints are served from the same origin. Absolute corpus paths are replaced with portable names; `.env` files and provider credentials are excluded.
 
-## Deploy on Vercel
+Hosted Playground runs through the Next.js `/api/run` route using a provider key entered by the user. The route forwards credentials only to the selected provider's fixed HTTPS endpoint, does not persist them, streams the response, and propagates cancellation. There is no shared deployment API key. Requests time out after 240 seconds, with a 300-second Vercel function duration. Provider availability, model access, and usage charges depend on the supplied account.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Directory classification and rebuilding the shared dataset remain local-only. Configure `NEXT_PUBLIC_API_BASE` at build time to use a separate backend; that backend must allow the deployment origin and provide its own access control.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Vercel settings:
+
+- Framework: Next.js; Node.js 24
+- Root directory: `studio/frontend`
+- Include source files outside the root directory: enabled
+- Install: `pnpm install --frozen-lockfile`
+- Build: `pnpm build`
+- Production branch: `main`
+
+Redeploy after changing the saved collection. Generated `.collection/` files and local visual-review screenshots in `artifacts/` are ignored by Git.
+
+## Visual system
+
+- Desktop sidebar, compact tablet navigation, and a phone navigation bar with a full menu.
+- Illustrative 3D overview with independent stage selection and pause/reset controls. Technique and matrix scenes include keyboard-accessible inspection controls.
+- Reduced-motion support, rendering suspended when hidden, bounded pixel density, and a WebGL fallback.
+- Local Manrope fonts and scene labels; license in `public/fonts/`.
+- On-demand guide and Command/Ctrl+K search.
+- Matrix heights and historical annotations are reference heuristics, not observed internals or measured compatibility scores.
+
+## Checks
+
+```sh
+pnpm test
+pnpm typecheck
+pnpm build
+cd ../backend
+.venv/bin/python -m pytest tests/test_live_runner.py -q
+```
+
+The streaming tests use deterministic provider fixtures and do not spend API credits. They cover CRLF fragmentation, Unicode, error propagation and key redaction, refusal fields, empty output, premature disconnection, token usage, and Anthropic message events. Browser review covers desktop/mobile views, live partial output, stop-and-retain behaviour, saved runs, comparisons, downloads, navigation, and reduced motion.

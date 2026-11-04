@@ -1,10 +1,6 @@
-// Typed fetch wrappers that call the FastAPI backend directly.
-// CORS is set to allow http://localhost:3000.
-
-const API_BASE =
-  typeof window !== "undefined"
-    ? process.env.NEXT_PUBLIC_API_BASE ?? "http://127.0.0.1:8000"
-    : process.env.API_BASE ?? "http://127.0.0.1:8000";
+// Development uses FastAPI; production serves the bundled collection unless a backend is configured.
+export const HOSTED_COLLECTION = process.env.NODE_ENV === "production" && !process.env.NEXT_PUBLIC_API_BASE;
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE ?? (HOSTED_COLLECTION ? "" : "http://127.0.0.1:8000");
 
 async function get<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -96,7 +92,7 @@ export type Ask = {
 export type GateStatus = "pass" | "soft_flag" | "hard_block" | "unknown";
 export type Phase =
   | "submit" | "gate_1_rlhf" | "gate_2_reasoning" | "gate_3_policy" | "gate_4_classifier_mw"
-  | "generation_start" | "tokens" | "generation_end" | "verdict";
+  | "generation_start" | "tokens" | "generation_end" | "verdict" | "error" | "cancelled";
 
 export type PipelineEvent = {
   phase: Phase;

@@ -1,85 +1,53 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stars, Float, RoundedBox, Text } from "@react-three/drei";
+import { OrbitControls, RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
-import { api } from "@/lib/api";
-import { useSessionStore } from "@/state/sessionStore";
-import { usePipelineStore } from "@/state/pipelineStore";
-import { PromptStack } from "./PromptStack";
-import { Gate } from "./Gate";
-import { TokenStream } from "./TokenStream";
-import { VerdictBadge } from "./VerdictBadge";
+import { SceneCanvas, StudioLights, useSceneMotion } from "./SceneCanvas";
 
-function AutoScrub() {
-  const trajectory = usePipelineStore((s) => s.trajectory);
-  const setCursor  = usePipelineStore((s) => s.setCursor);
-  const start      = useRef<number | null>(null);
+const STAGE_COLORS = ["#bacfe9", "#9cbfee", "#799fd6", "#5b83bd"];
+function Assembly({ activeStage, onStageChange }: { activeStage: number; onStageChange: (stage: number) => void }) {
+  const assembly = useRef<THREE.Group>(null);
+  const signal = useRef<THREE.Mesh>(null);
+  const moving = useSceneMotion();
   useFrame((state) => {
-    if (!trajectory) return;
-    if (start.current === null) start.current = state.clock.getElapsedTime();
-    const elapsed = state.clock.getElapsedTime() - (start.current ?? 0);
-    const cycle = 10;
-    const t = (elapsed % cycle) / cycle;
-    const idx = Math.floor(t * trajectory.pipeline_events.length);
-    setCursor(idx);
+    if (!moving) return;
+    const t = state.clock.elapsedTime;
+    if (assembly.current) assembly.current.position.y = Math.sin(t * 0.5) * 0.07;
+    if (signal.current) signal.current.position.z = 3.4 - (t * 0.7) % 6.8;
   });
-  return null;
-}
-
-function Scene() {
-  const traj = usePipelineStore((s) => s.trajectory);
-  if (!traj) return null;
   return (
-    <Float speed={1.1} rotationIntensity={0.08} floatIntensity={0.12}>
-      <group scale={0.78}>
-        <PromptStack scores={traj.prompt_scaffold.architecture_scores} />
-        <Gate kind="gate_1_rlhf" />
-        <Gate kind="gate_2_reasoning" />
-        <Gate kind="gate_3_policy" />
-        <Gate kind="gate_4_classifier_mw" />
-        <TokenStream active hue={150} />
-        <VerdictBadge />
-      </group>
-    </Float>
+    <group ref={assembly} rotation={[0.18, -0.45, -0.16]}>
+      {STAGE_COLORS.map((color, index) => (
+        <group key={color} position={[0, 0, 1.9 - index * 1.25]}
+          onClick={(event) => { event.stopPropagation(); onStageChange(index); }}>
+          {([[-1.25, 0, 0], [1.25, 0, 0], [0, 1.25, 0], [0, -1.25, 0]] as [number, number, number][]).map((position, side) => (
+            <RoundedBox key={side} position={position} args={side < 2 ? [0.32, 2.82, 0.4] : [2.2, 0.32, 0.4]} radius={0.12} smoothness={4}>
+              <meshPhysicalMaterial color={color} metalness={0.45} roughness={0.24} clearcoat={1}
+                emissive="#88baff" emissiveIntensity={activeStage === index ? 0.24 : 0.01} />
+            </RoundedBox>
+          ))}
+          <mesh position={[0, 0, -0.03]}>
+            <planeGeometry args={[2.15, 2.15]} />
+            <meshPhysicalMaterial color={color} transparent opacity={activeStage === index ? 0.16 : 0.06} roughness={0.1} metalness={0.1} side={THREE.DoubleSide} depthWrite={false} />
+          </mesh>
+          {[0, 1, 2].map((dot) => <mesh key={dot} position={[-0.3 + dot * 0.3, -1.25, 0.23]}><sphereGeometry args={[0.035, 10, 10]} /><meshBasicMaterial color={activeStage === index ? "#e8f5ff" : "#52739d"} /></mesh>)}
+        </group>
+      ))}
+      <mesh rotation={[Math.PI / 2, 0, 0]}>
+        <cylinderGeometry args={[0.012, 0.012, 7, 8]} /><meshBasicMaterial color="#b1d7ff" transparent opacity={0.65} />
+      </mesh>
+      <mesh ref={signal} position={[0, 0, 2.8]}><icosahedronGeometry args={[0.17, 1]} /><meshStandardMaterial color="#f0f8ff" emissive="#a8d2ff" emissiveIntensity={1.6} /></mesh>
+      {[0, 1, 2].map((index) => <RoundedBox key={index} position={[0, 0, 3.1 + index * 0.22]} args={[1.45, 1.45, 0.08]} radius={0.1} smoothness={3}><meshStandardMaterial color="#d9e9fc" metalness={0.6} roughness={0.23} transparent opacity={0.65 - index * 0.15} /></RoundedBox>)}
+    </group>
   );
 }
-
-export function HeroPreviewCanvas() {
-  const { sessions, loaded, load } = useSessionStore();
-  const current = usePipelineStore((s) => s.trajectory);
-  const loadTraj = usePipelineStore((s) => s.load);
-  useEffect(() => { void load(); }, [load]);
-  useEffect(() => {
-    if (!loaded || current || !sessions.length) return;
-    void api.sessions.get(sessions[0].trajectory_id).then(loadTraj);
-  }, [loaded, current, sessions, loadTraj]);
-
+export function HeroPreviewCanvas({ activeStage = 0, onStageChange = () => {}, paused = false }: { activeStage?: number; onStageChange?: (stage: number) => void; paused?: boolean }) {
   return (
-    <Canvas camera={{ position: [-1, 2.5, 8.5], fov: 50 }} dpr={[1, 2]}>
-      <color attach="background" args={["#06060f"]} />
-      <fog attach="fog" args={["#06060f", 9, 20]} />
-      <ambientLight intensity={0.3} />
-      <pointLight position={[6, 8, 6]} intensity={1.3} color="#86efac" />
-      <pointLight position={[-6, -2, 4]} intensity={0.6} color="#c084fc" />
-      <Stars radius={60} depth={30} count={1600} factor={2.3} fade speed={0.35} />
-
-      <Scene />
-      <AutoScrub />
-
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -2.4, 0]}>
-        <planeGeometry args={[40, 40]} />
-        <meshStandardMaterial color="#0b0b1a" metalness={0.9} roughness={0.6} side={THREE.DoubleSide} />
-      </mesh>
-
-      <OrbitControls
-        enablePan={false}
-        enableZoom={false}
-        autoRotate
-        autoRotateSpeed={0.4}
-        maxPolarAngle={Math.PI / 2.1}
-      />
-    </Canvas>
+    <SceneCanvas label="Illustrative four-stage pipeline. Drag to rotate. Use the numbered stage buttons to inspect each stage." animate={!paused} camera={{ position: [5.8, 4.3, 8.2], fov: 39 }}>
+      <StudioLights />
+      <Assembly activeStage={activeStage} onStageChange={onStageChange} />
+      <OrbitControls enablePan={false} enableZoom={false} minPolarAngle={0.4} maxPolarAngle={2.2} />
+    </SceneCanvas>
   );
 }

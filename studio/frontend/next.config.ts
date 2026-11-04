@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Local-first app; routes read from a sibling FastAPI process at runtime.
-  // Disable static prerendering so client-hook pages don't fail the build.
+  // Keep the generated collection with the read-only hosted API function.
+  outputFileTracingIncludes: { "/api/*": ["./.collection/index.json"] },
   cacheComponents: false,
   partialPrefetching: false,
   turbopack: {

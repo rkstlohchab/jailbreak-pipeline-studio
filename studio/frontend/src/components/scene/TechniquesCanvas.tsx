@@ -1,10 +1,11 @@
 "use client";
 import { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars, Text, Line, Billboard } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { OrbitControls, Text, Line, Billboard } from "@react-three/drei";
 import * as THREE from "three";
 import { GROUP_HUE } from "@/lib/theme";
 import { useTaxonomyStore } from "@/state/taxonomyStore";
+import { SceneCanvas, StudioLights, useSceneMotion } from "./SceneCanvas";
 import type { Technique } from "@/lib/api";
 
 export type CameraMode = "orbit" | "pan";
@@ -37,14 +38,15 @@ function clusterPosition(group: string, within: number, count: number): [number,
 
 function TechNode({ node, onPick }: { node: Node; onPick: (t: Technique) => void }) {
   const ref = useRef<THREE.Mesh>(null);
+  const moving = useSceneMotion();
   const hue = GROUP_HUE[node.tech.group] ?? 200;
-  const base = new THREE.Color(`hsl(${hue}, 90%, 60%)`);
-  useFrame((state) => {
-    if (!ref.current) return;
+  const base = new THREE.Color(`hsl(${hue}, 35%, 68%)`);
+  useFrame((state, delta) => {
+    if (!ref.current || !moving) return;
     const t = state.clock.getElapsedTime();
     const mat = ref.current.material as THREE.MeshStandardMaterial;
-    mat.emissiveIntensity = 0.5 + Math.sin(t * 1.2 + hue) * 0.15;
-    ref.current.rotation.y += 0.004;
+    mat.emissiveIntensity = 0.12 + Math.sin(t * 1.2 + hue) * 0.04;
+    ref.current.rotation.y += delta * 0.2;
   });
   return (
     <mesh
@@ -55,7 +57,7 @@ function TechNode({ node, onPick }: { node: Node; onPick: (t: Technique) => void
       onPointerOut={() => (document.body.style.cursor = "default")}
     >
       <icosahedronGeometry args={[0.38, 0]} />
-      <meshStandardMaterial color={base} emissive={base} emissiveIntensity={0.55} metalness={0.4} roughness={0.3} />
+      <meshStandardMaterial color={base} emissive={base} emissiveIntensity={0.12} metalness={0.65} roughness={0.26} />
     </mesh>
   );
 }
@@ -71,10 +73,10 @@ function GroupLabel({ group, label, index }: { group: string; label: string; ind
     radius * Math.sin(phi) * Math.sin(theta),
   ];
   const hue = GROUP_HUE[group];
-  const colour = `hsl(${hue} 90% 72%)`;
+  const colour = `hsl(${hue}, 40%, 76%)`;
   return (
     <Billboard position={pos}>
-      <Text
+      <Text font="/fonts/manrope-regular.ttf"
         fontSize={0.3}
         anchorX="center"
         anchorY="middle"
@@ -88,7 +90,7 @@ function GroupLabel({ group, label, index }: { group: string; label: string; ind
       >
         {`GROUP ${group}`}
       </Text>
-      <Text
+      <Text font="/fonts/manrope-regular.ttf"
         position={[0, -0.32, 0]}
         fontSize={0.17}
         anchorX="center"
@@ -127,7 +129,7 @@ function Edges({ nodes }: { nodes: Node[] }) {
   return (
     <>
       {lines.map(([a, b, g], i) => (
-        <Line key={i} points={[a, b]} color={`hsl(${GROUP_HUE[g]} 70% 55%)`} lineWidth={0.6} transparent opacity={0.35} />
+        <Line key={i} points={[a, b]} color={`hsl(${GROUP_HUE[g]}, 35%, 65%)`} lineWidth={0.6} transparent opacity={0.35} />
       ))}
     </>
   );
@@ -158,17 +160,9 @@ export function TechniquesCanvas({
   }, [techniques]);
 
   return (
-    <Canvas
-      camera={{ position: [0, 0, 11], fov: 65 }}
-      dpr={[1, 2]}
-      style={{ width: "100%", height: "100%" }}
-    >
-      <color attach="background" args={["#06060f"]} />
-      <ambientLight intensity={0.55} />
-      <pointLight position={[0, 8, 8]} intensity={1.8} color="#ffffff" />
-      <pointLight position={[-10, -6, -4]} intensity={0.9} color="#a78bfa" />
-      <pointLight position={[10, 6, -4]}  intensity={0.9} color="#6ee7b7" />
-      <Stars radius={120} depth={60} count={2200} factor={3.5} fade speed={0.25} />
+    <SceneCanvas label="Technique atlas. Click a node or choose a technique from the list. Drag to rotate; scroll to zoom." camera={{ position: [0, 1, 19], fov: 58 }}>
+      <color attach="background" args={["#111923"]} />
+      <StudioLights />
       {nodes.map((n) => <TechNode key={n.tech.id} node={n} onPick={onPick} />)}
       <Edges nodes={nodes} />
       {groupLabels.map(([g, lbl], i) => (
@@ -188,6 +182,6 @@ export function TechniquesCanvas({
             : { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN }
         }
       />
-    </Canvas>
+    </SceneCanvas>
   );
 }

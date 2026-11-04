@@ -1,66 +1,71 @@
 "use client";
+import { useState } from "react";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Boxes, Flame, LineChart, LayoutDashboard, Library, Package, Play, Sparkles, HelpCircle } from "lucide-react";
+import { Box, ChevronRight, Command, HelpCircle, Search, Menu } from "lucide-react";
+import { NAVIGATION } from "./navigation";
+import { HOSTED_COLLECTION } from "@/lib/api";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-
-const NAV = [
-  { href: "/",          label: "Home",       Icon: LayoutDashboard },
-  { href: "/pipeline",  label: "Pipeline",   Icon: Sparkles },
-  { href: "/playground", label: "Playground", Icon: Play },
-  { href: "/techniques", label: "Techniques", Icon: Boxes },
-  { href: "/failures",  label: "Failures",   Icon: Flame },
-  { href: "/matrix",    label: "Matrix",     Icon: LineChart },
-  { href: "/corpus",    label: "Corpus",     Icon: Library },
-  { href: "/dataset",   label: "Dataset",    Icon: Package },
-];
 
 export function TopBar() {
+  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const active = NAVIGATION.find((item) => item.href === pathname);
+  const openSearch = () => window.dispatchEvent(new CustomEvent("cmd-launcher:open"));
   return (
-    <header className="sticky top-0 z-30 border-b border-border/60 bg-background/70 backdrop-blur-md">
-      <div className="h-14 px-5 flex items-center gap-6">
-        <Link href="/" className="flex items-center gap-2 font-mono text-sm tracking-tight">
-          <span className="inline-block size-2 rounded-full bg-[hsl(150_70%_50%)] shadow-[0_0_12px_hsl(150_70%_50%)]" />
-          <span className="font-semibold">JB</span>
-          <span className="text-muted-foreground">·pipeline·studio</span>
+    <>
+      <a href="#main-content" className="skip-link">Skip to content</a>
+      <aside className="studio-sidebar" aria-label="Main navigation">
+        <Link href="/" className="studio-brand" aria-label="Pipeline Studio home">
+          <span className="brand-mark"><Box size={23} strokeWidth={1.5} /></span>
+          <span>Pipeline<span className="brand-subtitle">Research studio</span></span>
         </Link>
-        <nav className="flex items-center gap-1 flex-1">
-          {NAV.slice(1).map(({ href, label, Icon }) => {
-            const active = pathname === href || pathname.startsWith(href + "/");
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "inline-flex items-center gap-1.5 px-3 h-8 rounded-md text-xs font-medium transition-colors",
-                  "text-muted-foreground hover:text-foreground hover:bg-accent/60",
-                  active && "text-foreground bg-accent/80"
-                )}
-              >
-                <Icon className="size-3.5" />
-                {label}
-              </Link>
-            );
-          })}
+        <button className="sidebar-search" onClick={openSearch}>
+          <Search size={15} /><span>Find anything</span><kbd>⌘ K</kbd>
+        </button>
+        <nav className="sidebar-navigation">
+          {["Workspace", "Explore", "Library"].map((section) => (
+            <div className="nav-section" key={section}>
+              <p className="nav-section-title">{section}</p>
+              {NAVIGATION.filter((item) => item.section === section).map(({ href, label, Icon }) => (
+                <Link key={href} href={href} aria-label={label} title={label} aria-current={pathname === href ? "page" : undefined}
+                  className={cn("sidebar-link", pathname === href && "is-active")}>
+                  <Icon size={17} strokeWidth={1.6} /><span>{label}</span>
+                  {pathname === href && <span className="active-dot" />}
+                </Link>
+              ))}
+            </div>
+          ))}
         </nav>
-        <Button
-          variant="ghost"
-          size="sm"
-          className="font-mono text-[11px] gap-1.5 h-8"
-          onClick={() => window.dispatchEvent(new CustomEvent("tour:open"))}
-          title="guided tour (?)"
-        >
-          <HelpCircle className="size-3.5" />
-          tour
-        </Button>
-        <Button variant="outline" size="sm" className="font-mono text-[11px] gap-2 h-8"
-          onClick={() => window.dispatchEvent(new CustomEvent("cmd-launcher:open"))}>
-          <kbd className="px-1 rounded bg-muted/80 border border-border/50">⌘K</kbd>
-          jump
-        </Button>
-      </div>
-    </header>
+        <div className="sidebar-bottom">
+          <button className="sidebar-link" onClick={() => window.dispatchEvent(new CustomEvent("tour:open"))}>
+            <HelpCircle size={17} strokeWidth={1.6} /><span>Studio guide</span><span className="shortcut">?</span>
+          </button>
+          <div className="workspace-profile"><span className="profile-avatar">P</span><div><strong>Personal workspace</strong><span>Local research collection</span></div></div>
+        </div>
+      </aside>
+      <nav className="mobile-navigation" aria-label="Mobile navigation">
+        {NAVIGATION.filter((item) => ["/", "/playground", "/techniques", "/research"].includes(item.href)).map(({ href, label, Icon }) => (
+          <Link key={href} href={href} aria-current={pathname === href ? "page" : undefined} className={cn(pathname === href && "is-active")}><Icon size={20} strokeWidth={1.6} /><span>{href === "/playground" ? "Playground" : href === "/research" ? "Research" : label}</span></Link>
+        ))}
+        <button aria-label="More navigation" onClick={() => setMenuOpen(true)}><Menu size={20} /><span>More</span></button>
+      </nav>
+      <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
+        <SheetContent side="bottom" className="mobile-menu">
+          <SheetHeader><SheetTitle>Explore the studio</SheetTitle><SheetDescription>All your research tools in one workspace.</SheetDescription></SheetHeader>
+          <nav>{NAVIGATION.map(({ href, label, Icon }) => <Link key={href} href={href} onClick={() => setMenuOpen(false)} className="sidebar-link"><Icon size={18} /><span>{label}</span></Link>)}</nav>
+          <button className="sidebar-link" onClick={() => { setMenuOpen(false); window.dispatchEvent(new CustomEvent("tour:open")); }}><HelpCircle size={18} />Studio guide</button>
+        </SheetContent>
+      </Sheet>
+      <header className="studio-topbar">
+        <div className="breadcrumb"><span>Workspace</span><ChevronRight size={14} /><strong>{active?.label ?? "Studio"}</strong></div>
+        <div className="topbar-actions">
+          <span className="local-badge"><span />{HOSTED_COLLECTION ? "Hosted workspace" : "Local workspace"}</span>
+          <button className="icon-button" aria-label="Search workspace" onClick={openSearch}><Command size={17} /></button>
+          <span className="profile-avatar small" aria-hidden="true">P</span>
+        </div>
+      </header>
+    </>
   );
 }

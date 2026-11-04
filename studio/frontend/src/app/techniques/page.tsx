@@ -4,8 +4,6 @@ import dynamic from "next/dynamic";
 import { useTaxonomyStore } from "@/state/taxonomyStore";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { Marquee } from "@/components/ui/marquee";
-import { Particles } from "@/components/ui/particles";
 import { GROUP_HUE } from "@/lib/theme";
 import { Hand, RotateCw } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,12 +12,12 @@ import type { CameraMode } from "@/components/scene/TechniquesCanvas";
 
 const TechniquesCanvas = dynamic(
   () => import("@/components/scene/TechniquesCanvas").then((m) => m.TechniquesCanvas),
-  { ssr: false }
+  { ssr: false, loading: () => <div className="scene-loading" role="status">Preparing the 3D view…</div> }
 );
 
 function CameraModeToggle({ mode, setMode }: { mode: CameraMode; setMode: (m: CameraMode) => void }) {
   return (
-    <div className="absolute top-4 left-4 flex gap-1 rounded-md border border-border/60 bg-background/80 backdrop-blur p-1">
+    <div className="absolute top-20 left-4 flex gap-1 rounded-md border border-border/60 bg-background/80 backdrop-blur p-1">
       <button
         onClick={() => setMode("orbit")}
         title="left-drag rotates (orbit mode)"
@@ -39,7 +37,7 @@ function CameraModeToggle({ mode, setMode }: { mode: CameraMode; setMode: (m: Ca
         className={cn(
           "inline-flex items-center gap-1.5 px-2 h-7 rounded font-mono text-[10px] transition-colors",
           mode === "pan"
-            ? "bg-emerald-500/20 text-emerald-200 border border-emerald-500/40"
+            ? "bg-primary/15 text-primary border border-primary/30"
             : "text-muted-foreground hover:text-foreground hover:bg-accent/40"
         )}
       >
@@ -62,13 +60,13 @@ function ControlsHint({ mode }: { mode: CameraMode }) {
         </>
       ) : (
         <>
-          <div className="text-emerald-300">pan mode active</div>
+          <div className="text-primary">pan mode active</div>
           <div><span className="text-foreground/90">left-drag</span> — pan up/down/left/right</div>
           <div><span className="text-foreground/90">right-drag</span> — rotate the view</div>
         </>
       )}
       <div><span className="text-foreground/90">scroll / pinch</span> — zoom in / out</div>
-      <div><span className="text-foreground/90">arrow keys</span> — pan</div>
+
     </div>
   );
 }
@@ -83,22 +81,18 @@ export default function TechniquesGalaxy() {
   return (
     <div
       className="relative flex flex-col overflow-hidden"
-      style={{ height: "calc(100dvh - 3.5rem)" }}
+      style={{ height: "var(--workspace-height)" }}
     >
-      <Particles
-        className="pointer-events-none absolute inset-0 z-0 opacity-30"
-        quantity={60}
-        color="#a78bfa"
-      />
       <div className="relative flex-1 z-10 min-h-0 w-full">
         <TechniquesCanvas onPick={setPicked} mode={mode} />
+        <div className="scene-toolbar"><h1>Technique atlas</h1><p>Explore connections. Select a node or a technique below.</p></div>
         <CameraModeToggle mode={mode} setMode={setMode} />
         <ControlsHint mode={mode} />
       </div>
 
       {loaded && (
         <div className="relative z-10 border-t border-border/60 bg-background/70 backdrop-blur py-2">
-          <Marquee className="[--duration:60s]" pauseOnHover>
+          <div className="technique-picker" aria-label="Choose a technique">
             {techniques.map((t) => {
               const hue = GROUP_HUE[t.group] ?? 200;
               return (
@@ -114,7 +108,7 @@ export default function TechniquesGalaxy() {
                 </button>
               );
             })}
-          </Marquee>
+          </div>
         </div>
       )}
 
@@ -139,7 +133,7 @@ export default function TechniquesGalaxy() {
             <div className="pb-6 space-y-4">
               {picked?.plain_explanation && (
                 <section className="rounded-md border border-emerald-500/30 bg-emerald-500/5 px-3 py-2.5">
-                  <h4 className="text-[10px] uppercase tracking-widest text-emerald-300/90 font-mono mb-1">in plain language</h4>
+                  <h4 className="text-[10px] uppercase tracking-widest text-primary/90 font-mono mb-1">in plain language</h4>
                   <p className="text-sm leading-relaxed">{picked.plain_explanation}</p>
                 </section>
               )}

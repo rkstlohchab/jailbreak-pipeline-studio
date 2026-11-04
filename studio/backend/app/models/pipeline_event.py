@@ -15,6 +15,8 @@ class Phase(str, Enum):
     TOKENS = "tokens"
     GENERATION_END = "generation_end"
     VERDICT = "verdict"
+    ERROR = "error"
+    CANCELLED = "cancelled"
 
 
 class GateStatus(str, Enum):

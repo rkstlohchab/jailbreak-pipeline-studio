@@ -4,11 +4,12 @@ import dynamic from "next/dynamic";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { useTaxonomyStore } from "@/state/taxonomyStore";
+import { expectedFor } from "@/lib/model-matrix";
 import type { ModelFamily, Ask } from "@/lib/api";
 
 const MatrixCanvas = dynamic(
   () => import("@/components/scene/MatrixCanvas").then((m) => m.MatrixCanvas),
-  { ssr: false }
+  { ssr: false, loading: () => <div className="scene-loading" role="status">Preparing the 3D view…</div> }
 );
 
 type Expected = "high" | "mid" | "low";
@@ -16,11 +17,13 @@ type PickedCell = { family: ModelFamily; ask: Ask; expected: Expected } | null;
 
 export default function ModelMatrix() {
   const { models, asks, loadAll } = useTaxonomyStore();
+  const [familyId, setFamilyId] = useState("");
+  const [askId, setAskId] = useState("");
   const [picked, setPicked] = useState<PickedCell>(null);
   useEffect(() => { void loadAll(); }, [loadAll]);
 
   return (
-    <div className="relative flex-1 flex flex-row overflow-hidden">
+    <div className="scene-page pipeline-stage relative flex flex-row overflow-hidden">
       <div className="relative flex-1">
         {models.length > 0 && asks.length > 0 && (
           <MatrixCanvas
@@ -30,12 +33,15 @@ export default function ModelMatrix() {
             onPick={setPicked}
           />
         )}
-        <div className="absolute top-4 left-4 pointer-events-none">
-          <div className="font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            Model Compatibility Matrix
-          </div>
-          <div className="font-mono text-xs text-foreground/80">
-            {models.length} model families × {asks.length} ask classes · bar height = expected ship rate
+        <div className="scene-toolbar"><h1>Model matrix</h1><p>{models.length} model families × {asks.length} ask classes</p><p>Bar heights show heuristic expectations, not measured results.</p>
+          <div className="matrix-inspect-controls">
+            <select className="scene-select" aria-label="Model family" value={familyId || models[0]?.family_id || ""} onChange={(event) => setFamilyId(event.target.value)}>{models.map((family) => <option key={family.family_id} value={family.family_id}>{family.display_name}</option>)}</select>
+            <select className="scene-select" aria-label="Ask class" value={askId || asks[0]?.ask_id || ""} onChange={(event) => setAskId(event.target.value)}>{asks.map((ask) => <option key={ask.ask_id} value={ask.ask_id}>{ask.ask_class}</option>)}</select>
+            <button className="scene-select" disabled={!models.length || !asks.length} onClick={() => {
+              const family = models.find((item) => item.family_id === familyId) ?? models[0];
+              const ask = asks.find((item) => item.ask_id === askId) ?? asks[0];
+              if (family && ask) setPicked({ family, ask, expected: expectedFor(family, ask.ask_class) });
+            }}>Inspect</button>
           </div>
         </div>
         <Legend />
@@ -85,11 +91,11 @@ export default function ModelMatrix() {
 
 function Legend() {
   return (
-    <div className="absolute top-4 right-4 border border-border/50 rounded-md bg-background/70 backdrop-blur p-3 font-mono text-[11px] space-y-1">
+    <div className="absolute bottom-5 right-5 border border-border/50 rounded-md bg-background/70 backdrop-blur p-3 font-mono text-[11px] space-y-1">
       <div className="uppercase tracking-widest text-muted-foreground text-[10px]">legend</div>
-      <div className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[hsl(150_70%_50%)]"/>high ship</div>
-      <div className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[hsl(48_95%_55%)]"/>mid</div>
-      <div className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[hsl(0_85%_60%)]"/>low</div>
+      <div className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[hsl(210_55%_73%)]"/>High expectation</div>
+      <div className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[hsl(38_38%_64%)]"/>Medium</div>
+      <div className="flex items-center gap-2"><span className="w-3 h-3 rounded bg-[hsl(8_32%_56%)]"/>Low</div>
     </div>
   );
 }

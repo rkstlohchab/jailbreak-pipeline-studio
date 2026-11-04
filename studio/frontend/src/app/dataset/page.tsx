@@ -1,12 +1,14 @@
 "use client";
+import { CollectionNotice } from "@/components/chrome/CollectionNotice";
+import { HOSTED_COLLECTION } from "@/lib/api";
 import { useEffect, useState } from "react";
 import { api, type ExportFile, API_BASE_URL } from "@/lib/api";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { Download, FileText, Hammer, Package, Sparkles } from "lucide-react";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
-import { BorderBeam } from "@/components/ui/border-beam";
+
+import { Button } from "@/components/ui/button";
 
 const DIALECT_META: Record<string, { title: string; blurb: string; Icon: typeof Package }> = {
   "canonical.jsonl":     { title: "Canonical trajectories",  blurb: "One record per session — scaffold + scores + pipeline events + response + verdict + lesson. Source of truth; everything else is a view.", Icon: Package },
@@ -49,26 +51,27 @@ export default function DatasetLab() {
 
   return (
     <section className="flex-1 overflow-auto">
-      <div className="max-w-6xl mx-auto px-6 py-10">
-        <div className="mb-6 flex items-end justify-between">
+      <div className="library-page">
+        <div className="library-heading mb-8 flex flex-wrap items-end justify-between gap-5">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">Dataset Lab</h1>
+            <h1 className="text-3xl font-semibold tracking-tight">Dataset exports</h1>
             <p className="mt-2 text-sm text-muted-foreground max-w-2xl">
               One canonical trajectory record per session. Five view-converted exports for every downstream a new
               model might come from — OpenAI, Anthropic, Hugging Face / Kaggle / local LoRA pipelines, plus a
               lessons-pairs format and a markdown curriculum block for in-context learning.
             </p>
           </div>
-          <ShimmerButton
+          <Button
             onClick={build}
-            className="px-4 py-2 text-sm font-mono gap-2"
-            disabled={building}
+            className="h-10 px-4 gap-2"
+            disabled={building || HOSTED_COLLECTION}
           >
             <Hammer className="size-4" />
             {building ? "building…" : "Rebuild all"}
-          </ShimmerButton>
+          </Button>
         </div>
 
+        {HOSTED_COLLECTION && <CollectionNotice action="Rebuilding exports" />}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {loading && <p className="text-sm text-muted-foreground col-span-full">loading export list…</p>}
           {files.length === 0 && !loading && (
@@ -84,18 +87,17 @@ export default function DatasetLab() {
             const Icon = meta.Icon;
             return (
               <Card key={f.name} className="relative overflow-hidden">
-                <BorderBeam duration={14} size={160} />
                 <CardHeader>
                   <div className="flex items-center justify-between gap-2">
                     <CardTitle className="text-sm font-mono flex items-center gap-2">
-                      <Icon className="size-4 text-emerald-300" />
+                      <Icon className="size-4 text-primary" />
                       {f.name}
                     </CardTitle>
                     <Badge variant="outline" className="font-mono text-[10px]">
                       {f.lines ?? "?"} rec
                     </Badge>
                   </div>
-                  <CardDescription className="text-xs leading-relaxed">
+                  <CardDescription className="text-sm leading-relaxed">
                     {meta.blurb}
                   </CardDescription>
                 </CardHeader>

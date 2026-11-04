@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Generated hosted collection and local visual review artifacts
+/.collection/
+/artifacts/

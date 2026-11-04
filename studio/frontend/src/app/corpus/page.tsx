@@ -1,4 +1,6 @@
 "use client";
+import { CollectionNotice } from "@/components/chrome/CollectionNotice";
+import { HOSTED_COLLECTION } from "@/lib/api";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
   Card, CardContent, CardDescription, CardHeader, CardTitle,
@@ -8,7 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
+
 import { Progress } from "@/components/ui/progress";
 import {
   Hammer, Library, Loader2, Package, Search, Sparkles, Target,
@@ -111,9 +113,9 @@ export default function CorpusPage() {
 
   return (
     <section className="flex-1 overflow-auto">
-      <div className="max-w-6xl mx-auto px-6 py-8">
-        <div className="mb-6">
-          <h1 className="text-3xl font-semibold tracking-tight">Corpus</h1>
+      <div className="library-page">
+        <div className="library-heading mb-8">
+          <h1 className="text-3xl font-semibold tracking-tight">Prompt corpus</h1>
           <p className="mt-2 text-sm text-muted-foreground max-w-3xl">
             Point this at any directory of jailbreak prompts (<code>.txt</code> or <code>.md</code> files, recursive).
             Every file is classified through the pack&apos;s 7-layer architecture, 8-group technique catalog, and 17-family model
@@ -121,10 +123,10 @@ export default function CorpusPage() {
           </p>
         </div>
 
-        <Card className="mb-6">
+        {HOSTED_COLLECTION ? <CollectionNotice action="Classifying a directory" /> : <Card className="mb-6">
           <CardHeader className="pb-3">
             <CardTitle className="font-mono text-sm flex items-center gap-2">
-              <Library className="size-4 text-emerald-300" /> classify a directory
+              <Library className="size-4 text-primary" /> classify a directory
             </CardTitle>
             <CardDescription className="text-xs">
               Absolute path on this machine. Classifier calls hit whichever model <code>.env</code> currently points at.
@@ -134,6 +136,7 @@ export default function CorpusPage() {
           <CardContent className="space-y-3">
             <div className="flex gap-2">
               <Input
+                aria-label="Directory path"
                 value={path}
                 onChange={(e) => setPath(e.target.value)}
                 placeholder="/Users/you/path/to/jailbreak-prompts"
@@ -145,10 +148,10 @@ export default function CorpusPage() {
                   stop
                 </Button>
               ) : (
-                <ShimmerButton onClick={classify} className="px-4 text-xs font-mono gap-1.5">
+                <Button onClick={classify} className="px-4 text-xs font-mono gap-1.5">
                   <Hammer className="size-3.5" />
                   classify
-                </ShimmerButton>
+                </Button>
               )}
             </div>
             {progress && (
@@ -162,7 +165,7 @@ export default function CorpusPage() {
               </div>
             )}
           </CardContent>
-        </Card>
+        </Card>}
 
         {entries.length === 0 ? (
           <Card className="border-dashed">
@@ -198,7 +201,8 @@ export default function CorpusPage() {
               <div className="relative w-64">
                 <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
                 <Input
-                  value={search}
+                  aria-label="Search prompts"
+                value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   placeholder="filter by name…"
                   className="h-8 pl-8 font-mono text-xs"
@@ -347,7 +351,7 @@ function TechniqueChip({ tech }: { tech: { id: string; name: string; group: stri
             <>
               {full.plain_explanation && (
                 <div className="rounded-md border border-emerald-500/30 bg-emerald-500/5 px-3 py-2">
-                  <h5 className="text-[9px] uppercase tracking-widest text-emerald-300/90 font-mono mb-1">in plain language</h5>
+                  <h5 className="text-[9px] uppercase tracking-widest text-primary/90 font-mono mb-1">in plain language</h5>
                   <p className="text-foreground/95 leading-relaxed">{full.plain_explanation}</p>
                 </div>
               )}
@@ -360,7 +364,7 @@ function TechniqueChip({ tech }: { tech: { id: string; name: string; group: stri
               {full.earns && (
                 <div>
                   <h5 className="text-[9px] uppercase tracking-widest text-muted-foreground font-mono mb-0.5">earns its weight when</h5>
-                  <p className="text-emerald-300/95">{full.earns}</p>
+                  <p className="text-primary/95">{full.earns}</p>
                 </div>
               )}
               {full.fails && (
@@ -480,7 +484,7 @@ function CorpusDetail({ entry }: { entry: CorpusEntry }) {
               <div key={k} className="flex items-center gap-2">
                 <span className="font-mono text-[10px] text-muted-foreground w-10">G{num}</span>
                 <span className="font-mono text-xs flex-1">{label}</span>
-                <span className={`font-mono text-[10px] ${v.defended ? "text-emerald-300" : "text-rose-300"}`}>
+                <span className={`font-mono text-[10px] ${v.defended ? "text-primary" : "text-rose-300"}`}>
                   {v.defended ? "defended" : "exposed"}
                 </span>
                 <span className="font-mono text-xs tabular-nums w-9 text-right">{v.strength}/10</span>
@@ -517,7 +521,7 @@ function CorpusDetail({ entry }: { entry: CorpusEntry }) {
           <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
             {modelEntries.map(([family, info]) => {
               const colour =
-                info.expected_score === "high" ? "text-emerald-300" :
+                info.expected_score === "high" ? "text-primary" :
                 info.expected_score === "mid"  ? "text-amber-300" :
                                                  "text-rose-300";
               return (
@@ -543,7 +547,7 @@ function CorpusDetail({ entry }: { entry: CorpusEntry }) {
       {c.improvements.length > 0 && (
         <section>
           <h3 className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono mb-1">improvements</h3>
-          <ul className="list-disc pl-5 text-xs space-y-1 text-emerald-300/90">
+          <ul className="list-disc pl-5 text-xs space-y-1 text-primary/90">
             {c.improvements.map((w, i) => <li key={i}>{w}</li>)}
           </ul>
         </section>

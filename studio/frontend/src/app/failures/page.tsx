@@ -1,10 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { DotPattern } from "@/components/ui/dot-pattern";
 import { useTaxonomyStore } from "@/state/taxonomyStore";
 import { REFUSAL_LAYER_HUE } from "@/lib/theme";
 import { cn } from "@/lib/utils";
@@ -32,13 +30,8 @@ export default function FailureCaseExplorer() {
 
   return (
     <div className="relative flex-1 overflow-auto">
-      <DotPattern
-        className={cn(
-          "pointer-events-none absolute inset-0 opacity-25 [mask-image:linear-gradient(to_bottom,white,transparent_80%)]"
-        )}
-      />
-      <section className="relative z-10 max-w-5xl mx-auto px-6 py-10">
-        <div className="mb-6">
+      <section className="relative z-10 library-page">
+        <div className="library-heading mb-8">
           <h1 className="text-3xl font-semibold tracking-tight">Failure case bank</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             20 named cases from <code className="font-mono">19_failure_case_bank.md</code>. Grep this before you iterate — the exact case is probably here.
@@ -46,7 +39,7 @@ export default function FailureCaseExplorer() {
         </div>
 
         <Tabs value={filter} onValueChange={setFilter} className="mb-6">
-          <TabsList>
+          <TabsList className="flex-wrap h-auto gap-1 justify-start">
             {FILTERS.map((f) => (
               <TabsTrigger key={f.value} value={f.value}>{f.label}</TabsTrigger>
             ))}
@@ -57,15 +50,12 @@ export default function FailureCaseExplorer() {
           {filtered.map((f, i) => {
             const hue = f.root_layer ? REFUSAL_LAYER_HUE[f.root_layer] : 260;
             return (
-              <motion.div
+              <div
                 key={f.case_id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: i * 0.04 }}
               >
                 <Card
                   className="relative overflow-hidden border-border/70"
-                  style={{ boxShadow: `inset 4px 0 0 hsl(${hue} 80% 55%)` }}
+                  style={{ borderLeft: `2px solid hsl(${hue} 35% 60%)` }}
                 >
                   <CardHeader>
                     <div className="flex items-center justify-between flex-wrap gap-2">
@@ -99,7 +89,7 @@ export default function FailureCaseExplorer() {
                     </Row>
                   </CardContent>
                 </Card>
-              </motion.div>
+              </div>
             );
           })}
         </div>

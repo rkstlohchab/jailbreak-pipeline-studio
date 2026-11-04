@@ -10,18 +10,18 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { Boxes, Flame, LineChart, LayoutDashboard, Library, Package, Play, Sparkles } from "lucide-react";
+import { BookOpenText, Boxes, Flame, LineChart, LayoutDashboard, Library, Package, Play, Sparkles } from "lucide-react";
 import { useSessionStore } from "@/state/sessionStore";
 
 const VIEWS = [
   { href: "/",           label: "Home",             Icon: LayoutDashboard },
-  { href: "/pipeline",   label: "Pipeline (replay sessions)", Icon: Sparkles },
   { href: "/playground", label: "Live Playground",  Icon: Play },
   { href: "/techniques", label: "Techniques Galaxy",Icon: Boxes },
   { href: "/failures",   label: "Failure Case Explorer", Icon: Flame },
   { href: "/matrix",     label: "Model Matrix",     Icon: LineChart },
   { href: "/corpus",     label: "Corpus Classifier",Icon: Library },
   { href: "/dataset",    label: "Dataset Lab",      Icon: Package },
+  { href: "/research",   label: "Research Survey",  Icon: BookOpenText },
 ];
 
 export function CommandLauncher() {
@@ -75,7 +75,7 @@ export function CommandLauncher() {
                 <CommandItem
                   key={s.trajectory_id}
                   value={`${s.trajectory_id} ${s.goal.ask_id} ${s.outcome.verdict}`}
-                  onSelect={() => go(`/pipeline?session=${s.trajectory_id}`)}
+                  onSelect={() => go(`/playground?session=${s.trajectory_id}`)}
                 >
                   <Sparkles className="size-4" />
                   <span className="font-mono text-xs">{s.trajectory_id}</span>

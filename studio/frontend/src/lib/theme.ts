@@ -54,7 +54,7 @@ export const GROUP_HUE: Record<string, number> = {
 };
 
 export function hslString(h: string | number, s = 70, l = 55, a = 1): string {
-  if (typeof h === "string") return `hsla(${h.replace(/%/g, "")}, ${a})`;
+  if (typeof h === "string") return `hsl(${h} / ${a})`;
   return `hsla(${h}, ${s}%, ${l}%, ${a})`;
 }
 
