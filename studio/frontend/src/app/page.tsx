@@ -93,9 +93,9 @@ export default function Landing() {
           <div className="section-heading"><div><h2>Explore the collection</h2><p>Find the next piece of the picture.</p></div></div>
           <Link href="/techniques" className="collection-feature">
             <div className="collection-feature-top"><span className="collection-icon"><Boxes size={21} strokeWidth={1.4} /></span><ArrowUpRight size={17} /></div>
-            <h3>Technique atlas</h3><p>Explore the relationships across your technique library.</p>
+            <h3>Technique library</h3><p>Browse techniques by group, search explanations, and read their limitations.</p>
             {groups.length > 0 && <div className="group-chart" aria-label={`${techniques.length} techniques in ${groups.length} groups`}>{groups.map(([group, info]) => <div key={group} title={`${info.name}: ${info.count}`}><span style={{ height: `${14 + info.count / Math.max(...groups.map(([, item]) => item.count)) * 35}px` }} /><small>{group}</small></div>)}</div>}
-            <span className="collection-feature-footer">{taxonomyLoaded ? `${groups.length} groups to explore` : "Browse the atlas"}<ArrowRight size={15} /></span>
+            <span className="collection-feature-footer">{taxonomyLoaded ? `${groups.length} groups to explore` : "Browse the library"}<ArrowRight size={15} /></span>
           </Link>
           <Link href="/research" className="library-link"><span className="library-icon"><BookOpenText size={18} /></span><span><strong>Research library</strong><small>{RESEARCH_PAPERS.length} papers in the collection</small></span><ArrowUpRight size={16} /></Link>
           <Link href="/dataset" className="library-link"><span className="library-icon"><ArrowDownToLine size={18} /></span><span><strong>Take your work further</strong><small>Browse dataset exports</small></span><ArrowUpRight size={16} /></Link>

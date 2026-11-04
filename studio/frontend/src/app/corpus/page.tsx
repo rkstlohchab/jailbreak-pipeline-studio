@@ -394,7 +394,7 @@ function TechniqueChip({ tech }: { tech: { id: string; name: string; group: stri
             href="/techniques"
             className="inline-flex items-center gap-1 text-[10px] font-mono text-muted-foreground hover:text-foreground mt-1"
           >
-            open in Techniques Galaxy →
+            open in technique library →
           </Link>
         </div>
       </PopoverContent>

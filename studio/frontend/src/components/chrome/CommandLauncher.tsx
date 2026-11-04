@@ -16,7 +16,7 @@ import { useSessionStore } from "@/state/sessionStore";
 const VIEWS = [
   { href: "/",           label: "Home",             Icon: LayoutDashboard },
   { href: "/playground", label: "Live Playground",  Icon: Play },
-  { href: "/techniques", label: "Techniques Galaxy",Icon: Boxes },
+  { href: "/techniques", label: "Technique library",Icon: Boxes },
   { href: "/failures",   label: "Failure Case Explorer", Icon: Flame },
   { href: "/matrix",     label: "Model Matrix",     Icon: LineChart },
   { href: "/corpus",     label: "Corpus Classifier",Icon: Library },

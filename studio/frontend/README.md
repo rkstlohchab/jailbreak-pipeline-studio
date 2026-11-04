@@ -1,6 +1,6 @@
 # Pipeline Studio frontend
 
-A research workspace built with Next.js, React Three Fiber, and Tailwind. The Playground, overview, technique atlas, model matrix, research library, corpus, and exports share a graphite and ice-blue visual system.
+A research workspace built with Next.js, React Three Fiber, and Tailwind. The Playground, overview, technique library, model matrix, research library, corpus, and exports share a graphite and ice-blue visual system.
 
 ## Local workspace
 
@@ -51,7 +51,7 @@ Redeploy after changing the saved collection. Generated `.collection/` files and
 ## Visual system
 
 - Desktop sidebar, compact tablet navigation, and a phone navigation bar with a full menu.
-- Illustrative 3D overview with independent stage selection and pause/reset controls. Technique and matrix scenes include keyboard-accessible inspection controls.
+- Illustrative 3D overview with independent stage selection and pause/reset controls. The model matrix includes keyboard-accessible inspection controls. Techniques use a searchable, grouped card browser with a detail panel; the duplicate 3D visualization has been removed.
 - Reduced-motion support, rendering suspended when hidden, bounded pixel density, and a WebGL fallback.
 - Local Manrope fonts and scene labels; license in `public/fonts/`.
 - On-demand guide and Command/Ctrl+K search.

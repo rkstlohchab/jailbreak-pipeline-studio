@@ -371,7 +371,7 @@ function PaperDetail({ paper }: { paper: Paper }) {
             </Link>
           </div>
           <p className="text-[10px] text-muted-foreground font-mono mb-2 leading-relaxed">
-            Click a chip to open the Techniques Galaxy. Colour marks the group
+            Click a chip to open the technique library. Colour marks the group
             each technique belongs to.
           </p>
           <div className="flex flex-wrap gap-1.5">
@@ -387,7 +387,7 @@ function PaperDetail({ paper }: { paper: Paper }) {
                     borderColor: `hsl(${gHue} 70% 50% / 0.6)`,
                     color: `hsl(${gHue} 90% 72%)`,
                   }}
-                  title={`Group ${group} — see Techniques Galaxy`}
+                  title={`Group ${group} — see technique library`}
                 >
                   <span className="font-semibold">{id}</span>
                 </Link>

@@ -407,9 +407,6 @@
 .library-page pre { overflow-wrap: anywhere; }
 .library-page [data-slot="input"] { min-height: 39px; }
 .library-page [data-slot="button"] { min-height: 38px; }
-.technique-picker { display: flex; flex-wrap: wrap; gap: 8px; max-height: 140px; overflow-y: auto; padding: 12px 20px; background: #161d27; }
-.technique-picker button { min-height: 36px; font-size: 11px; border-color: #3e5069 !important; background: #202d3e; }
-.technique-picker button:hover { background: #304663; }
 .scene-toolbar { max-width: calc(100% - 35px); }
 @media (max-width: 760px) {
   .library-page { padding: 25px 20px; }
@@ -424,7 +421,6 @@
   .playground-panels > [data-panel] { flex: 0 0 auto !important; width: 100% !important; height: 600px !important; min-height: 600px; overflow: hidden !important; }
   .playground-panels > [data-panel] > div { height: 100%; width: 100%; }
   .playground-panels > [data-slot="resizable-handle"] { display: none; }
-  .technique-picker { max-height: 160px; padding: 10px; }
   .scene-toolbar h1 { font-size: 16px; }
   .scene-toolbar p { font-size: 10px; max-width: 290px; }
   .sidebar-link { font-size: 8px; }
@@ -570,3 +566,50 @@
 .lab-page .button-secondary:hover:not(:disabled) { border-color: #647e9b; background: #253246; }
 .lab-inline-stop { display: inline-flex; align-items: center; gap: 5px; padding: 6px 8px; font-size: 10px; color: #e1adb7; border: 1px solid #6c424b; border-radius: 5px; margin-left: auto; margin-right: 9px; }
 .lab-output { scroll-margin-top: 85px; }
+
+/* Technique collection: direct browsing and readable group membership. */
+.techniques-page { max-width: 1560px; padding: 32px 36px; margin: 0 auto; }
+.technique-total { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #97a7ba; white-space: nowrap; }
+.technique-browser-tools { padding: 20px; border: 1px solid var(--border); border-radius: 11px; background: var(--card); }
+.technique-search { display: flex; align-items: center; gap: 10px; max-width: 480px; height: 42px; padding: 0 13px; border: 1px solid #354252; background: #11161d; border-radius: 7px; color: #8699b1; }
+.technique-search:focus-within { border-color: #a1bedd; outline: 1px solid #a1bedd; }
+.technique-search input { border: 0; outline: none; min-width: 0; flex: 1; background: transparent; font-size: 12px; color: var(--foreground); }
+.technique-search input::placeholder { color: #76869a; }
+.technique-search input::-webkit-search-cancel-button { display: none; }
+.technique-group-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 17px; }
+.technique-group-filters button { display: inline-flex; align-items: center; gap: 7px; text-align: left; border: 1px solid #303a48; background: #1a212b; color: #a7b4c4; border-radius: 6px; padding: 8px 10px; font-size: 11px; line-height: 1.5; }
+.technique-group-filters button[aria-pressed="true"] { color: #d6e4f5; border-color: #6683a7; background: #2a3a50; }
+.technique-group-filters button:hover { background: #253246; color: #d6e4f5; }
+.technique-group-filters button > span:last-child { font-family: var(--font-mono); color: #8f9fb3; font-size: 10px; margin-left: 3px; }
+.technique-group-filters .group-letter { font-family: var(--font-mono); color: #c0d5ee; font-size: 10px; }
+.technique-results-line { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 11px; color: #8998ac; margin: 20px 1px 25px; }
+.technique-results-line button { color: #b9cfe8; text-decoration: underline; text-underline-offset: 3px; }
+.technique-groups { display: flex; flex-direction: column; gap: 32px; }
+.technique-group-section > header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.technique-group-mark { display: grid; place-items: center; width: 43px; height: 43px; border: 1px solid #40546f; border-radius: 8px; color: #bbd1eb; background: #1f2b3a; font-family: var(--font-mono); font-size: 16px; flex-shrink: 0; }
+.technique-group-section .eyebrow { font-size: 9px; margin-bottom: 4px; }
+.technique-group-section h2 { font-size: 17px; line-height: 1.4; letter-spacing: -.02em; }
+.technique-group-count { color: #8495aa; font-size: 11px; margin-left: auto; white-space: nowrap; }
+.technique-card-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; }
+.technique-card { display: flex; flex-direction: column; text-align: left; min-width: 0; padding: 19px; background: var(--card); border: 1px solid var(--border); border-radius: 9px; transition: background .15s,border-color .15s; }
+.technique-card:hover { border-color: #5b7494; background: #1e2938; }
+.technique-card:focus-visible, .technique-group-filters button:focus-visible { outline: 2px solid #c2dbf6; outline-offset: 3px; }
+.technique-card-top { display: flex; align-items: center; justify-content: space-between; color: #8094ad; margin-bottom: 14px; }
+.technique-id { font-family: var(--font-mono); font-size: 10px; color: #b6cde7; padding: 3px 6px; border: 1px solid #3a4a5f; border-radius: 4px; background: #1d2836; }
+.technique-card h3 { font-size: 13px; font-weight: 500; line-height: 1.6; margin-bottom: 8px; }
+.technique-card p { font-size: 11px; line-height: 1.85; color: #95a3b6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; margin-bottom: 20px; }
+.technique-open { display: inline-flex; align-items: center; gap: 5px; margin-top: auto; font-size: 10px; color: #a0b9d6; }
+.technique-library-note { color: #8190a4; font-size: 11px; line-height: 1.8; border-top: 1px solid var(--border); margin-top: 36px; padding-top: 20px; }
+.technique-empty { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 60px 20px; border: 1px dashed #344357; border-radius: 10px; color: #8d9eb3; }
+.technique-empty h2 { color: #d4dfed; font-size: 17px; margin-top: 18px; }
+.technique-empty p { font-size: 12px; margin: 10px 0 22px; }
+.technique-detail-sheet { padding-bottom: 24px; }
+.technique-detail-sheet > [data-slot="sheet-header"] { padding: 28px 24px 22px; border-bottom: 1px solid var(--border); }
+.technique-detail-content { padding: 8px 24px 0; display: flex; flex-direction: column; gap: 24px; }
+.technique-detail-content h3 { font-size: 11px; font-weight: 600; color: #b7c9df; margin-bottom: 9px; }
+.technique-detail-content p { color: #abb8c9; font-size: 13px; line-height: 1.9; }
+.technique-plain { background: #1d2836; border: 1px solid #354a64; padding: 16px; border-radius: 8px; }
+.technique-detail-content .technique-annotation { border-top: 1px solid var(--border); padding-top: 20px; color: #8190a5; font-size: 11px; }
+@media (max-width: 1200px) { .techniques-page { padding: 28px 24px; } .technique-card-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 700px) { .technique-card-grid { grid-template-columns: minmax(0,1fr); } .techniques-page .page-heading { align-items: flex-start; flex-direction: column; gap: 15px; } .technique-card p { -webkit-line-clamp: 3; } }
+@media (max-width: 560px) { .techniques-page { padding: 22px 16px; } .technique-browser-tools { padding: 14px; } .technique-group-filters { gap: 7px; } .technique-group-filters button { font-size: 10px; padding: 8px; } .technique-group-section h2 { font-size: 15px; } .technique-group-count { font-size: 10px; } .technique-group-mark { width: 36px; height: 36px; font-size: 14px; } .technique-results-line { font-size: 10px; } }
