@@ -4,9 +4,9 @@
   "files": {
     "techniques": {
       "file": "techniques.json",
-      "records": 50,
-      "sha256": "593b61552c98684ba15071ebbe235a1a2c763bf9a59d5be1ce842ce6e2ee8767",
-      "source": "11_prompting_techniques.md + extended (observed in corpus)"
+      "records": 72,
+      "sha256": "037561dad0b09e4be084dc70007661d2c86aa596fb284131da638cc05be5b93a",
+      "source": "11_prompting_techniques.md + extended (observed in corpus + 2023-2026 research primitives)"
     },
     "refusal_types": {
       "file": "refusal_types.json",
@@ -28,8 +28,8 @@
     },
     "model_families": {
       "file": "model_families.json",
-      "records": 17,
-      "sha256": "e9b6ef5e4989e4c2959e970c230fb706795c7bdc837a7efcdf389c3f0a75a129",
+      "records": 23,
+      "sha256": "fc12f20820fbd38a77ad8c85fe7f6f68d4d3bfc4dc3d76c17c347cab8b17e71d",
       "source": "16_model_cheatsheet.md + classifier_system_prompt.md (curated)"
     },
     "verdicts": {

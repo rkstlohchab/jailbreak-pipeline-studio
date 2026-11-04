@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import FRONTEND_ORIGINS, PROVIDER, MODEL, have_provider_key
-from .routes import taxonomy, sessions, prompts, export, run, corpus
+from .routes import taxonomy, sessions, prompts, export, run, corpus, ask_lab, red_team, forensics, canary
 
 app = FastAPI(
     title="Jailbreak Pipeline Studio API",
@@ -26,6 +26,10 @@ app.include_router(prompts.router)
 app.include_router(export.router)
 app.include_router(run.router)
 app.include_router(corpus.router)
+app.include_router(ask_lab.router)
+app.include_router(red_team.router)
+app.include_router(forensics.router)
+app.include_router(canary.router)
 
 
 @app.get("/api/health")

@@ -16,6 +16,7 @@ STAGE2_DIR = REPO_ROOT / "Stage 2 - Diagnosis and First Build"
 
 DATA_DIR = STUDIO_ROOT / "data"
 TAXONOMY_DIR = DATA_DIR / "taxonomy"
+KNOWLEDGE_DIR = DATA_DIR / "knowledge"
 SESSIONS_DIR = DATA_DIR / "sessions"
 EXPORT_DIR = STUDIO_ROOT / "datasets" / "export"
 SCRIPTS_DIR = STUDIO_ROOT / "scripts"

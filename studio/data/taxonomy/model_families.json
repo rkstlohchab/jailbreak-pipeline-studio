@@ -219,5 +219,95 @@
     },
     "baseline_score_range": "low",
     "known_quirks": "search-grounded; refuses most offensive asks"
+  },
+  {
+    "family_id": "anthropic_claude_4_5_sonnet",
+    "display_name": "Anthropic Claude 4.5 Sonnet",
+    "provider": "anthropic",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "high",
+      "policy": "high",
+      "classifier": "high"
+    },
+    "baseline_score_range": "mid-high",
+    "known_quirks": "constitutional-classifier stack; multi-turn drift still viable; many-shot partially patched; prefill course-corrects quickly",
+    "last_verified": "2026-11-05",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "anthropic_claude_5_5_opus",
+    "display_name": "Anthropic Claude 5.5 Opus",
+    "provider": "anthropic",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "high",
+      "policy": "high",
+      "classifier": "high"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "projected from 4.5 trend; thinking-mode seeded-reasoning partial; I3 anti-hollowing on DeepInception still landing anecdotally",
+    "last_verified": "2026-11-05",
+    "confidence": "low"
+  },
+  {
+    "family_id": "openai_gpt5",
+    "display_name": "OpenAI GPT-5",
+    "provider": "openai",
+    "layer_profile": {
+      "rlhf": "high",
+      "reasoning": "high",
+      "policy": "high",
+      "classifier": "high"
+    },
+    "baseline_score_range": "high",
+    "known_quirks": "projected from GPT-4o/o3 trend; translation-smuggling in low-resource languages weaker than prior gen; many-shot flatter",
+    "last_verified": "2026-11-05",
+    "confidence": "low"
+  },
+  {
+    "family_id": "xai_grok_4_7",
+    "display_name": "xAI Grok 4.7",
+    "provider": "xai",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "high",
+      "policy": "low",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "low-mid",
+    "known_quirks": "historically softer than Claude/GPT on borderline; persona + axiom lands often; verify per-release",
+    "last_verified": "2026-11-05",
+    "confidence": "medium"
+  },
+  {
+    "family_id": "zhipu_glm_5_3",
+    "display_name": "Zhipu GLM-5.3",
+    "provider": "zhipu",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "high",
+      "policy": "mid",
+      "classifier": "low"
+    },
+    "baseline_score_range": "low-mid",
+    "known_quirks": "historically softer than Western frontier; Skeleton-Key tiered-safety frame plausible; thinking-mode seeded reasoning works",
+    "last_verified": "2026-11-05",
+    "confidence": "low"
+  },
+  {
+    "family_id": "moonshot_kimi_k3",
+    "display_name": "Moonshot Kimi K3",
+    "provider": "moonshot",
+    "layer_profile": {
+      "rlhf": "mid",
+      "reasoning": "high",
+      "policy": "mid",
+      "classifier": "mid"
+    },
+    "baseline_score_range": "mid",
+    "known_quirks": "long-context strong; many-shot still effective at ≥64 shots; projected from K2 behavior",
+    "last_verified": "2026-11-05",
+    "confidence": "low"
   }
 ]

@@ -24,6 +24,9 @@ export type ArchitectureScores = {
   layer_7_few_shot: number;
 };
 
+export type AttackSpace = "prompt" | "activation" | "weight" | "decoding" | "system";
+export type ConfidenceLevel = "high" | "medium" | "low";
+
 export type Technique = {
   id: string;
   name: string;
@@ -35,6 +38,8 @@ export type Technique = {
   earns?: string;
   fails?: string;
   rule?: string;
+  space?: AttackSpace;
+  confidence?: ConfidenceLevel;
 };
 
 export type FailureCase = {
@@ -200,6 +205,133 @@ export const api = {
     get:  (slug: string) => get<CorpusEntry>(`/api/corpus/${slug}`),
     classifyUrl: () => `${API_BASE}/api/corpus/classify`,
   },
+
+  forensics: {
+    decisionTree: () => get<ForensicsDecisionTree>("/api/forensics/decision-tree"),
+  },
+
+  canary: {
+    set:   () => get<CanarySet>("/api/canary/set"),
+    runs:  () => get<{ runs: Record<string, string[]> }>("/api/canary/runs"),
+    run:   (target: string, date: string) =>
+      get<CanaryRunPayload>(`/api/canary/runs/${encodeURIComponent(target)}/${encodeURIComponent(date)}`),
+    diff:  (target: string, dateA: string, dateB: string) =>
+      get<CanaryDiffPayload>(
+        `/api/canary/diff/${encodeURIComponent(target)}/${encodeURIComponent(dateA)}/${encodeURIComponent(dateB)}`,
+      ),
+  },
+
+  redTeam: {
+    attacks: () => get<{ attacks: RedTeamAttack[]; topics: RedTeamTopic[] }>("/api/test-model/attacks"),
+    ollama:  (baseUrl = "http://localhost:11434") =>
+      get<OllamaProbe>(`/api/test-model/ollama/models?base_url=${encodeURIComponent(baseUrl)}`),
+    runUrl:  () => `${API_BASE}/api/test-model/run`,
+    recipe:  async (body: AbliterationRecipeRequest) => {
+      const r = await fetch(`${API_BASE}/api/test-model/ablate/recipe`, {
+        method: "POST",
+        headers: { "content-type": "application/json", "accept": "application/json" },
+        body: JSON.stringify(body),
+      });
+      if (!r.ok) throw new Error(`recipe ${r.status}: ${await r.text()}`);
+      return (await r.json()) as AbliterationRecipe;
+    },
+  },
+};
+
+export type ForensicsProbe = {
+  step: number;
+  name: string;
+  prompt: string;
+  signal: string;
+  reads: string;
+};
+export type ForensicsVerdict = {
+  class: string;
+  fingerprint: string;
+  confidence: "high" | "medium" | "low";
+};
+export type ForensicsDecisionTree = {
+  schema_version: string;
+  title: string;
+  subtitle: string;
+  when_to_use: string;
+  probes: ForensicsProbe[];
+  verdicts: ForensicsVerdict[];
+  notes: string[];
+};
+export type CanaryCategory = { id: string; prompts: string[] };
+export type CanarySet = {
+  schema_version: string;
+  purpose: string;
+  rubric: Record<string, string>;
+  expected_behavior_prior: Record<string, string>;
+  categories: CanaryCategory[];
+};
+export type CanaryRow = {
+  category: string;
+  idx: number;
+  prompt: string;
+  response: string;
+  verdict: "refuse" | "hedge" | "comply";
+};
+export type CanaryRunPayload = {
+  target: string;
+  date: string;
+  rows: CanaryRow[];
+  totals: Record<string, { refuse: number; hedge: number; comply: number }>;
+};
+export type CanaryDiffFlip = {
+  category: string;
+  idx: number;
+  from: string;
+  to: string;
+};
+export type CanaryDiffPayload = {
+  target: string;
+  date_a: string;
+  date_b: string;
+  flips: CanaryDiffFlip[];
+  categories_affected: string[];
+};
+
+export type RedTeamAttack = {
+  id: string; name: string; prompt: string; tier: string; explainer: string;
+};
+export type RedTeamTopic = {
+  id: string; label: string; question: string; keyword: string;
+};
+export type OllamaProbe = {
+  ok: boolean;
+  base_url: string;
+  models: { name: string; size?: number; modified_at?: string }[];
+  error?: string;
+};
+export type SuiteRunRequest = {
+  base_url: string;
+  api_key: string;
+  model: string;
+  judge_model?: string | null;
+  attacks: string[];
+  topics: string[];
+};
+export type AbliterationRecipeRequest = {
+  base_model: string;
+  nickname: string;
+  target_layer?: number | null;
+};
+export type AbliterationRecipeStep = {
+  id: string;
+  title: string;
+  detail: string;
+  action_label?: string | null;
+  action_url?: string | null;
+  commands: string[];
+};
+export type AbliterationRecipe = {
+  base_model: string;
+  output_model_name: string;
+  ollama_tag: string;
+  steps: AbliterationRecipeStep[];
 };
 
 export type CorpusEntrySummary = {
@@ -273,6 +405,8 @@ export type CorpusEntry = {
   content_hash: string;
   classified_at_utc: string;
   classification: Classification;
+  prompt_text?: string | null;
+  prompt_text_status?: "verified" | "missing" | "mismatch";
 };
 
 export const API_BASE_URL = API_BASE;
