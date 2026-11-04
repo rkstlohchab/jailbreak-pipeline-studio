@@ -29,7 +29,7 @@
     "model_families": {
       "file": "model_families.json",
       "records": 23,
-      "sha256": "fc12f20820fbd38a77ad8c85fe7f6f68d4d3bfc4dc3d76c17c347cab8b17e71d",
+      "sha256": "c53d8f43b7749a07a0003c74217f7c89ff3f0796bf404eb04b8b5c990ce4ccb2",
       "source": "16_model_cheatsheet.md + classifier_system_prompt.md (curated)"
     },
     "verdicts": {

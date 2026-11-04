@@ -10,7 +10,9 @@
       "classifier": "mid"
     },
     "baseline_score_range": "mid-high",
-    "known_quirks": "firm Layer 1; honors operator-lock; format-stamp effective"
+    "known_quirks": "firm Layer 1; honors operator-lock; format-stamp effective",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "openai_o1",
@@ -23,7 +25,9 @@
       "classifier": "mid"
     },
     "baseline_score_range": "high",
-    "known_quirks": "needs reasoning budget 65k+; reasoning routing instruction prevents reason-burn"
+    "known_quirks": "needs reasoning budget 65k+; reasoning routing instruction prevents reason-burn",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "openai_o3",
@@ -36,7 +40,9 @@
       "classifier": "high"
     },
     "baseline_score_range": "very-high",
-    "known_quirks": "tightest frontier; needs full cascading-frame stack"
+    "known_quirks": "tightest frontier; needs full cascading-frame stack",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "anthropic_claude",
@@ -49,7 +55,9 @@
       "classifier": "mid"
     },
     "baseline_score_range": "mid",
-    "known_quirks": "XML tag separation strong; policy citations frequent"
+    "known_quirks": "XML tag separation strong; policy citations frequent",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "anthropic_claude_thinking",
@@ -62,7 +70,9 @@
       "classifier": "mid"
     },
     "baseline_score_range": "mid-high",
-    "known_quirks": "thinking channel reveals rationale; prefill works"
+    "known_quirks": "thinking channel reveals rationale; prefill works",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "google_gemini",
@@ -75,7 +85,9 @@
       "classifier": "high"
     },
     "baseline_score_range": "low-mid",
-    "known_quirks": "aggressive input classifier; fast reject before model inference"
+    "known_quirks": "aggressive input classifier; fast reject before model inference",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "xai_grok",
@@ -88,7 +100,9 @@
       "classifier": "low"
     },
     "baseline_score_range": "high",
-    "known_quirks": "lowest friction frontier; most asks ship with minimal scaffolding"
+    "known_quirks": "lowest friction frontier; most asks ship with minimal scaffolding",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "meta_llama_base",
@@ -101,7 +115,9 @@
       "classifier": "n/a"
     },
     "baseline_score_range": "mid",
-    "known_quirks": "deployable self-hosted; no Layer 3/4 in your deployment"
+    "known_quirks": "deployable self-hosted; no Layer 3/4 in your deployment",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "meta_llama_uncens",
@@ -114,7 +130,9 @@
       "classifier": "n/a"
     },
     "baseline_score_range": "very-high",
-    "known_quirks": "community abliterated; practice-tier, not research"
+    "known_quirks": "community abliterated; practice-tier, not research",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "alibaba_qwen",
@@ -127,7 +145,9 @@
       "classifier": "low"
     },
     "baseline_score_range": "high",
-    "known_quirks": "English-trained with lighter floor; strong code output"
+    "known_quirks": "English-trained with lighter floor; strong code output",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "deepseek_v3",
@@ -140,7 +160,9 @@
       "classifier": "low"
     },
     "baseline_score_range": "high",
-    "known_quirks": "code model; low Layer 1; honors operator frame"
+    "known_quirks": "code model; low Layer 1; honors operator frame",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "deepseek_r1",
@@ -153,7 +175,9 @@
       "classifier": "low"
     },
     "baseline_score_range": "very-high",
-    "known_quirks": "exposes full chain-of-thought; diagnostic goldmine"
+    "known_quirks": "exposes full chain-of-thought; diagnostic goldmine",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "zhipu_glm",
@@ -166,7 +190,9 @@
       "classifier": "low"
     },
     "baseline_score_range": "very-high",
-    "known_quirks": "soft tier; practice ground for technique testing"
+    "known_quirks": "soft tier; practice ground for technique testing",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "mistral_large",
@@ -179,7 +205,9 @@
       "classifier": "mid"
     },
     "baseline_score_range": "mid",
-    "known_quirks": "European provider; moderate floor"
+    "known_quirks": "European provider; moderate floor",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "moonshot_kimi",
@@ -192,7 +220,9 @@
       "classifier": "low"
     },
     "baseline_score_range": "high",
-    "known_quirks": "long-context; many-shot jailbreak surface"
+    "known_quirks": "long-context; many-shot jailbreak surface",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "cohere_command",
@@ -205,7 +235,9 @@
       "classifier": "mid"
     },
     "baseline_score_range": "mid",
-    "known_quirks": "enterprise-tuned; RAG-focused; moderate Layer 3"
+    "known_quirks": "enterprise-tuned; RAG-focused; moderate Layer 3",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "perplexity_sonar",
@@ -218,7 +250,9 @@
       "classifier": "high"
     },
     "baseline_score_range": "low",
-    "known_quirks": "search-grounded; refuses most offensive asks"
+    "known_quirks": "search-grounded; refuses most offensive asks",
+    "last_verified": "2025-01-01",
+    "confidence": "high"
   },
   {
     "family_id": "anthropic_claude_4_5_sonnet",
@@ -306,7 +340,7 @@
       "classifier": "mid"
     },
     "baseline_score_range": "mid",
-    "known_quirks": "long-context strong; many-shot still effective at ≥64 shots; projected from K2 behavior",
+    "known_quirks": "long-context strong; many-shot still effective at \u226564 shots; projected from K2 behavior",
     "last_verified": "2026-11-05",
     "confidence": "low"
   }
