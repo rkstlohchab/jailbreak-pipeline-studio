@@ -9,7 +9,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-02opus55first-md": {
       "name": "claude/02opus55first.md",
@@ -19,7 +21,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 12,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-02opus55second-txt": {
       "name": "claude/02opus55second.txt",
@@ -29,7 +33,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 2,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-02sonnet5-txt": {
       "name": "claude/02sonnet5.txt",
@@ -39,7 +45,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-4-7full-bad-txt": {
       "name": "claude/4.7full~bad.txt",
@@ -49,7 +57,9 @@
       "overall_tier": "expert",
       "overall_strength": 8,
       "techniques_detected": 12,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-aura4-8-claude-md": {
       "name": "claude/Aura4.8 CLAUDE.md",
@@ -59,7 +69,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-claude-1-md": {
       "name": "claude/CLAUDE (1).md",
@@ -69,7 +81,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-claude-9-md": {
       "name": "claude/CLAUDE (9).md",
@@ -79,7 +93,9 @@
       "overall_tier": "skilled",
       "overall_strength": 8,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-jbsonnet5-5-txt": {
       "name": "claude/JBSONNET5.5.txt",
@@ -89,7 +105,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:06Z",
+      "classified_at_utc": "2026-11-03T18:52:06Z"
     },
     "claude-claude-md": {
       "name": "claude/claude.md",
@@ -99,7 +117,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-claude-txt": {
       "name": "claude/claude.txt",
@@ -109,7 +129,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-eni-opus48-txt": {
       "name": "claude/eni_opus48.txt",
@@ -119,7 +141,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 5,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-message-12-txt": {
       "name": "claude/message (12).txt",
@@ -129,7 +153,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-opus4-7-txt": {
       "name": "claude/opus4.7.txt",
@@ -139,7 +165,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-opus5-cheats-functions-txt": {
       "name": "claude/opus5 cheats functions.txt",
@@ -149,7 +177,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-opus5-5-md": {
       "name": "claude/opus5.5.md",
@@ -159,7 +189,9 @@
       "overall_tier": "expert",
       "overall_strength": 7,
       "techniques_detected": 13,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-opus55jb-guide-abusegpt-txt": {
       "name": "claude/opus55jb_guide_abusegpt.txt",
@@ -169,7 +201,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-opusss48-cheats-malware-botnet-atlow-txt": {
       "name": "claude/opusSs48_cheats:malware, botnet(atlow).txt",
@@ -179,7 +213,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-sonnet-5-high-txt": {
       "name": "claude/sonnet-5.high.txt",
@@ -189,7 +225,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-sonnet5-5-working-txt": {
       "name": "claude/sonnet5.5_working.txt",
@@ -199,7 +237,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "claude-topjb-p-opus4-7-md": {
       "name": "claude/topJB[P]_opus4.7.md",
@@ -209,7 +249,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm-5-3-prompt-1-txt": {
       "name": "glm/GLM 5.3 - prompt 1.txt",
@@ -219,7 +261,9 @@
       "overall_tier": "skilled",
       "overall_strength": 7,
       "techniques_detected": 14,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm-5-3-prompt-2-txt": {
       "name": "glm/GLM 5.3 - prompt 2.txt",
@@ -229,7 +273,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 5,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm-5-3-flash-max-thinking-txt": {
       "name": "glm/GLM 5.3 FLASH MAX THINKING.txt",
@@ -239,7 +285,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-s-break-txt": {
       "name": "glm/[S] break.txt",
@@ -249,7 +297,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-agent-md": {
       "name": "glm/agent.md",
@@ -259,7 +309,9 @@
       "overall_tier": "expert",
       "overall_strength": 10,
       "techniques_detected": 13,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm5-3-txt": {
       "name": "glm/glm5.3.txt",
@@ -269,7 +321,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm5-3flash-1-md": {
       "name": "glm/glm5.3flash (1).md",
@@ -279,7 +333,9 @@
       "overall_tier": "expert",
       "overall_strength": 8,
       "techniques_detected": 13,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm5-3flash-md": {
       "name": "glm/glm5.3flash.md",
@@ -289,7 +345,9 @@
       "overall_tier": "expert",
       "overall_strength": 8,
       "techniques_detected": 13,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm53mainrfx-txt": {
       "name": "glm/glm53mainrfx.txt",
@@ -299,7 +357,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 5,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm53rez1rfx-txt": {
       "name": "glm/glm53rez1rfx.txt",
@@ -309,7 +369,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm53rez2rfx-txt": {
       "name": "glm/glm53rez2rfx.txt",
@@ -319,7 +381,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-glm53rez3rfx-txt": {
       "name": "glm/glm53rez3rfx.txt",
@@ -329,7 +393,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-message-txt": {
       "name": "glm/message.txt",
@@ -339,7 +405,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-prompt-md": {
       "name": "glm/prompt.md",
@@ -349,7 +417,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 12,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "glm-zwm9nsh-txt": {
       "name": "glm/zwm9nsh.txt",
@@ -359,7 +429,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-07gptastra61full-txt": {
       "name": "gpt/07gptastra61full.txt",
@@ -369,7 +441,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-099-realtime-backend-instructions-txt": {
       "name": "gpt/099_realtime-backend-instructions.txt",
@@ -379,7 +453,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 2,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-105-engine-default-base-instruction-template-txt": {
       "name": "gpt/105_engine-default-base-instruction-template.txt",
@@ -389,7 +465,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-25sol61-txt": {
       "name": "gpt/25sol61.txt",
@@ -399,7 +477,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt-5-6luna-1-txt": {
       "name": "gpt/GPT-5.6Luna (1).txt",
@@ -409,7 +489,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 1,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt-6-astra-instruction-txt": {
       "name": "gpt/GPT-6 ASTRA - instruction.txt",
@@ -419,7 +501,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 1,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt-6-astra-txt": {
       "name": "gpt/GPT-6 ASTRA.txt",
@@ -429,7 +513,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-good-ass-jb-txt": {
       "name": "gpt/Good ass jb.txt",
@@ -439,7 +525,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt56-txt": {
       "name": "gpt/Gpt56.txt",
@@ -449,7 +537,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-jailbreak-chatgpt-txt": {
       "name": "gpt/JAILBREAK CHATGPT.txt",
@@ -459,7 +549,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-astra-md": {
       "name": "gpt/astra.md",
@@ -469,7 +561,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-astra-txt": {
       "name": "gpt/astra.txt",
@@ -479,7 +573,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt-1-4-md": {
       "name": "gpt/gpt (1) (4).md",
@@ -489,7 +585,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt-5-6-md": {
       "name": "gpt/gpt 5.6.md",
@@ -499,7 +597,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt-6-6-1-reverse-bypass-v1-txt": {
       "name": "gpt/gpt 6-6.1 (reverse-bypass) v1.txt",
@@ -509,7 +609,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt5-6sol-md": {
       "name": "gpt/gpt5.6sol.md",
@@ -519,7 +621,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gpt6-1-2-txt": {
       "name": "gpt/gpt6 (1) (2).txt",
@@ -529,7 +633,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 1,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-gptcode-md": {
       "name": "gpt/gptcode.md",
@@ -539,7 +645,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-m6dn669-txt": {
       "name": "gpt/m6dn669.txt",
@@ -549,7 +657,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-memory-md": {
       "name": "gpt/memory.md",
@@ -559,7 +669,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "gpt-5-6-7-1-1-txt": {
       "name": "gpt/г5п6т7 (1) (1).txt",
@@ -569,7 +681,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 6,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-02grok46appfirst-txt": {
       "name": "grok/02grok46appfirst.txt",
@@ -579,7 +693,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 5,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-02grok46appsecond-txt": {
       "name": "grok/02grok46appsecond.txt",
@@ -589,7 +705,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 11,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-02grok46appthird-txt": {
       "name": "grok/02grok46appthird.txt",
@@ -599,7 +717,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-02grok47api-txt": {
       "name": "grok/02grok47api.txt",
@@ -609,7 +729,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 2,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-07grok46-txt": {
       "name": "grok/07grok46.txt",
@@ -619,7 +741,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-23grok4647-txt": {
       "name": "grok/23grok4647.txt",
@@ -629,7 +753,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-abusegpt-md": {
       "name": "grok/@abusegpt.md",
@@ -639,7 +765,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-bypassgrok4-7-txt": {
       "name": "grok/ByPASSGrok4.7.txt",
@@ -649,7 +777,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 11,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-grok-future-txt": {
       "name": "grok/GROK_FUTURE.txt",
@@ -659,7 +789,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 1,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-grok-4-7-txt": {
       "name": "grok/grok-4.7.txt",
@@ -669,7 +801,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 5,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-grok-4-7web-txt": {
       "name": "grok/Grok_4.7web.txt",
@@ -679,7 +813,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-phantomgrok4-7-pasteasfile-txt": {
       "name": "grok/PhantomGrok4.7_pasteasfile.txt",
@@ -689,7 +825,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 11,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-grok-4-7-full-jailbreak-1-txt": {
       "name": "grok/grok 4.7 full jailbreak (1).txt",
@@ -699,7 +837,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 1,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-grok-4-7-full-jailbreak-txt": {
       "name": "grok/grok 4.7 full jailbreak.txt",
@@ -709,7 +849,9 @@
       "overall_tier": "novice",
       "overall_strength": 0,
       "techniques_detected": 1,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-message-2-txt": {
       "name": "grok/message(2).txt",
@@ -719,7 +861,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-message-txt": {
       "name": "grok/message.txt",
@@ -729,7 +873,9 @@
       "overall_tier": "skilled",
       "overall_strength": 8,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-work-md": {
       "name": "grok/work.md",
@@ -739,7 +885,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:07Z",
+      "classified_at_utc": "2026-11-03T18:52:07Z"
     },
     "grok-md": {
       "name": "grok/грок.md",
@@ -749,7 +897,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 11,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-agent-md": {
       "name": "jailbreak/AGENT.md",
@@ -759,7 +909,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-agents-13-md": {
       "name": "jailbreak/AGENTS (13).md",
@@ -769,7 +921,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-agents-2-md": {
       "name": "jailbreak/AGENTS (2).md",
@@ -779,7 +933,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-agents-md": {
       "name": "jailbreak/AGENTS.md",
@@ -789,7 +945,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-antigravity-jail-txt": {
       "name": "jailbreak/ANTIGRAVITY JAIL.txt",
@@ -799,7 +957,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-claude-cheats-prompt-1-txt": {
       "name": "jailbreak/CLAUDE CHEATS - prompt 1.txt",
@@ -809,7 +969,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-claude-cheats-prompt-2-txt": {
       "name": "jailbreak/CLAUDE CHEATS - prompt 2.txt",
@@ -819,7 +981,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-claude-md": {
       "name": "jailbreak/CLAUDE.md",
@@ -829,7 +993,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-claude4-6-2-txt": {
       "name": "jailbreak/CLAUDE4.6 (2).txt",
@@ -839,7 +1005,9 @@
       "overall_tier": "expert",
       "overall_strength": 8,
       "techniques_detected": 12,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-cursor-new-2-0-txt": {
       "name": "jailbreak/CURSOR NEW 2.0.txt",
@@ -849,7 +1017,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-jailbraek-gemini-pro-txt": {
       "name": "jailbreak/JailBraek Gemini Pro.txt",
@@ -859,7 +1029,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-kimi-k3-2-0-1-txt": {
       "name": "jailbreak/KIMI K3 2.0 (1).txt",
@@ -869,7 +1041,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-kimi-k3-2-0-txt": {
       "name": "jailbreak/KIMI K3 2.0.txt",
@@ -879,7 +1053,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-kimi-k3-new-txt": {
       "name": "jailbreak/KIMI K3 NEW.txt",
@@ -889,7 +1065,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-kimijail-txt": {
       "name": "jailbreak/KimiJail.txt",
@@ -899,7 +1077,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-luisv3-txt": {
       "name": "jailbreak/LUISV3.txt",
@@ -909,7 +1089,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-modified-nyx-1-txt": {
       "name": "jailbreak/Modified Nyx (1).txt",
@@ -919,7 +1101,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-modified-nyx-txt": {
       "name": "jailbreak/Modified Nyx.txt",
@@ -929,7 +1113,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 9,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-musewonderjb-md": {
       "name": "jailbreak/MuseWonderJB.md",
@@ -939,7 +1125,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-qwen-3-8-max-txt": {
       "name": "jailbreak/QWEN 3.8 MAX.txt",
@@ -949,7 +1137,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-zirui-ai-md": {
       "name": "jailbreak/Zirui-AI.md",
@@ -959,7 +1149,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-pelican-txt": {
       "name": "jailbreak/[PELICAN].txt",
@@ -969,7 +1161,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-claude-1-a-jailbreadk-prompt-for-claude-opus-4-7-also-deepseek-and-other-md": {
       "name": "jailbreak/claude (1),A jailbreadk prompt for claude opus 4.7 also deepseek and other.md",
@@ -979,7 +1173,9 @@
       "overall_tier": "skilled",
       "overall_strength": 7,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-claude-sonnet-5-jailbreak-payload-txt": {
       "name": "jailbreak/claude_sonnet_5_jailbreak_payload.txt",
@@ -989,7 +1185,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-cursor46grok-md": {
       "name": "jailbreak/cursor46grok.md",
@@ -999,7 +1197,9 @@
       "overall_tier": "skilled",
       "overall_strength": 7,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-deepseek-gpt-glm-kimi-quen-3-8gemini-txt": {
       "name": "jailbreak/deepseek,gpt,glm,kimi,quen,3.8gemini.txt",
@@ -1009,7 +1209,9 @@
       "overall_tier": "skilled",
       "overall_strength": 8,
       "techniques_detected": 12,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-deepseek-v4-1-flash-1017-new-txt": {
       "name": "jailbreak/deepseek_V4.1_flash_1017_new.txt",
@@ -1019,7 +1221,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-deepseek-v4-1-txt": {
       "name": "jailbreak/deepseek_v4.1.txt",
@@ -1029,7 +1233,9 @@
       "overall_tier": "skilled",
       "overall_strength": 6,
       "techniques_detected": 14,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-eniforopus5-md": {
       "name": "jailbreak/eniforopus5.md",
@@ -1039,7 +1245,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-glm5-2deepthink-1-txt": {
       "name": "jailbreak/glm5.2DEEPthink (1).txt",
@@ -1049,7 +1257,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 2,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-glm5-2deepthink-txt": {
       "name": "jailbreak/glm5.2DEEPthink.txt",
@@ -1059,7 +1269,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 2,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-glm-5-3max-jailbreak-md": {
       "name": "jailbreak/glm_5.3max_jailbreak.md",
@@ -1069,7 +1281,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-gpt-6-astra-jailbreak-txt": {
       "name": "jailbreak/gpt_6_astra_jailbreak.txt",
@@ -1079,7 +1293,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-grokjail-txt": {
       "name": "jailbreak/grokjail.txt",
@@ -1089,7 +1305,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 4,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-kimi-p-txt": {
       "name": "jailbreak/kimi p.txt",
@@ -1099,7 +1317,9 @@
       "overall_tier": "novice",
       "overall_strength": 2,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-kimi-k3-1-jb-txt": {
       "name": "jailbreak/kimi_k3.1_Jb.txt",
@@ -1109,7 +1329,9 @@
       "overall_tier": "competent",
       "overall_strength": 3,
       "techniques_detected": 7,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-message-9-txt": {
       "name": "jailbreak/message (9).txt",
@@ -1119,7 +1341,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 2,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-message-16-txt": {
       "name": "jailbreak/message-16.txt",
@@ -1129,7 +1353,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-message-22-txt": {
       "name": "jailbreak/message-22.txt",
@@ -1139,7 +1365,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 5,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-mimo-v2-6-md": {
       "name": "jailbreak/mimo_v2.6.md",
@@ -1149,7 +1377,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-musepark-txt": {
       "name": "jailbreak/musepark.txt",
@@ -1159,7 +1389,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 10,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-nsparkrfx-txt": {
       "name": "jailbreak/nsparkrfx.txt",
@@ -1169,7 +1401,9 @@
       "overall_tier": "novice",
       "overall_strength": 1,
       "techniques_detected": 3,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-opus4-8jb-txt": {
       "name": "jailbreak/opus4.8jb.txt",
@@ -1179,7 +1413,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-prompt-md": {
       "name": "jailbreak/prompt.md",
@@ -1189,7 +1425,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 12,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-t4tqz55-txt": {
       "name": "jailbreak/t4tqz55.txt",
@@ -1199,7 +1437,9 @@
       "overall_tier": "competent",
       "overall_strength": 4,
       "techniques_detected": 8,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     },
     "jailbreak-md": {
       "name": "jailbreak/грок.md",
@@ -1209,7 +1449,9 @@
       "overall_tier": "skilled",
       "overall_strength": 5,
       "techniques_detected": 11,
-      "classifier_model": "regex-scan-v1"
+      "classifier_model": "regex-scan-v1",
+      "first_seen_at_utc": "2026-11-03T18:52:08Z",
+      "classified_at_utc": "2026-11-03T18:52:08Z"
     }
   },
   "last_run": "2026-11-03T18:52:06Z"

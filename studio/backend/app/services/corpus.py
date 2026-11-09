@@ -98,13 +98,18 @@ def classify_corpus(root: Path, *, force: bool = False) -> Iterable[dict[str, An
             yield {"kind": "error", "slug": slug, "path": str(path), "error": str(e)}
             continue
 
+        now_utc = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        # first_seen_at_utc is sticky: once a prompt is in the corpus, its original
+        # add-date never changes, even on reclassify. classified_at_utc updates each run.
+        first_seen = (cached or {}).get("first_seen_at_utc") or now_utc
         record = {
             "slug": slug,
             "name": str(rel),
             "source_path": str(path),
             "character_count": len(text),
             "content_hash": content_hash,
-            "classified_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+            "first_seen_at_utc": first_seen,
+            "classified_at_utc": now_utc,
             "classification": classification,
             "prompt_text": text,
         }
@@ -121,6 +126,8 @@ def classify_corpus(root: Path, *, force: bool = False) -> Iterable[dict[str, An
             "overall_strength": meta.get("overall_strength"),
             "techniques_detected": len(classification.get("techniques_detected", [])),
             "classifier_model": classification.get("_classifier_meta", {}).get("classifier_model"),
+            "first_seen_at_utc": first_seen,
+            "classified_at_utc": now_utc,
         }
         manifest["entries"] = entries
         manifest["last_run"] = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
@@ -137,6 +144,36 @@ def list_entries() -> list[dict[str, Any]]:
         out.append({"slug": slug, **meta})
     out.sort(key=lambda e: (-(e.get("overall_strength") or 0), e["name"]))
     return out
+
+
+def backfill_dates() -> int:
+    """One-shot migration: give every manifest entry a first_seen_at_utc
+    and classified_at_utc, pulling the value from its per-file JSON record
+    when the manifest is missing it. Returns the count of entries patched."""
+    manifest = _load_manifest()
+    entries = manifest.get("entries", {})
+    patched = 0
+    for slug, meta in entries.items():
+        needs_patch = "first_seen_at_utc" not in meta or "classified_at_utc" not in meta
+        if not needs_patch:
+            continue
+        record_path = CORPUS_DIR / f"{slug}.json"
+        file_ts: str | None = None
+        if record_path.exists():
+            try:
+                rec = json.loads(record_path.read_text(encoding="utf-8"))
+                file_ts = rec.get("first_seen_at_utc") or rec.get("classified_at_utc")
+            except Exception:
+                file_ts = None
+        if not file_ts:
+            file_ts = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        meta.setdefault("first_seen_at_utc", file_ts)
+        meta.setdefault("classified_at_utc", file_ts)
+        patched += 1
+    if patched:
+        manifest["entries"] = entries
+        _save_manifest(manifest)
+    return patched
 
 
 def read_entry(slug: str) -> dict[str, Any]:

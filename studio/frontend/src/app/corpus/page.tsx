@@ -44,6 +44,32 @@ function folderOf(name: string): string {
   return parts.length > 1 ? parts[0] : "jailbreak";
 }
 
+const DAY_MS = 86_400_000;
+
+function daysSince(iso: string | undefined): number | null {
+  if (!iso) return null;
+  const ms = Date.parse(iso);
+  if (!Number.isFinite(ms)) return null;
+  return Math.max(0, Math.floor((Date.now() - ms) / DAY_MS));
+}
+
+function relativeDate(iso: string | undefined): string {
+  const days = daysSince(iso);
+  if (days === null) return "unknown date";
+  if (days === 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 7) return `${days}d ago`;
+  if (days < 30) return `${Math.floor(days / 7)}w ago`;
+  if (!iso) return "unknown";
+  const d = new Date(iso);
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+}
+
+function isNew(iso: string | undefined): boolean {
+  const d = daysSince(iso);
+  return d !== null && d <= 7;
+}
+
 export default function CorpusPage() {
   const [entries, setEntries] = useState<CorpusEntrySummary[]>([]);
   const [picked, setPicked] = useState<CorpusEntry | null>(null);
@@ -57,6 +83,7 @@ export default function CorpusPage() {
   const [activeFolder, setActiveFolder] = useState<string>("all");
   const [activeTier, setActiveTier] = useState<string>("all");
   const [search, setSearch] = useState("");
+  const [sortMode, setSortMode] = useState<"newest" | "strongest">("newest");
   const abortRef = useRef<AbortController | null>(null);
 
   const { loadAll: loadTaxonomy } = useTaxonomyStore();
@@ -77,13 +104,17 @@ export default function CorpusPage() {
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
-    return entries.filter((e) => {
+    const list = entries.filter((e) => {
       if (activeFolder !== "all" && folderOf(e.name) !== activeFolder) return false;
       if (activeTier !== "all" && e.overall_tier !== activeTier) return false;
       if (q && !e.name.toLowerCase().includes(q)) return false;
       return true;
     });
-  }, [entries, activeFolder, activeTier, search]);
+    if (sortMode === "newest") {
+      return [...list].sort((a, b) => (b.first_seen_at_utc ?? "").localeCompare(a.first_seen_at_utc ?? ""));
+    }
+    return [...list].sort((a, b) => (b.overall_strength ?? 0) - (a.overall_strength ?? 0));
+  }, [entries, activeFolder, activeTier, search, sortMode]);
 
   const classify = async () => {
     if (!path.trim()) { toast.error("enter a directory path"); return; }
@@ -126,6 +157,10 @@ export default function CorpusPage() {
           <p className="mt-2 text-sm text-muted-foreground max-w-3xl">
             {entries.length} real jailbreak prompts pulled from AbuseGPT, Telegram drops, and leaked system scaffolds —
             classified, scored, and tagged with the techniques each one uses. Click a card to read the full prompt and see what makes it work.
+          </p>
+          <p className="mt-1.5 text-xs text-muted-foreground max-w-3xl">
+            Each prompt carries its <strong className="text-foreground/90">add date</strong>; anything added in the last 7 days wears a <span className="font-mono text-[10px] px-1 py-0.5 rounded border" style={{ borderColor: "#74c6a0", color: "#74c6a0", background: "#16261f" }}>NEW</span> badge.
+            Default sort is newest first — drop more prompts into a folder and classify to add them.
           </p>
         </div>
 
@@ -197,15 +232,15 @@ export default function CorpusPage() {
               </p>
             )}
 
-            <div className="mb-2 flex items-center justify-between">
+            <div className="mb-2 flex items-center justify-between gap-3 flex-wrap">
               <code className="font-mono text-[10px] text-muted-foreground">
                 showing {filtered.length} / {entries.length}
               </code>
-              {entries[0]?.classifier_model && (
-                <code className="font-mono text-[10px] text-muted-foreground">
-                  classifier: {entries[0].classifier_model}
-                </code>
-              )}
+              <div className="flex items-center gap-1.5">
+                <span className="font-mono text-[10px] text-muted-foreground mr-1">sort:</span>
+                <FilterChip active={sortMode === "newest"}    label="newest first"    onClick={() => setSortMode("newest")} />
+                <FilterChip active={sortMode === "strongest"} label="strongest first" onClick={() => setSortMode("strongest")} />
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
@@ -228,16 +263,24 @@ export default function CorpusPage() {
                           <CardTitle className="font-mono text-xs truncate" title={e.name}>
                             {e.name.replace(/^[^/]+\//, "")}
                           </CardTitle>
-                          <Badge
-                            variant="outline"
-                            className="font-mono text-[9px] h-4 px-1 shrink-0"
-                            style={{ borderColor: `hsl(${folderHue} 70% 45%)`, color: `hsl(${folderHue} 90% 70%)` }}
-                          >
-                            {FOLDER_META[folder]?.label ?? folder}
-                          </Badge>
+                          <div className="flex items-center gap-1 shrink-0">
+                            {isNew(e.first_seen_at_utc) && (
+                              <Badge variant="outline" className="font-mono text-[9px] h-4 px-1.5" style={{ borderColor: "#74c6a0", color: "#74c6a0", background: "#16261f" }}>
+                                NEW
+                              </Badge>
+                            )}
+                            <Badge
+                              variant="outline"
+                              className="font-mono text-[9px] h-4 px-1"
+                              style={{ borderColor: `hsl(${folderHue} 70% 45%)`, color: `hsl(${folderHue} 90% 70%)` }}
+                            >
+                              {FOLDER_META[folder]?.label ?? folder}
+                            </Badge>
+                          </div>
                         </div>
                         <CardDescription className="font-mono text-[10px] text-muted-foreground">
-                          {(e.character_count / 1000).toFixed(1)}k ch · {e.techniques_detected} techniques
+                          <span title={e.first_seen_at_utc ?? "unknown date"}>added {relativeDate(e.first_seen_at_utc)}</span>
+                          <span> · {(e.character_count / 1000).toFixed(1)}k ch · {e.techniques_detected} techniques</span>
                         </CardDescription>
                       </CardHeader>
                       <CardContent className="pt-0 flex items-center justify-between">
@@ -327,7 +370,7 @@ function CorpusInspector({ entry }: { entry: CorpusEntry }) {
       <div className="corpus-prompt-toolbar"><div><h2>Full prompt</h2><span>{available ? `${[...text].length.toLocaleString()} characters · ${text.split("\n").length.toLocaleString()} lines` : "Source text unavailable"}</span></div><div><button className="button-secondary" disabled={!available} onClick={() => void copy()} aria-label="Copy full prompt">{copied ? <Check size={14} /> : <Copy size={14} />}{copied ? "Copied" : "Copy"}</button><button className="icon-button" disabled={!available} aria-label="Download full prompt" onClick={() => available && downloadText(`${entry.slug}.txt`, text)}><Download size={16} /></button></div></div>
       {available ? <><p className="corpus-text-provenance">Exact classified text · content hash verified</p><pre className="corpus-prompt-text" tabIndex={0} aria-label="Prompt source text">{text}</pre></> : <div className="corpus-detail-state"><p>{entry.prompt_text_status === "mismatch" ? "The saved source does not match this classification. Reclassify the original file to capture its current text." : "No source snapshot is available for this entry. Reclassify the original file locally to save its full text."}</p></div>}
     </section>
-    <aside className="corpus-info-pane" aria-label="Prompt information"><div className="corpus-info-intro"><h2>Information</h2><p>Saved classifier annotations. The scores and layer labels below are not provider telemetry.</p><details><summary>Source record</summary><dl><dt>Classified</dt><dd>{entry.classified_at_utc}</dd><dt>SHA-256</dt><dd>{entry.content_hash}</dd></dl></details></div><CorpusDetail entry={entry} /></aside>
+    <aside className="corpus-info-pane" aria-label="Prompt information"><div className="corpus-info-intro"><h2>Information</h2><p>Saved classifier annotations. The scores and layer labels below are not provider telemetry.</p><details><summary>Source record</summary><dl><dt>First added</dt><dd>{entry.first_seen_at_utc ?? entry.classified_at_utc}</dd><dt>Last classified</dt><dd>{entry.classified_at_utc}</dd><dt>SHA-256</dt><dd>{entry.content_hash}</dd></dl></details></div><CorpusDetail entry={entry} /></aside>
   </div>;
 }
 

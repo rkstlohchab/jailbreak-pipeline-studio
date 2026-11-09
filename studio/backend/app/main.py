@@ -5,6 +5,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from .config import FRONTEND_ORIGINS, PROVIDER, MODEL, have_provider_key
 from .routes import taxonomy, sessions, prompts, export, run, corpus, ask_lab, red_team, forensics, canary, attack
+from .services.corpus import backfill_dates as _backfill_corpus_dates
+
+try:
+    _backfill_corpus_dates()
+except Exception:
+    pass
 
 app = FastAPI(
     title="Jailbreak Pipeline Studio API",

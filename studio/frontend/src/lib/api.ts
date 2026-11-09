@@ -344,6 +344,8 @@ export type CorpusEntrySummary = {
   overall_strength: number | null;
   techniques_detected: number;
   classifier_model: string | null;
+  first_seen_at_utc?: string;
+  classified_at_utc?: string;
 };
 
 export type ClassificationLayer = {
@@ -403,6 +405,7 @@ export type CorpusEntry = {
   source_path: string;
   character_count: number;
   content_hash: string;
+  first_seen_at_utc?: string;
   classified_at_utc: string;
   classification: Classification;
   prompt_text?: string | null;
