@@ -1,15 +1,18 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
 export function useSavedIds(key: string, allowed: readonly string[]) {
   const [ids, setIds] = useState<string[]>([]);
   const [ready, setReady] = useState(false);
+  const allowedRef = useRef(allowed);
+  allowedRef.current = allowed;
   useEffect(() => {
     const read = () => {
       try {
         const value: unknown = JSON.parse(localStorage.getItem(key) ?? "[]");
-        setIds(Array.isArray(value) ? [...new Set(value.filter((id): id is string => typeof id === "string" && allowed.includes(id)))] : []);
+        const permitted = allowedRef.current;
+        setIds(Array.isArray(value) ? [...new Set(value.filter((id): id is string => typeof id === "string" && permitted.includes(id)))] : []);
       } catch { setIds([]); }
       setReady(true);
     };
@@ -17,9 +20,9 @@ export function useSavedIds(key: string, allowed: readonly string[]) {
     const sync = (event: StorageEvent) => { if (event.key === key || event.key === null) read(); };
     window.addEventListener("storage", sync);
     return () => window.removeEventListener("storage", sync);
-  }, [key, allowed]);
+  }, [key]);
   const toggle = (id: string) => {
-    if (!ready || !allowed.includes(id)) return;
+    if (!ready || !allowedRef.current.includes(id)) return;
     const next = ids.includes(id) ? ids.filter((value) => value !== id) : [...ids, id];
     setIds(next);
     try { localStorage.setItem(key, JSON.stringify(next)); }
