@@ -1,11 +1,17 @@
 import type { PipelineEvent, Trajectory } from "./api";
 
 export type RunStatus = "running" | "completed" | "refusal" | "filtered" | "truncated" | "empty" | "error" | "cancelled" | "interrupted";
+export type StudyPlan = { exerciseId?: string; hypothesis: string; criteria: string };
+export type StudyReview = {
+  outcome: "unreviewed" | "task-met" | "task-unmet" | "partial" | "refusal" | "uncertain" | "not-evaluable";
+  notes: string; reviewedAt: string;
+};
 export type RunRecord = {
   id: string; createdAt: string; provider: string; model: string;
   scaffold: string; prompt: string; maxTokens: number;
   text: string; status: RunStatus; events: PipelineEvent[];
   archived?: boolean; archiveVerdict?: string;
+  study?: StudyPlan; review?: StudyReview;
 };
 export const STATUS_LABEL: Record<RunStatus, string> = {
   running: "Receiving", completed: "Response received", refusal: "Refusal reported", filtered: "Provider filter",

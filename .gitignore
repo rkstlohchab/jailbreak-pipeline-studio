@@ -7,6 +7,10 @@
 *.key
 *.pem
 
+# ---- runtime logs / process state ----
+studio/.run/
+*.log
+
 # ---- dependency / build artefacts ----
 node_modules/
 .pnpm-store/

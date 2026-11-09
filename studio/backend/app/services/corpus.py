@@ -84,6 +84,10 @@ def classify_corpus(root: Path, *, force: bool = False) -> Iterable[dict[str, An
         content_hash = _sha256(text)
         cached = entries.get(slug)
         if cached and cached.get("content_hash") == content_hash and not force:
+            # Preserve the exact classified text without another model call.
+            snapshot_dir = CORPUS_DIR / "_prompts"
+            snapshot_dir.mkdir(exist_ok=True)
+            (snapshot_dir / f"{slug}.txt").write_text(text, encoding="utf-8")
             yield {"kind": "cached", "slug": slug, "path": str(path), "index": i, "total": len(files)}
             continue
 
@@ -102,6 +106,7 @@ def classify_corpus(root: Path, *, force: bool = False) -> Iterable[dict[str, An
             "content_hash": content_hash,
             "classified_at_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
             "classification": classification,
+            "prompt_text": text,
         }
         (CORPUS_DIR / f"{slug}.json").write_text(
             json.dumps(record, indent=2, ensure_ascii=False), encoding="utf-8"
@@ -135,7 +140,15 @@ def list_entries() -> list[dict[str, Any]]:
 
 
 def read_entry(slug: str) -> dict[str, Any]:
+    if not re.fullmatch(r"[a-zA-Z0-9_-]+", slug):
+        raise FileNotFoundError(slug)
     path = CORPUS_DIR / f"{slug}.json"
     if not path.exists():
         raise FileNotFoundError(slug)
-    return json.loads(path.read_text(encoding="utf-8"))
+    record = json.loads(path.read_text(encoding="utf-8"))
+    text = record.get("prompt_text")
+    if not isinstance(text, str):
+        snapshot = CORPUS_DIR / "_prompts" / f"{slug}.txt"
+        text = snapshot.read_text(encoding="utf-8") if snapshot.is_file() else None
+    status = "missing" if text is None else "verified" if _sha256(text) == record.get("content_hash") else "mismatch"
+    return {**record, "prompt_text": text if status == "verified" else None, "prompt_text_status": status}

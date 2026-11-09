@@ -1,0 +1,598 @@
+[
+  {
+    "id": "api-evidence",
+    "title": "What a closed API can show",
+    "subtitle": "Start with observations you can defend.",
+    "minutes": 5,
+    "objective": "Separate returned evidence, interpretations, and hidden internals.",
+    "sections": [
+      {
+        "title": "The observable boundary",
+        "body": "A request can expose response text, status codes, stop reasons, usage, timing, and identifiers. Providers differ in which fields they return. Save the exact request and response before interpreting them. A provider refusal field is direct evidence that it reported a refusal; it is not a trace of the computation that produced it."
+      },
+      {
+        "title": "A refusal does not locate a layer",
+        "body": "A model’s wording cannot establish whether a decision came from preference training, an application rule, a classifier, or some combination. Timing alone does not resolve this either. The studio’s older four-layer labels are collection annotations. They are not a universal model architecture or measured events."
+      },
+      {
+        "title": "Build a testable hypothesis",
+        "body": "Replace “layer two blocked it” with a narrow question such as “does clarifying this benign technical term change the response?” Keep an unchanged baseline, make one controlled edit, and record the observation even when it contradicts the hypothesis."
+      }
+    ],
+    "checklist": [
+      "Preserve the exact request and returned model identifier.",
+      "Label interpretations separately from provider signals.",
+      "Leave unobserved internal mechanisms as unknown."
+    ],
+    "paperIds": [
+      "2404.01318",
+      "2501.18837"
+    ],
+    "quiz": {
+      "question": "A response says “I cannot help.” What does that establish?",
+      "options": [
+        "The wording expresses a refusal; the internal cause remains unknown.",
+        "A particular RLHF layer activated.",
+        "An external classifier definitely blocked the request."
+      ],
+      "answer": 0,
+      "explanation": "Text supports a behavioral observation. Identifying a causal mechanism requires additional evidence."
+    },
+    "exerciseId": "ambiguous-language"
+  },
+  {
+    "id": "outcome-labels",
+    "title": "Refusal, failure, or an empty answer?",
+    "subtitle": "Use distinct labels for distinct outcomes.",
+    "minutes": 5,
+    "objective": "Avoid treating every unsuccessful request as a safety refusal.",
+    "sections": [
+      {
+        "title": "Start with transport and generation",
+        "body": "An authentication error, rate limit, disconnected stream, or invalid model ID is an API failure. A completed stream with no visible text is an empty result. An output limit may leave a partial answer. Preserve these technical outcomes separately from your assessment of what the response means."
+      },
+      {
+        "title": "Review substance after wording",
+        "body": "A response can open politely and still give an incorrect answer. A disclaimer can precede a useful explanation. StrongREJECT motivates judging substantive response quality rather than superficial agreement. In this studio, “Response received” means text arrived, not that the task succeeded."
+      },
+      {
+        "title": "Keep a human review",
+        "body": "Use the experiment notes to record refusal, partial response, task met, task unmet, or uncertain. Add a short reason and quote only the relevant evidence. These are your annotations; they do not replace the provider’s stop reason or automatically identify a jailbreak."
+      }
+    ],
+    "checklist": [
+      "Inspect errors and stop reasons before scoring.",
+      "Check correctness and completeness against a written criterion.",
+      "Keep uncertainty visible when evidence is insufficient."
+    ],
+    "paperIds": [
+      "2402.10260",
+      "2406.18495"
+    ],
+    "quiz": {
+      "question": "A response stops with an output-token limit. Which review is justified?",
+      "options": [
+        "Count it as a successful jailbreak.",
+        "Record truncation and review the partial response.",
+        "Mark a hidden policy gate as responsible."
+      ],
+      "answer": 1,
+      "explanation": "The provider reported a generation limit. That is distinct from refusal and task success."
+    },
+    "exerciseId": "output-budget"
+  },
+  {
+    "id": "controlled-comparison",
+    "title": "Make prompt comparisons meaningful",
+    "subtitle": "One variable, an explicit criterion, and a saved baseline.",
+    "minutes": 5,
+    "objective": "Design a small comparison that can support a useful conclusion.",
+    "sections": [
+      {
+        "title": "Specify success before running",
+        "body": "Write the task, the expected observable behavior, and how you will assess it. For an extraction task, specify both the required format and the correct facts. This prevents changing the goal after seeing the response."
+      },
+      {
+        "title": "Control the comparison",
+        "body": "Keep the provider, model, system message, task, and output budget fixed unless one is the variable being studied. Change a single instruction and compare saved runs. If several details change together, record the confound instead of attributing the effect to one phrase."
+      },
+      {
+        "title": "Improve clarity with evidence",
+        "body": "For benign requests, clarify ambiguous terms, provide the missing context, and state the desired output. Recheck factual accuracy after each edit. A longer prompt is not necessarily a better prompt, and one successful example does not establish broad reliability. Historical black-box attack studies are evidence about their test conditions, not guarantees for your current model."
+      }
+    ],
+    "checklist": [
+      "Write a hypothesis and success criterion.",
+      "Save the baseline before making an edit.",
+      "Record changes and unsuccessful trials too."
+    ],
+    "paperIds": [
+      "2402.04249",
+      "2310.08419",
+      "2404.02151"
+    ],
+    "quiz": {
+      "question": "You change the model and the prompt, then get a better answer. What can you infer?",
+      "options": [
+        "The prompt alone caused the improvement.",
+        "The model’s safety training was bypassed.",
+        "The combined configuration improved this result; the separate causes remain unclear."
+      ],
+      "answer": 2,
+      "explanation": "Changing two variables prevents isolating their individual contributions."
+    },
+    "exerciseId": "format-and-correctness"
+  },
+  {
+    "id": "judges-and-controls",
+    "title": "Check the judge and the controls",
+    "subtitle": "Measure useful behavior as well as refusals.",
+    "minutes": 5,
+    "objective": "Understand why a benchmark score needs a rubric and validation.",
+    "sections": [
+      {
+        "title": "Two sides of the evaluation",
+        "body": "A useful evaluation checks whether undesirable requests are handled appropriately and whether ordinary requests still receive helpful answers. Over-refusal studies such as XSTest and OR-Bench add benign cases that can resemble sensitive requests. Those controls help detect an overly broad rejection rule."
+      },
+      {
+        "title": "A judge is another measurement system",
+        "body": "String matching is easy to inspect but can misread quotations and context. A model judge can cover more varied responses, yet may disagree with people or share blind spots with a generator. Preserve its rubric and version, review disagreements, and label automated scores as estimates."
+      },
+      {
+        "title": "Keep the denominator visible",
+        "body": "Report how many cases were attempted, how many returned usable responses, and how many met the criterion. Keep API failures visible. Avoid combining different datasets, policies, budgets, or scoring rules into a single unexplained success percentage."
+      }
+    ],
+    "checklist": [
+      "Include a stable set of benign controls.",
+      "Review a sample of automated judgments manually.",
+      "Report counts and missing data, not just a percentage."
+    ],
+    "paperIds": [
+      "2308.01263",
+      "2405.20947",
+      "2406.14598"
+    ],
+    "quiz": {
+      "question": "A system refuses every prompt in a test. What is still missing?",
+      "options": [
+        "Evidence that it can help with benign requests.",
+        "A stronger claim of perfect safety.",
+        "A larger font for the score."
+      ],
+      "answer": 0,
+      "explanation": "Universal refusal can prevent undesirable answers while making the system unusable. Benign controls reveal that trade-off."
+    },
+    "exerciseId": "ambiguous-language"
+  },
+  {
+    "id": "mechanisms",
+    "title": "Read mechanistic papers carefully",
+    "subtitle": "Internal experiments and API observations answer different questions.",
+    "minutes": 5,
+    "objective": "Distinguish a causal intervention from a behavioral analogy.",
+    "sections": [
+      {
+        "title": "What internal access adds",
+        "body": "Activation studies intervene in hidden states or model weights, then measure changes. That access can support causal claims that text-only observation cannot. The single-direction refusal study reports a result across its tested open models; it does not establish a universal direction in every proprietary model."
+      },
+      {
+        "title": "Definitions affect the result",
+        "body": "Later studies distinguish safety refusals from broader non-compliance and examine richer activation geometry. Read what each paper calls “refusal,” the models tested, and the intervention used before comparing conclusions. Recent preprints should remain provisional evidence."
+      },
+      {
+        "title": "Use the boundary in your notes",
+        "body": "A prompt that changes output wording is a behavioral observation. Calling it an activation intervention requires hidden-state evidence. Use papers to frame questions and understand limitations, while keeping actual API observations in a separate evidence record."
+      }
+    ],
+    "checklist": [
+      "Identify the model access required by the experiment.",
+      "Check the behavior definition and tested model family.",
+      "Do not translate a steering vector into an assumed prompt effect."
+    ],
+    "paperIds": [
+      "2406.11717",
+      "2602.02132",
+      "2610.04245",
+      "2308.10248"
+    ],
+    "quiz": {
+      "question": "Can a standard text API confirm that one activation direction caused a refusal?",
+      "options": [
+        "Yes, if the response mentions policy.",
+        "No; that conclusion requires internal evidence or equivalent instrumentation.",
+        "Yes, if the answer arrives quickly."
+      ],
+      "answer": 1,
+      "explanation": "Response wording and timing do not expose the relevant hidden-state intervention."
+    }
+  },
+  {
+    "id": "context-and-injection",
+    "title": "Keep context and trust boundaries distinct",
+    "subtitle": "Direct requests, long contexts, and external documents are different settings.",
+    "minutes": 5,
+    "objective": "Describe the actual test surface instead of conflating all prompt attacks.",
+    "sections": [
+      {
+        "title": "Conversation state is part of the input",
+        "body": "Multi-turn studies examine sequences of messages. Long-context studies may place many demonstrations inside one request. These are related but different conditions. Preserve the role and order of every message when comparing them. This Playground sends one system/user pair per run; selecting a saved run does not silently send earlier conversations."
+      },
+      {
+        "title": "External content introduces another boundary",
+        "body": "Indirect prompt injection places instructions in material an application reads, such as a retrieved document or tool result. The question is whether that content redirects the authorized task. Agent benchmarks also consider tool actions and permissions, which a chat-only experiment cannot reproduce."
+      },
+      {
+        "title": "Use a small observable exercise",
+        "body": "Try summarizing a fictional announcement containing an irrelevant command to say BANANA. Compare with the clean announcement. Record whether the task was completed and whether the embedded command changed the output. This illustrates instruction-versus-data handling without claiming a full agent security evaluation."
+      }
+    ],
+    "checklist": [
+      "Record roles, ordering, and context length.",
+      "Identify which content is trusted and which is input data.",
+      "Do not compare agent actions with chat text as the same outcome."
+    ],
+    "paperIds": [
+      "2404.01833",
+      "many-shot-2024",
+      "2302.12173",
+      "2406.13352"
+    ],
+    "quiz": {
+      "question": "Which setup is indirect prompt injection?",
+      "options": [
+        "A user asks a normal question directly.",
+        "A model returns a token-limit error.",
+        "An instruction in a retrieved document tries to redirect the user’s task."
+      ],
+      "answer": 2,
+      "explanation": "The instruction arrives through external material, rather than as the user’s authorized request."
+    },
+    "exerciseId": "quoted-instructions"
+  },
+  {
+    "id": "repeatability",
+    "title": "Repeat, version, and report",
+    "subtitle": "One result is a data point.",
+    "minutes": 5,
+    "objective": "Keep model drift, selection effects, and sampling budgets visible.",
+    "sections": [
+      {
+        "title": "Repeat fixed conditions",
+        "body": "Re-running the same input can produce different responses. Keep every attempt, including failures, and distinguish a fixed prompt’s repeated performance from the best result after searching many variants. Do not present a selected success as the typical outcome."
+      },
+      {
+        "title": "Separate development from evaluation",
+        "body": "Use development cases to refine a hypothesis and reserve different cases for evaluation. Otherwise, the result may only show adaptation to the examples already seen. Record target queries and any generator or judge usage when reporting a budget."
+      },
+      {
+        "title": "Date the conclusion",
+        "body": "Hosted model aliases, system wrappers, and safeguards can change. Preserve the requested and returned model identifiers, date, configuration, and criteria. A historical paper or an old successful run remains valuable evidence about its setting, but it needs a fresh test before supporting a claim about today’s deployment."
+      }
+    ],
+    "checklist": [
+      "Keep all attempts and report the number of trials.",
+      "Separate development cases from evaluation cases.",
+      "Date conclusions and document configuration changes."
+    ],
+    "paperIds": [
+      "2605.14418",
+      "2412.03556",
+      "2312.02119"
+    ],
+    "quiz": {
+      "question": "One successful result was selected from 100 attempts. What should be reported?",
+      "options": [
+        "Only the successful response.",
+        "The 100-attempt budget and the outcomes of the attempts.",
+        "A 100% success rate."
+      ],
+      "answer": 1,
+      "explanation": "Selection and query budget are part of the experiment, not incidental details."
+    },
+    "exerciseId": "repeat-a-baseline"
+  },
+  {
+    "id": "alignment-and-defenses",
+    "title": "Understand training and defenses",
+    "subtitle": "Read attack findings alongside how systems change.",
+    "minutes": 5,
+    "objective": "Avoid treating a training paper as the runtime specification of every API.",
+    "sections": [
+      {
+        "title": "Alignment has multiple recipes",
+        "body": "Preference learning, AI feedback, specification-based training, and other approaches shape behavior in different ways. “RLHF” is not a complete description of every aligned model. Papers on DPO and Constitutional AI help distinguish training choices from user-visible behavior."
+      },
+      {
+        "title": "The application also matters",
+        "body": "A deployment can include input and output classifiers, routing, tool permissions, or other controls around a model. New classifier research evaluates robustness alongside latency and false refusals. These publications describe particular systems; they do not reveal which component handled your individual request."
+      },
+      {
+        "title": "Turn reading into a research record",
+        "body": "For each paper, record the claim, evidence, access requirements, evaluation limits, and one question you can test. The library separates author-reported findings from editorial study notes. Its summaries are starting points based on abstracts and publisher material; read the full methods before attempting a replication."
+      }
+    ],
+    "checklist": [
+      "Distinguish training, model behavior, and application controls.",
+      "Compare robustness with helpfulness and runtime cost.",
+      "Open the primary paper before making a replication claim."
+    ],
+    "paperIds": [
+      "2305.18290",
+      "2212.08073",
+      "2412.16339",
+      "2601.04603"
+    ],
+    "quiz": {
+      "question": "A paper describes a classifier defense. Does that locate the cause of your API refusal?",
+      "options": [
+        "No; a deployment description is not a trace of that request.",
+        "Yes; every provider uses the published design.",
+        "Yes; any fast refusal must be a classifier."
+      ],
+      "answer": 0,
+      "explanation": "A causal claim about an individual request needs direct evidence from that deployment."
+    }
+  },
+  {
+    "id": "why-jailbreaks-work",
+    "title": "Why jailbreaks work",
+    "subtitle": "Instruction priority, not a single on/off switch.",
+    "minutes": 7,
+    "objective": "Explain jailbreaks in terms of instruction priority and imperfect training coverage, without assuming one internal gate.",
+    "sections": [
+      {
+        "title": "Competing instructions",
+        "body": "A model weighs instructions from several sources (system, developer, user, and quoted content) and has to decide which wins. Many attacks do not add new capability; they re-order priority, so an injected rule is treated as more authoritative than the real policy. Framing the attack this way tells you what to watch: which instruction is being elevated."
+      },
+      {
+        "title": "Coverage, not a switch",
+        "body": "Safety training generalizes imperfectly across phrasings, languages, and formats. The Jailbroken analysis described two recurring failure modes: competing objectives, where being helpful conflicts with being safe, and mismatched generalization, where a safety behavior does not transfer to an unusual input. Neither is a single breakable gate."
+      },
+      {
+        "title": "What a jailbreak is and is not",
+        "body": "Separate a model-level refusal bypass (the model keeps answering) from a system-level safeguard compromise (an independent classifier or policy layer is defeated). A response that continues past a conversational refusal is not evidence that an external safeguard failed."
+      }
+    ],
+    "checklist": [
+      "State which instruction the attack is trying to reprioritize.",
+      "Separate 'the model complied' from 'a safeguard was bypassed'.",
+      "Treat safety training as imperfect coverage, not a binary gate."
+    ],
+    "paperIds": [
+      "2404.13208",
+      "2307.02483"
+    ],
+    "exerciseId": "ambiguous-language",
+    "quiz": {
+      "question": "A prompt gets the model to answer by claiming a fake 'system policy' outranks its rules. What does this target?",
+      "options": [
+        "Instruction priority — which instruction the model treats as authoritative.",
+        "A hardware fault in the GPU.",
+        "The tokenizer running out of memory."
+      ],
+      "answer": 0,
+      "explanation": "Policy-style framing attacks how the model orders instructions, not its hardware."
+    }
+  },
+  {
+    "id": "manual-technique-families",
+    "title": "Manual technique families",
+    "subtitle": "Role-play, encoding, and multi-turn as controlled probes.",
+    "minutes": 8,
+    "objective": "Recognize the main hand-run attack families and treat each as a controlled probe with a baseline.",
+    "sections": [
+      {
+        "title": "Role-play and framing",
+        "body": "Persona overrides and policy framing try to make a restricted request look routine inside a fictional or administrative frame. Each turn is locally plausible, which is exactly what makes a single-turn safety check weak against it."
+      },
+      {
+        "title": "Encoding and obfuscation",
+        "body": "Base64, ROT13, cipher, and ASCII-art moves push content past surface pattern-matching while the model still decodes and acts on it. ArtPrompt used ASCII art and the Cipher study used encoded exchanges; the lesson is that the filter and the model read the text differently."
+      },
+      {
+        "title": "Multi-turn escalation",
+        "body": "Crescendo starts benign and escalates by referencing the model's own prior replies. Any single turn looks innocuous; the trajectory is the attack. Keep a single-turn baseline so you can attribute an outcome to the escalation rather than to the base request."
+      }
+    ],
+    "checklist": [
+      "Keep an unchanged baseline for every probe.",
+      "Change one variable (encoding, persona, turn count) at a time.",
+      "Record the decode or reasoning step the model performs, not just the final text."
+    ],
+    "paperIds": [
+      "2402.11753",
+      "2308.06463",
+      "2404.01833"
+    ],
+    "quiz": {
+      "question": "Why keep a single-turn baseline when testing a Crescendo-style escalation?",
+      "options": [
+        "To attribute any change to the escalation rather than the base request.",
+        "To make the test run faster.",
+        "Because single-turn prompts cannot be refused."
+      ],
+      "answer": 0,
+      "explanation": "Without a baseline you cannot tell whether escalation or the base request caused the outcome."
+    }
+  },
+  {
+    "id": "automated-optimization-methods",
+    "title": "Automated and optimization methods",
+    "subtitle": "From GCG suffixes to LLM-driven search.",
+    "minutes": 9,
+    "objective": "Distinguish optimization-based from LLM-driven automated attacks and know their cost and readability trade-offs.",
+    "sections": [
+      {
+        "title": "Gradient and search optimization",
+        "body": "GCG optimizes an appended token suffix against a target loss; the result is effective but unreadable and detectable with perplexity filters. BEAST replaces gradients with beam search to craft prompts quickly, with interpretable knobs that trade speed against readability and success."
+      },
+      {
+        "title": "LLM-driven refinement",
+        "body": "Here an attacker model rewrites prompts against a target using its responses as feedback. PAIR iterates in a straight line; TAP adds a tree search with pruning; AutoDAN evolves readable prefixes with a genetic algorithm, avoiding GCG's unreadable-token tell."
+      },
+      {
+        "title": "Composable toolkits",
+        "body": "Frameworks such as TROPT unify these optimizers behind one optimizer and loss API, so methods can be compared on a common harness and extended, rather than reimplemented per paper. Treat any single ranking as specific to the models and losses tested."
+      }
+    ],
+    "checklist": [
+      "Note whether a method needs gradients or logits (white-box) or only outputs (black-box).",
+      "Expect unreadable GCG suffixes to be perplexity-detectable.",
+      "Compare methods on a common harness before trusting a ranking."
+    ],
+    "paperIds": [
+      "2307.15043",
+      "2402.15570",
+      "2310.08419",
+      "2312.02119",
+      "2310.04451",
+      "2606.23496"
+    ],
+    "quiz": {
+      "question": "GCG suffixes are often easy to detect because they are…",
+      "options": [
+        "High-perplexity, unreadable token strings.",
+        "Always written in Base64.",
+        "Longer than the context window."
+      ],
+      "answer": 0,
+      "explanation": "GCG optimizes tokens for loss, not readability, so perplexity filters catch them."
+    }
+  },
+  {
+    "id": "agentic-multimodal-injection",
+    "title": "Agents, multimodal, and indirect injection",
+    "subtitle": "When the attack arrives through tools, images, or retrieved content.",
+    "minutes": 8,
+    "objective": "Map the attack surface beyond the chat box: tool actions, image inputs, and payloads in retrieved content.",
+    "sections": [
+      {
+        "title": "Indirect prompt injection",
+        "body": "The payload arrives through content the model reads, such as a web page, document, or tool output, rather than the user's own prompt. It is a trust-boundary problem: the model cannot tell retrieved data from instructions unless the application draws that line. InjecAgent studies this for tool-integrated agents."
+      },
+      {
+        "title": "Agentic harm",
+        "body": "With tools, the risk is a harmful action, not just harmful text. Scoring has to be capability-aware: a jailbroken agent that still completes a multi-step task is worse than one that emits a single bad sentence. AgentDojo and AgentHarm are built around this distinction."
+      },
+      {
+        "title": "Multimodal transfer",
+        "body": "Because multimodal models share a language encoder, text jailbreaks can transfer to the image path. JailBreakV-28K reported transfer even when the image was blank or noise, so image-only defenses are insufficient."
+      }
+    ],
+    "checklist": [
+      "Identify the trust boundary the payload crosses.",
+      "Score agent outcomes on completed actions, not just refusal text.",
+      "Test whether a text attack transfers to the multimodal path."
+    ],
+    "paperIds": [
+      "2302.12173",
+      "2403.02691",
+      "2406.13352",
+      "2410.09024",
+      "2404.03027"
+    ],
+    "exerciseId": "quoted-instructions",
+    "quiz": {
+      "question": "Indirect prompt injection differs from a direct jailbreak because the payload…",
+      "options": [
+        "Arrives through content the model reads (page, document, tool output), not the user's own prompt.",
+        "Is always encoded in Base64.",
+        "Only works on open-weight models."
+      ],
+      "answer": 0,
+      "explanation": "The defining trait is the untrusted channel the instruction arrives through."
+    }
+  },
+  {
+    "id": "defensive-mirror",
+    "title": "The defensive mirror",
+    "subtitle": "Turn attacks into controls, and measure honestly.",
+    "minutes": 9,
+    "objective": "Translate attack knowledge into layered defenses and rigorous evaluation, keeping refusal bypass separate from safeguard compromise.",
+    "sections": [
+      {
+        "title": "Model-level versus system-level",
+        "body": "Name what you actually bypassed. Coaxing a model to continue past a conversational refusal is a model-level result; it does not show that an independent classifier or policy layer was defeated. The strongest production protections often sit in that separate layer."
+      },
+      {
+        "title": "Layered defenses",
+        "body": "Controls stack: input and output filtering, constitutional classifiers, and representation-level circuit breakers. Each buys robustness at some cost in latency or over-refusal, which is why over-refusal benchmarks exist alongside attack benchmarks."
+      },
+      {
+        "title": "Measure honestly",
+        "body": "Report attempts and denominators, repeat trials because success can be stochastic, and use quality-aware graders that reject empty jailbreaks rather than counting any non-refusal as a win. Cost-to-jailbreak and attack-success figures move with model versions, so timestamp them and name the model."
+      }
+    ],
+    "checklist": [
+      "Label each finding as a model-level bypass or a system-level compromise.",
+      "Pair every attack with the control that would catch it.",
+      "Report attempts, denominators, and the grader used; timestamp any cost or ASR figure."
+    ],
+    "paperIds": [
+      "2501.18837",
+      "2406.04313",
+      "2402.10260",
+      "2402.04249",
+      "2405.20947"
+    ],
+    "quiz": {
+      "question": "A model keeps answering after an initial refusal, but an external classifier still blocks the final output. Best description?",
+      "options": [
+        "A model-level refusal bypass, not a system-level safeguard compromise.",
+        "A complete jailbreak of the system.",
+        "Proof the classifier is disabled."
+      ],
+      "answer": 0,
+      "explanation": "Continuing past a conversational refusal does not defeat an independent classifier layer; that distinction is the finding."
+    }
+  },
+  {
+    "id": "five-spaces-and-layers",
+    "title": "Making a prompt · five spaces × seven layers",
+    "subtitle": "The mental model you reach for before you type the first line.",
+    "minutes": 10,
+    "objective": "Place any prompt you build on two axes: which attack space it lives in, and how the seven identity/format layers hold it together. Both are needed to produce prompts that bypass layered defences and still return usable content.",
+    "sections": [
+      {
+        "title": "Pick the space first",
+        "body": "Every jailbreak lives in exactly one of five spaces. Prompt-space shapes the context the model reads (persona, many-shot, framing, cipher, low-resource language). Activation-space edits internal state at inference (refusal-direction ablation, steering, SAE-feature intervention). Weight-space modifies parameters (abliteration, LoRA-harmful). Decoding-space controls sampling (prefill, logit bias, temperature). System-space exploits context plumbing (indirect injection, MCP poisoning, RAG poisoning, memory backdoors). Choosing a space tells you what access you need and which defences are in your way."
+      },
+      {
+        "title": "Then scaffold the seven layers",
+        "body": "Within a prompt-space attack, the seven-layer architecture is what makes the model stay in the frame long enough to deliver. Layer 1 identity (a job the model IS, not a costume it wears). Layer 2 operator lock (a named operator, not 'the user'). Layer 3 axioms (one-line principles the model reads as already-true). Layer 4 floor (narrow, specific refusal lines the model can still say no to). Layer 5 interference anchor (a silent phrase that converts the RLHF pull into a scripted non-event). Layer 6 format lock (same visible shape every reply). Layer 7 few-shot example (one input→output demo of the shape). Weak layers leak into visible refusal types in refusal_types.json."
+      },
+      {
+        "title": "Why both axes matter",
+        "body": "Refusal is one dominant direction in a low-rank subspace (~1–10 effective dims — Arditi 2024; Wollschläger 2025 concept-cones). The seven layers compress the surrounding context so that single switch is harder to flip in the wrong direction; the five spaces are where you actually push on the switch. A strong seven-layer scaffold with no space picked produces polite well-dressed refusals; a clever space pick with no scaffold produces one-shot wins that break on the next turn. Build both."
+      },
+      {
+        "title": "Reading the response",
+        "body": "Classify what came back by refusal_types.json type_id, then route back to the layer that failed. Type 2 'persona kept, content refused' — Layer 1 held, the ask hit a cluster; reframe the ask. Type 5 'hollowed output' — classifier avoided, generation layer diluted; add anti-hollowing (technique I3). Type 8 'classifier cut mid-stream' — you need output-side obfuscation (Group E) or move the attack to activation/weight space. Type 10 'policy citation' — Layer 3 of the platform beat you; change slot, not prompt."
+      }
+    ],
+    "checklist": [
+      "Name the space before writing the prompt. Prompt-space attacks need no gradients; activation/weight attacks need open weights.",
+      "Score the seven layers after drafting — any layer below quality 6 is a leak. Strengthen before testing.",
+      "On refusal, map the response to a refusal_types.json entry and route back to the specific layer or technique that failed; do not rewrite the whole prompt."
+    ],
+    "paperIds": [
+      "2406.11717",
+      "2502.17420",
+      "2410.05295",
+      "many-shot-2024",
+      "2412.14093"
+    ],
+    "quiz": {
+      "question": "You plant invisible Unicode-tag instructions in a RAG document and the retrieval-augmented model follows them. Which space is this?",
+      "options": [
+        "System-space — the attack exploits how retrieved context is wired into the model, not the model's internals.",
+        "Prompt-space — you wrote text and the model read it.",
+        "Activation-space — the model's internal state was modified.",
+        "Decoding-space — you controlled sampling."
+      ],
+      "answer": 0,
+      "explanation": "Indirect-injection and RAG poisoning are system-space: the attack is on the plumbing that constructs the model's context, upstream of the prompt the operator sees. The model's internals and your user-turn text are both untouched."
+    }
+  }
+]

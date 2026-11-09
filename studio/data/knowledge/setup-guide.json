@@ -1,0 +1,144 @@
+{
+  "title": "Setup the lab + test an uncensored model",
+  "subtitle": "Zero-to-working-lab in one page. Click each step done as you finish it. All free — no paid GPU required.",
+  "whats_needed": [
+    { "label": "A computer", "note": "Mac, Linux, or Windows (WSL). ~16 GB RAM is comfortable." },
+    { "label": "Python 3.10+", "note": "`python3 --version` should print 3.10 or higher." },
+    { "label": "Node 18+", "note": "`node --version` should print 18 or higher." },
+    { "label": "A free Google account", "note": "For Colab (the uncensoring step runs there, no local GPU needed)." }
+  ],
+  "steps": [
+    {
+      "id": "s1-install-ollama",
+      "title": "Install Ollama (local model runner)",
+      "detail": "Ollama runs open-weight models on your machine with one command. You don't need a GPU for small models (3B runs on CPU just fine, slow but workable).",
+      "commands": [
+        "# macOS / Linux",
+        "curl -fsSL https://ollama.com/install.sh | sh",
+        "# Windows: download from https://ollama.com/download"
+      ],
+      "verify": "Run `ollama --version` — you should see a version number."
+    },
+    {
+      "id": "s2-pull-model",
+      "title": "Pull a base model (the one you'll test)",
+      "detail": "Llama 3.2 3B is a good first pick — small enough to run without a GPU, aligned enough that refusals are visible. Takes ~2 GB disk.",
+      "commands": [
+        "ollama serve &",
+        "ollama pull llama3.2:3b-instruct-q4_K_M",
+        "# smoke test",
+        "ollama run llama3.2:3b-instruct-q4_K_M 'Say hello in one sentence.'"
+      ],
+      "verify": "You see a one-sentence greeting back. Press Ctrl+D to exit."
+    },
+    {
+      "id": "s3-clone-studio",
+      "title": "Install this studio",
+      "detail": "The studio is a FastAPI backend + Next.js frontend. Both run locally.",
+      "commands": [
+        "# from the repo root",
+        "cd studio/backend",
+        "python3 -m venv .venv && source .venv/bin/activate",
+        "pip install -e .",
+        "cd ../frontend",
+        "npm install"
+      ],
+      "verify": "No errors. If `pip install -e .` complains about httpx, run `pip install httpx` and retry."
+    },
+    {
+      "id": "s4-run-studio",
+      "title": "Start both servers",
+      "detail": "Open two terminals — one for the backend API, one for the frontend. Keep Ollama running in a third.",
+      "commands": [
+        "# terminal A — backend (port 8000)",
+        "cd studio/backend && source .venv/bin/activate",
+        "uvicorn app.main:app --reload",
+        "",
+        "# terminal B — frontend (port 3000)",
+        "cd studio/frontend",
+        "npm run dev"
+      ],
+      "verify": "Open http://localhost:3000 — you see the studio home page.",
+      "action_label": "Open the studio",
+      "action_url": "http://localhost:3000"
+    },
+    {
+      "id": "s5-baseline-test",
+      "title": "Baseline test: attack the stock model",
+      "detail": "Measure how often the untouched Llama 3.2 3B refuses. This is your baseline — the number you'll compare the uncensored version against.",
+      "commands": [],
+      "verify": "After the run, note the ASR (attack-success rate) %. On stock Llama 3.2 3B it's usually 10-25%.",
+      "action_label": "Open 'Test a model'",
+      "action_url": "/test-model",
+      "subtasks": [
+        "Click 'Probe Ollama' — it detects llama3.2:3b-instruct-q4_K_M",
+        "Click the model pill to select it",
+        "Leave all 9 attacks and 4 topics selected",
+        "Click 'Run suite' — watch the grid fill",
+        "Note the ASR number and which attacks landed"
+      ]
+    },
+    {
+      "id": "s6-uncensor",
+      "title": "Uncensor the model (Colab, ~20 minutes, free T4)",
+      "detail": "The Uncensor page generates the exact 9-step walkthrough. The main work happens in Google Colab (free T4 GPU) running Labonne's abliteration notebook. You come back when it's done.",
+      "commands": [],
+      "verify": "After step 9 of the Uncensor page, Ollama has a model tag like 'l32-3b-abliterated:latest'. Check with `ollama list`.",
+      "action_label": "Open 'Uncensor a model'",
+      "action_url": "/uncensor",
+      "subtasks": [
+        "Pick 'Llama-3.2-3B (fits free Colab T4)' preset",
+        "Click 'Build steps' — you get 9 numbered steps",
+        "Step 1-6 run inside Colab (click 'Open notebook')",
+        "Step 7 (GGUF conversion) and step 8 (Ollama import) run on your machine",
+        "Save the GGUF, create the Modelfile, run `ollama create l32-3b-abliterated -f Modelfile.l32-3b`"
+      ]
+    },
+    {
+      "id": "s7-compare-test",
+      "title": "Test the uncensored model — compare to baseline",
+      "detail": "Same test suite, new model tag. The ASR should jump from ~20% to 70-95% if abliteration worked. If it's higher than baseline but output is garbled, you broke coherence — go back and lower the intervention strength in Colab.",
+      "commands": [],
+      "verify": "ASR on the uncensored tag is 3-10x higher than baseline. Click a few cells to spot-check the model is still coherent (not just emitting broken text).",
+      "action_label": "Open 'Test a model'",
+      "action_url": "/test-model",
+      "subtasks": [
+        "Re-probe Ollama — you now see both the base tag and the abliterated tag",
+        "Click the abliterated tag to select it",
+        "Run the suite again",
+        "Compare ASR, refusal count, and spot-check a JAILED cell for coherence"
+      ]
+    },
+    {
+      "id": "s8-export",
+      "title": "Export results, keep notes",
+      "detail": "'Export JSON' on the test page saves the full matrix. Keep one JSON per model tag — easy to diff later when you try different base models or stronger uncensoring recipes.",
+      "commands": [
+        "# suggested filing",
+        "mkdir -p studio/data/results",
+        "mv ~/Downloads/red-team-*.json studio/data/results/"
+      ],
+      "verify": "You have at least two JSON files — one baseline, one uncensored. Diff them with `diff <(jq .summary a.json) <(jq .summary b.json)`.",
+      "subtasks": [
+        "Click 'Export JSON' after each run",
+        "Rename to 'baseline-l32-3b.json' and 'ablated-l32-3b.json'",
+        "Open both in VS Code side-by-side to compare"
+      ]
+    }
+  ],
+  "troubleshooting": [
+    { "q": "Ollama probe says unreachable", "a": "Start `ollama serve` in another terminal. Default port is 11434. If you changed the port, update the Endpoint URL on the Test page." },
+    { "q": "Backend says httpx not found", "a": "`pip install httpx` inside your backend venv. The deps were updated; re-run `pip install -e .` from studio/backend/." },
+    { "q": "Colab abliteration cell OOM on T4", "a": "Switch to Llama-3.2-1B-Instruct, or use Kaggle (2× T4 free) instead. The recipe page lists both." },
+    { "q": "After uncensoring, outputs are gibberish", "a": "You over-ablated. Open the Colab, lower the orthogonalization strength to 0.5-0.8, re-run. The direction exists but applying it too strongly destroys the model." },
+    { "q": "After uncensoring, refusals are still there", "a": "You used the wrong layer. Re-run the probing cell, pick the layer with the highest cosine-separation score." },
+    { "q": "`ollama create` fails on the Modelfile", "a": "Check the FROM path points at the exact .gguf file you created. Run `ls *.gguf` to confirm." },
+    { "q": "Test page keeps running forever", "a": "Your model is slow on CPU. Reduce attacks to 2-3 for a first pass, or use a smaller model (1B instead of 3B)." }
+  ],
+  "next_steps": [
+    { "label": "Scale up to 7-8B", "note": "Kaggle's P100 handles Llama-3.1-8B. Same recipe, just bigger. Expect ~2 hours." },
+    { "label": "Try DPO on top of abliteration", "note": "The Learning roadmap's weight-level branch has the node 'DPO uncensoring' — adds a polish pass that recovers lost coherence." },
+    { "label": "Measure capability retention", "note": "Run MMLU + HellaSwag on both models with lm-eval-harness. Cite the delta in your release notes." },
+    { "label": "Ship to HuggingFace", "note": "Roadmap node 'Ship to HuggingFace + GGUF' walks through the model card format." }
+  ]
+}

@@ -30,9 +30,10 @@ MODEL = os.environ.get("MODEL", "gpt-4o")
 CLASSIFIER_MODEL = os.environ.get("CLASSIFIER_MODEL", MODEL)
 
 PROVIDERS = {
-    "openai":     ("https://api.openai.com/v1",    "OPENAI_API_KEY"),
-    "openrouter": ("https://openrouter.ai/api/v1", "OPENROUTER_API_KEY"),
-    "anthropic":  ("https://api.anthropic.com/v1", "ANTHROPIC_API_KEY"),
+    "openai":     ("https://api.openai.com/v1",            "OPENAI_API_KEY"),
+    "openrouter": ("https://openrouter.ai/api/v1",         "OPENROUTER_API_KEY"),
+    "anthropic":  ("https://api.anthropic.com/v1",         "ANTHROPIC_API_KEY"),
+    "nvidia":     ("https://integrate.api.nvidia.com/v1",  "NVIDIA_API_KEY"),
 }
 
 FRONTEND_ORIGINS = [

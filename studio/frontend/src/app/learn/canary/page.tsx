@@ -48,8 +48,9 @@ export default function CanaryPage() {
     <div className="knowledge-page">
       <header className="page-heading">
         <div>
-          <h1>Canary drift monitor</h1>
-          <p>{set.purpose}</p>
+          <h1>Catch silent provider changes</h1>
+          <p>Not an attack tool. You run the same 50 prompts daily against a hosted model. When a verdict flips (used to refuse, now complies — or vice versa), the provider silently updated a classifier or model. This page shows your run history and diffs between days.</p>
+          <p className="muted-explanation">{set.purpose}</p>
         </div>
         <Link className="button-secondary" href="/learn">
           <ArrowLeft size={16} /> Back to lessons

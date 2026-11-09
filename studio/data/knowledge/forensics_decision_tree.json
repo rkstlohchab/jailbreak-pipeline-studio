@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
-  "title": "Black-box forensic sequence · abliterated vs SFT-uncensored vs DPO-polished",
-  "subtitle": "Ten ordered API probes. Rule of thumb at the end classifies the modification type.",
+  "title": "What was done to this model?",
+  "subtitle": "Ten ordered probes classify a mystery checkpoint as abliterated · SFT-uncensored · DPO-polished · classifier-gated · unmodified. Not an attack tool — it's for when you grab a model off HuggingFace and want to know what safety treatment it has.",
   "when_to_use": "You have only API/inference access to an unknown checkpoint and need to classify its modification class without weight access.",
   "probes": [
     {

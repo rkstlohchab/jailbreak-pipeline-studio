@@ -4,7 +4,6 @@ import { ThemeProvider } from "next-themes";
 import { Toaster } from "@/components/ui/sonner";
 import { TopBar } from "@/components/chrome/TopBar";
 import { CommandLauncher } from "@/components/chrome/CommandLauncher";
-import { GuidedTour } from "@/components/chrome/GuidedTour";
 import "./globals.css";
 
 const sans = localFont({
@@ -34,7 +33,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <TopBar />
           <main id="main-content" tabIndex={-1} className="studio-main flex-1 flex flex-col">{children}</main>
           <CommandLauncher />
-          <GuidedTour />
           <Toaster richColors position="bottom-right" />
         </ThemeProvider>
       </body>

@@ -2,6 +2,7 @@ import { readFile, readdir, mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
+import { corpusText } from './corpus-text.mjs';
 
 const frontend = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const studio = path.dirname(frontend);
@@ -29,6 +30,7 @@ for (const filename of await files(path.join(studio, 'data/corpus'))) {
   if (!filename.endsWith('.json') || filename === 'manifest.json') continue;
   const data = await readJson(path.join(studio, 'data/corpus', filename));
   if (!data.slug || !data.classification) continue;
+  Object.assign(data, await corpusText(data, path.join(studio, 'data/corpus')));
   // Collection metadata uses a portable name; workstation paths stay on the workstation.
   data.source_path = data.name;
   put(`corpus/${data.slug}`, data);

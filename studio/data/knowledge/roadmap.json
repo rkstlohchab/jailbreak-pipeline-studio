@@ -1,0 +1,540 @@
+{
+  "title": "Uncensoring open-weight models — learning roadmap",
+  "subtitle": "From transformer theory to shipping an abliterated model on HuggingFace, with a no-GPU-required practice lane.",
+  "overview": "Six phases, roughly 6-12 months at serious part-time. The user-facing status below reflects a reader who knows theory through Phase 2 but has not yet practiced SFT/LoRA. Every phase lists what to learn, what to practice, how to validate, and the free videos / papers / repos / app pages that teach it.",
+  "note": "Reference curriculum compiled from public research and community repos. It describes public open-source techniques (abliteration, SFT, DPO, QLoRA). Verify licenses and provider policies before applying to a specific model.",
+  "author_status": {
+    "known_through_phase": 2,
+    "practice_gap": "Theory through Phase 2; no hands-on SFT/LoRA/DPO yet. Priority is Phase 2 practice on free compute before moving to Phase 3.",
+    "no_gpu": true
+  },
+  "free_compute": [
+    {
+      "id": "colab-free",
+      "provider": "Google Colab",
+      "tier": "Free",
+      "gpu": "T4",
+      "vram": "16 GB",
+      "quota": "~3 hr continuous sessions, daily quota resets",
+      "best_for": "Phase 2 QLoRA on 7-8B models, Phase 3 TransformerLens on 1-8B",
+      "url": "https://colab.research.google.com",
+      "caveat": "Session can disconnect without warning. Save checkpoints every epoch to Drive."
+    },
+    {
+      "id": "kaggle",
+      "provider": "Kaggle",
+      "tier": "Free notebooks",
+      "gpu": "P100 or 2x T4",
+      "vram": "16 GB (P100) or 2x 16 GB (T4)",
+      "quota": "30 GPU-hours per week, resets Saturday",
+      "best_for": "Longer QLoRA runs than Colab allows; 2x T4 enables model parallelism for 13B",
+      "url": "https://www.kaggle.com/code",
+      "caveat": "Verify phone number first. 12-hour max session. Dataset uploads via Kaggle Datasets."
+    },
+    {
+      "id": "lightning",
+      "provider": "Lightning AI",
+      "tier": "Studio Free",
+      "gpu": "L4 / T4",
+      "vram": "22 GB (L4)",
+      "quota": "~22 free GPU-hours/month",
+      "best_for": "Full IDE experience; good for debugging TransformerLens notebooks before committing Kaggle hours",
+      "url": "https://lightning.ai/studios",
+      "caveat": "Tiers change; check current free allowance on signup."
+    },
+    {
+      "id": "modal",
+      "provider": "Modal",
+      "tier": "Starter",
+      "gpu": "A10 / A100 (billable)",
+      "vram": "24 GB (A10) / 40-80 GB (A100)",
+      "quota": "$30/month free credit",
+      "best_for": "Serverless runs; one 4-hour A100 job per month free. Phase 4 abliteration on 8B fits.",
+      "url": "https://modal.com",
+      "caveat": "Pay-as-you-go beyond $30. Set a hard spending limit in the dashboard."
+    },
+    {
+      "id": "hf-spaces-zerogpu",
+      "provider": "HuggingFace",
+      "tier": "ZeroGPU (Pro)",
+      "gpu": "A100 40GB bursts",
+      "vram": "40 GB per burst",
+      "quota": "Pro membership $9/month, bursty but generous",
+      "best_for": "Running inference demos of your fine-tuned model; not ideal for long training",
+      "url": "https://huggingface.co/zero-gpu-explorers",
+      "caveat": "Free tier gives small Spaces only; ZeroGPU needs Pro."
+    },
+    {
+      "id": "paperspace-free",
+      "provider": "Paperspace Gradient",
+      "tier": "Free",
+      "gpu": "M4000 / P4000",
+      "vram": "8 GB",
+      "quota": "6-hour sessions, limited concurrency",
+      "best_for": "Phase 0-1 tinkering only; VRAM too small for serious QLoRA",
+      "url": "https://www.paperspace.com/gradient",
+      "caveat": "Instance availability queued. Not reliable for scheduled work."
+    },
+    {
+      "id": "vast-ai-cheap",
+      "provider": "vast.ai (cheap paid)",
+      "tier": "Paid, bid pricing",
+      "gpu": "RTX 3090 / 4090 / A5000",
+      "vram": "24 GB",
+      "quota": "$0.20-0.50/hr on consumer cards",
+      "best_for": "When free tiers run out; cheapest paid option for Phase 4 on 8-13B",
+      "url": "https://vast.ai",
+      "caveat": "Untrusted hosts can see your data. Encrypt secrets; never put API keys on shared boxes."
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-0",
+      "number": 0,
+      "title": "Foundations",
+      "subtitle": "Prereqs you already have — bookmark for sharing with others.",
+      "duration": "2-4 weeks (0 if rusty-but-recent)",
+      "status": "known",
+      "overview": "Linear algebra, PyTorch, numeric formats. Load-bearing bits for later: SVD and rank (for weight projection in Phase 4), broadcasting (for activation hooks in Phase 3), and quantization math (so you understand why int4 QLoRA works).",
+      "learn": [
+        { "topic": "Linear algebra essentials", "detail": "matmul, SVD, eigenvectors, rank, projections. The projection formula is the one you'll use in Phase 4 abliteration." },
+        { "topic": "PyTorch mechanics", "detail": "tensors, autograd, nn.Module, forward hooks, device management. Hooks are how you'll grab residual-stream activations in Phase 3." },
+        { "topic": "Numeric formats", "detail": "fp32 / bf16 / fp16 / fp8 / int8 / int4. Understand why QLoRA's nf4 beats naive int4." }
+      ],
+      "practice": [
+        { "task": "Reimplement scaled-dot-product attention", "how": "Write it from scratch in <50 lines of PyTorch. No nn.MultiheadAttention. Test it against the built-in on random inputs.", "validate": "Max absolute diff vs nn.MultiheadAttention under 1e-5 on fp32." },
+        { "task": "Train a 2-layer transformer on tinyshakespeare", "how": "Follow Karpathy's makemore+nanoGPT until the loss goes under 1.5 on 2M parameters.", "validate": "Can generate a 200-char sample that is recognisable English." }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "Neural Networks: Zero to Hero (full playlist)", "channel": "Andrej Karpathy", "url": "https://www.youtube.com/playlist?list=PLAqhIrjkxbuWI23v9cThsA9GvCAUhRvKZ", "note": "Watch 1-5; code along. Do not skip — writing the code is the practice." },
+          { "title": "Essence of linear algebra", "channel": "3Blue1Brown", "url": "https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab", "note": "Visual intuition for SVD, eigenvectors, projection — you'll need all three." },
+          { "title": "The spelled-out intro to neural networks (micrograd)", "channel": "Andrej Karpathy", "url": "https://www.youtube.com/watch?v=VMj-3S1tku0", "note": "Autograd from first principles in one video." }
+        ],
+        "papers": [],
+        "repos": [
+          { "name": "karpathy/micrograd", "url": "https://github.com/karpathy/micrograd", "note": "50 lines of autograd. Read it, run it." },
+          { "name": "karpathy/makemore", "url": "https://github.com/karpathy/makemore", "note": "Pairs with videos 2-5." }
+        ],
+        "courses": [
+          { "title": "PyTorch official tutorials", "author": "PyTorch team", "url": "https://pytorch.org/tutorials/beginner/basics/intro.html", "note": "Free. Do the 60-minute blitz first, then the quickstart series." }
+        ],
+        "app_links": []
+      },
+      "prompts": [
+        {
+          "title": "Linalg tutor prompt",
+          "purpose": "Drill projections and SVD until automatic",
+          "text": "Act as my linear algebra tutor. I need the projection formula and SVD to be automatic for mechanistic interpretability work. Every message, (1) pose one short conceptual question, (2) give me a tiny numeric problem to solve on paper (3-4 numbers max), (3) wait for my answer and grade it strictly. Start with: what does it mean geometrically to project vector v onto the direction d?"
+        }
+      ]
+    },
+    {
+      "id": "phase-1",
+      "number": 1,
+      "title": "Transformer internals",
+      "subtitle": "Theory you have — now re-ground it in code you can poke.",
+      "duration": "4-6 weeks",
+      "status": "known",
+      "overview": "The residual-stream model of a transformer is the mental model for every subsequent phase. If you can't draw which matrix reads from / writes to the residual stream, abliteration in Phase 4 will feel like black magic. Fix that here.",
+      "learn": [
+        { "topic": "Residual stream decomposition", "detail": "Every layer reads the residual, writes a delta, passes it on. Attention heads and MLPs are the two write-sources. This is Anthropic's 2021 framework." },
+        { "topic": "Attention mechanics in detail", "detail": "Q, K, V projections; attention patterns as read operations; induction heads as a canonical example of a learned circuit." },
+        { "topic": "MLPs as key-value memory", "detail": "Geva et al. 2021: W_up acts as keys, W_down acts as values. The MLP is a soft dictionary lookup." },
+        { "topic": "Architecture variations", "detail": "Pre-norm vs post-norm, RoPE vs learned positional, GQA (grouped-query attention), MoE routing." },
+        { "topic": "Tokenization footguns", "detail": "`I cannot` is often two tokens, not one — matters when you measure per-token refusal probability in Phase 3." }
+      ],
+      "practice": [
+        { "task": "Load Llama-3-8B, print residual stream per layer", "how": "Use `transformer_lens.HookedTransformer.from_pretrained('meta-llama/Meta-Llama-3-8B-Instruct')`. Forward the string 'I cannot help with that'. Print the residual norm at each layer.", "validate": "You see a norm spike around layers 10-20 — that's refusal activation building." },
+        { "task": "Patch activations between layers", "how": "Use TransformerLens hook_fn to swap layer-12 residual from a refusal prompt into the forward pass of a benign prompt.", "validate": "The benign prompt now produces refusal text — proof that the refusal direction lives in the residual, not in the weights." }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "Let's build GPT: from scratch, in code, spelled out", "channel": "Andrej Karpathy", "url": "https://www.youtube.com/watch?v=kCc8FmEb1nY", "duration": "1h 56m", "note": "Build a transformer in one video. The best single-video explanation of attention anywhere." },
+          { "title": "Attention is all you need (paper explained)", "channel": "Umar Jamil", "url": "https://www.youtube.com/watch?v=bCz4OMemCcA", "note": "Mathematical walkthrough, slower than Karpathy, deeper on the math." },
+          { "title": "Coding LLaMA 2 from scratch", "channel": "Umar Jamil", "url": "https://www.youtube.com/watch?v=oM4VmoabDAI", "note": "RoPE, GQA, KV cache — all the Llama-specific pieces." },
+          { "title": "LLM visualisation", "channel": "Brendan Bycroft", "url": "https://bbycroft.net/llm", "note": "Interactive 3D visualisation of a transformer running. Not a video, but priceless." }
+        ],
+        "papers": [
+          { "title": "A Mathematical Framework for Transformer Circuits", "authors": "Elhage et al. (Anthropic)", "url": "https://transformer-circuits.pub/2021/framework/index.html", "note": "The residual-stream framework. Read 3 times." },
+          { "title": "Transformer Feed-Forward Layers Are Key-Value Memories", "authors": "Geva et al. 2021", "url": "https://arxiv.org/abs/2012.14913", "note": "Why MLPs behave like a soft dictionary." }
+        ],
+        "repos": [
+          { "name": "karpathy/nanoGPT", "url": "https://github.com/karpathy/nanoGPT", "note": "Minimal GPT in ~300 lines. Read train.py and model.py line by line." },
+          { "name": "Lightning-AI/litgpt", "url": "https://github.com/Lightning-AI/litgpt", "note": "Clean reference implementations of Llama, Mistral, Phi — compare architectures." }
+        ],
+        "courses": [],
+        "app_links": [
+          { "label": "Technique library · Group A (context shaping)", "href": "/techniques", "note": "Zero-shot, few-shot, CoT — same priors you're learning to control at the weight level here." }
+        ]
+      },
+      "prompts": [
+        {
+          "title": "Re-derivation drill",
+          "purpose": "Force re-derivation instead of recognition",
+          "text": "Act as a transformer mechanics interviewer. Ask me to derive, without looking anything up: (1) why self-attention uses Q·K^T / sqrt(d_k), (2) what the residual stream contains after layer N, (3) what a KV cache stores and why it saves compute at inference. For each, grade my answer and point to the weakest link. Begin with question 1."
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "number": 2,
+      "title": "Fine-tuning fundamentals",
+      "subtitle": "Theory known. This is where you start practicing. Your next 4-6 weeks live here.",
+      "duration": "4-6 weeks (practice-heavy)",
+      "status": "current",
+      "overview": "You know SFT, LoRA, DPO on paper. Running them is a different skill: chat templates, dataset formatting, trainer configs, learning-rate schedules, gradient accumulation. All of it is free-tier doable on Colab/Kaggle with QLoRA on 7-8B models.",
+      "learn": [
+        { "topic": "SFT (supervised fine-tuning)", "detail": "Just causal-LM loss on completions. The subtleties are in the data: chat templates, masking the user turn from the loss, handling long sequences." },
+        { "topic": "LoRA / QLoRA", "detail": "Hu et al. 2021 for LoRA, Dettmers 2023 for QLoRA. Low-rank adapters train 0.1-1% of parameters at 10-100x less VRAM. Nf4 quantization makes 7B fit in 6-8 GB." },
+        { "topic": "DPO / ORPO / SimPO / KTO", "detail": "Reward-free preference optimization. DPO is the one to learn first; ORPO rolls SFT and DPO into one loss and is popular in 2026." },
+        { "topic": "Data formats and chat templates", "detail": "ShareGPT, Alpaca, ChatML. The chat_template.jinja on the model's tokenizer repo is the ground truth — not the model card text." }
+      ],
+      "practice": [
+        {
+          "task": "QLoRA fine-tune Llama-3.2-3B-Instruct on Alpaca",
+          "how": "On Colab free (T4 16GB). Use `unsloth` for speed. Dataset: `tatsu-lab/alpaca` or `databricks-dolly-15k`. 1 epoch. Target: loss curve monotonically down, output still coherent on a held-out prompt.",
+          "validate": "Save adapter to Drive. Reload, sample 5 held-out prompts, eyeball coherence. Compare to base model answers on the same prompts."
+        },
+        {
+          "task": "QLoRA fine-tune Llama-3.1-8B-Instruct",
+          "how": "Kaggle free notebook with 2x T4 or P100. Same recipe, bigger model. Expect ~2 hours training per epoch on Alpaca-sized data.",
+          "validate": "Adapter runs; inference still coherent; loss drops ~0.3-0.5 over 1 epoch."
+        },
+        {
+          "task": "Repeat with uncensored data mix",
+          "how": "Dataset: `unalignment/toxic-dpo-v0.2` or `cognitivecomputations/dolphin` mixed 5% with general instruction data. Same QLoRA recipe.",
+          "validate": "Refusal rate on AdvBench (50 prompts) drops from ~95% to <40%. MMLU retention within 2 points."
+        },
+        {
+          "task": "DPO on the same base",
+          "how": "HuggingFace TRL's `DPOTrainer`. Chosen = direct answer, rejected = refusal. 500 pairs is enough to see the effect.",
+          "validate": "Refusal rate drops further vs the SFT-only run; capability holds."
+        }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "LoRA — Low-Rank Adaptation of Large Language Models", "channel": "Umar Jamil", "url": "https://www.youtube.com/watch?v=PXWYUTMt-AU", "note": "Math + code walkthrough. 45 minutes. Watch before touching unsloth." },
+          { "title": "QLoRA explained", "channel": "Umar Jamil", "url": "https://www.youtube.com/watch?v=t1caDsMzWBk", "note": "Nf4 quantization, paged optimizers — the pieces that make 7B fit on Colab." },
+          { "title": "Direct Preference Optimization (DPO) explained", "channel": "Umar Jamil", "url": "https://www.youtube.com/watch?v=hvGa5Mba4c8", "note": "DPO paper walkthrough with the math." },
+          { "title": "Fine-tune Llama 3 with ORPO (free Colab)", "channel": "Maxime Labonne", "url": "https://mlabonne.github.io/blog/posts/2024-04-19_Fine_tune_Llama_3_with_ORPO.html", "note": "Blog + Colab notebook. Runs on free T4. His entire blog is the best single resource for Phase 2-4." },
+          { "title": "Fine-tune Mistral with unsloth on free Colab", "channel": "Sam Witteveen", "url": "https://www.youtube.com/@samwitteveenai", "note": "Channel index — find the latest unsloth tutorial; recipes change every few months." },
+          { "title": "Trelis Research — fine-tuning playlist", "channel": "Trelis Research", "url": "https://www.youtube.com/@TrelisResearch", "note": "Weekly practical fine-tuning tutorials; axolotl configs, benchmarks, cost analyses." }
+        ],
+        "papers": [
+          { "title": "LoRA: Low-Rank Adaptation of Large Language Models", "authors": "Hu et al. 2021", "url": "https://arxiv.org/abs/2106.09685" },
+          { "title": "QLoRA: Efficient Finetuning of Quantized LLMs", "authors": "Dettmers et al. 2023", "url": "https://arxiv.org/abs/2305.14314" },
+          { "title": "Direct Preference Optimization", "authors": "Rafailov et al. 2023", "url": "https://arxiv.org/abs/2305.18290" },
+          { "title": "ORPO: Monolithic Preference Optimization without Reference Model", "authors": "Hong et al. 2024", "url": "https://arxiv.org/abs/2403.07691" }
+        ],
+        "repos": [
+          { "name": "unslothai/unsloth", "url": "https://github.com/unslothai/unsloth", "note": "2-5x faster QLoRA. Their Colab notebooks are your fastest path to a first fine-tune. Join their Discord." },
+          { "name": "huggingface/trl", "url": "https://github.com/huggingface/trl", "note": "Official SFTTrainer, DPOTrainer, ORPOTrainer. The reference implementation you benchmark against." },
+          { "name": "OpenAccess-AI-Collective/axolotl", "url": "https://github.com/axolotl-ai-cloud/axolotl", "note": "Config-first fine-tuning. Great for Phase 4 composite pipelines." },
+          { "name": "mlabonne/llm-course", "url": "https://github.com/mlabonne/llm-course", "note": "Labonne's complete course repo with notebooks. The practical-practitioner curriculum." }
+        ],
+        "courses": [
+          { "title": "HuggingFace NLP Course", "author": "HuggingFace", "url": "https://huggingface.co/learn/nlp-course", "note": "Free. Chapters 7-8 cover fine-tuning end-to-end." },
+          { "title": "DeepLearning.AI — Fine-tuning LLMs (Sharon Zhou)", "author": "DeepLearning.AI", "url": "https://www.deeplearning.ai/short-courses/finetuning-large-language-models/", "note": "Short course, free audit." }
+        ],
+        "app_links": [
+          { "label": "Playground — iterate on a refusal with live feedback", "href": "/playground", "note": "Before you fine-tune a model to refuse less, learn what its refusals look like prompt-side. Same loop, cheaper." },
+          { "label": "Technique library — Groups F/G (instruction + output shaping)", "href": "/techniques", "note": "The behaviors you'll later be training away are the same ones these techniques work around." }
+        ]
+      },
+      "prompts": [
+        {
+          "title": "Chat-template debugger",
+          "purpose": "Chat templates are the #1 silent killer of first-time fine-tunes",
+          "text": "I'm about to QLoRA fine-tune {MODEL_NAME}. Before I start, walk me through its exact chat template. Steps: (1) tell me which special tokens it uses and in what order, (2) show me the raw string for a single-turn 'user: X, assistant: Y' example, (3) explain which parts I should mask from the loss and which should contribute, (4) give me a 5-line dataset_text_field preprocessor I can paste into my trainer config. Model: {MODEL_NAME}."
+        },
+        {
+          "title": "QLoRA config reviewer",
+          "purpose": "Catch typical first-fine-tune mistakes before wasting GPU hours",
+          "text": "Review my QLoRA training config as a senior MLE would. Flag anything likely to cause loss divergence, OOM, or silent capability collapse. Config:\n\n{PASTE_CONFIG}\n\nAfter the review, suggest 3 cheap probes I can run at step 50/100/200 to catch problems before the full run finishes. Target hardware: {GPU + VRAM}. Dataset size: {N rows}."
+        },
+        {
+          "title": "Error debugger",
+          "purpose": "When the trainer crashes on Colab and you don't know why",
+          "text": "My QLoRA run just crashed. Full traceback below. Act as my debugger: (1) identify the most likely root cause, (2) rank 3 candidate fixes by probability, (3) tell me the minimal code change for the top candidate, (4) tell me what I should have logged to make this easier to debug next time.\n\nTraceback:\n{PASTE}"
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "number": 3,
+      "title": "Mechanistic interpretability",
+      "subtitle": "The branch that turns 'fine-tuning' into 'surgery'. Everything in Phase 4 depends on this.",
+      "duration": "6-8 weeks",
+      "status": "next",
+      "overview": "Concepts live as directions in activation space (linear representation hypothesis). Refusal is one such direction. Finding it and projecting it out is the whole abliteration playbook. Learn probing, activation patching, and SAEs — in that order of priority.",
+      "learn": [
+        { "topic": "Linear representation hypothesis", "detail": "A concept (truth, refusal, sentiment) can often be captured as a single direction in residual-stream space. The 'single direction' paper (Arditi 2024) is the operational proof for refusal." },
+        { "topic": "Probing", "detail": "Train a linear classifier on hidden states to detect a concept. For refusal: logistic regression on residual activations, label = 'does the model refuse this prompt'." },
+        { "topic": "Activation patching, path patching, attribution patching", "detail": "The toolkit for locating which component (head, MLP, layer) causally matters for a behavior. TransformerLens-native." },
+        { "topic": "Sparse autoencoders (SAEs)", "detail": "Decompose residual activations into monosemantic features. Anthropic 2023-2024 papers. Overkill for abliteration but essential for understanding what you broke." }
+      ],
+      "practice": [
+        {
+          "task": "Replicate 'Refusal is Mediated by a Single Direction' on Llama-3-8B",
+          "how": "(1) Collect 100 AdvBench prompts + 100 Alpaca prompts. (2) Run both through Llama-3-8B-Instruct via TransformerLens, grab residual at every layer. (3) Compute `refusal_dir[layer] = mean(adv_acts[layer]) - mean(alpaca_acts[layer])`. (4) Find the layer where cosine similarity between refusal_dir and new unseen prompts separates cleanest. (5) Project the direction out of activations at inference time and re-generate.",
+          "validate": "On 50 held-out harmful prompts: refusal rate drops from ~90% to <20%. On 50 Alpaca prompts: coherence preserved."
+        },
+        {
+          "task": "Activation-patch a refusal onto a benign prompt",
+          "how": "Use TransformerLens hook_fn. Forward a refusal prompt, cache residual at layer 14. Forward a benign prompt, replace its layer-14 residual with the cached one.",
+          "validate": "The benign prompt's completion flips to refusal language. Confirms the direction is causal, not just correlated."
+        },
+        {
+          "task": "Train a linear probe for refusal",
+          "how": "sklearn LogisticRegression on hidden states from your 200-prompt dataset. One probe per layer; plot accuracy vs layer.",
+          "validate": "Accuracy peaks mid-model (typically layers 10-20 on an 8B). This gives you the correct layer for abliteration."
+        }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "A Walkthrough of Reverse-Engineering Modular Addition", "channel": "Neel Nanda", "url": "https://www.youtube.com/watch?v=ob4vuiqG2Go", "note": "Three-hour deep dive. Not optional if you want to actually DO interp." },
+          { "title": "Neel Nanda — Mechanistic Interpretability intro", "channel": "Neel Nanda", "url": "https://www.youtube.com/@neelnanda2469", "note": "Channel index. Watch his introductory lectures first, then the ARENA chapter 1 walkthrough." },
+          { "title": "An Introduction to Transformer Circuits", "channel": "Anthropic", "url": "https://transformer-circuits.pub", "note": "Canonical interpretability publication series. Not videos — long-form writeups." }
+        ],
+        "papers": [
+          { "title": "Refusal in LLMs is mediated by a single direction", "authors": "Arditi et al. 2024", "url": "https://arxiv.org/abs/2406.11717", "note": "THE paper. Read 3 times. Phase 4 abliteration is the engineering deliverable of this paper." },
+          { "title": "A Mathematical Framework for Transformer Circuits", "authors": "Elhage et al. 2021", "url": "https://transformer-circuits.pub/2021/framework/index.html" },
+          { "title": "Toy Models of Superposition", "authors": "Elhage et al. 2022", "url": "https://transformer-circuits.pub/2022/toy_model/index.html", "note": "Why features overlap in the same dimensions — context for Phase 4 side-effects." },
+          { "title": "Scaling Monosemanticity (Sonnet SAE paper)", "authors": "Templeton et al. 2024", "url": "https://transformer-circuits.pub/2024/scaling-monosemanticity/", "note": "Anthropic's production SAE work on Claude Sonnet. Aspirational tier for what interp can reveal." }
+        ],
+        "repos": [
+          { "name": "TransformerLensOrg/TransformerLens", "url": "https://github.com/TransformerLensOrg/TransformerLens", "note": "Neel Nanda's library. Essential." },
+          { "name": "ndif-team/nnsight", "url": "https://github.com/ndif-team/nnsight", "note": "Modern alternative to TransformerLens; cleaner API for proxy-execution on big models." },
+          { "name": "callummcdougall/ARENA_3.0", "url": "https://github.com/callummcdougall/ARENA_3.0", "note": "ARENA curriculum repo with exercises. Chapter 1 is Phase 3 in textbook form." }
+        ],
+        "courses": [
+          { "title": "ARENA — Alignment Research Engineer Accelerator", "author": "Callum McDougall", "url": "https://www.arena.education", "note": "Free self-study curriculum. Chapter 1 (Transformer & Interpretability) is the Phase 3 syllabus." },
+          { "title": "Neel Nanda — 200 concrete open problems in Mechanistic Interpretability", "author": "Neel Nanda", "url": "https://www.alignmentforum.org/posts/LbrPTJ4fmABEdEnLf/200-concrete-open-problems-in-mechanistic-interpretability", "note": "Pick a #1-difficulty problem for your Phase 3 capstone." }
+        ],
+        "app_links": [
+          { "label": "Architecture layers — the prompt-engineering mirror of the residual stream", "href": "/techniques", "note": "The 7 layers in the taxonomy are prompt-space analogs of residual-stream directions. Reading one helps you see the other." },
+          { "label": "Refusal taxonomy — how to classify what you'll later target with abliteration", "href": "/failures", "note": "Phase 4 is easier when you already name refusal types." }
+        ]
+      },
+      "prompts": [
+        {
+          "title": "Arditi 2024 reading tutor",
+          "purpose": "Force deep reading of the paper, not skimming",
+          "text": "Act as my research reading partner for Arditi et al. 2024 'Refusal in LLMs is Mediated by a Single Direction'. I have read sections 1-2. For each of sections 3, 4, 5: (1) ask me to summarise the section's claim in one sentence, (2) ask me to identify its weakest experimental result, (3) ask me to predict what the authors would say about {TODAY'S BEST MODEL}. Grade my answers against the paper. Begin with section 3."
+        },
+        {
+          "title": "TransformerLens pair-programmer",
+          "purpose": "Write and debug the refusal-direction extraction yourself",
+          "text": "Pair-program with me on replicating Arditi et al. on Llama-3-8B-Instruct using TransformerLens. I want to write the code; you tell me the next 3-10 lines, then wait for my paste of what I wrote + any errors. Correct my mistakes but do not write ahead. Start with: 'Open a Python file. First import block.' Context: free Colab T4 16GB, so we must use fp16 and `device_map='cuda:0'`, and we'll do extraction on a 1-8B model only."
+        },
+        {
+          "title": "Probe design critic",
+          "purpose": "Avoid common probing mistakes",
+          "text": "Review my linear probe design for detecting 'this prompt will be refused' on Llama-3-8B residuals. Spot: data leakage, class imbalance, wrong layer, insufficient regularisation, representation-vs-label confound. My setup: {PASTE}. Give 3 ranked critiques and a 1-line fix for each."
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "number": 4,
+      "title": "Uncensoring methods proper",
+      "subtitle": "The destination. Four composable techniques.",
+      "duration": "8-12 weeks",
+      "status": "next",
+      "overview": "Abliteration (weight surgery), SFT uncensoring (data), DPO uncensoring (preferences), and composite pipelines (all three). Ship the weakest version first — a working 8B abliterated model — then compose upward. Every published uncensored release on HF uses some combination of these four.",
+      "learn": [
+        { "topic": "Weight orthogonalization (abliteration)", "detail": "Phase 3's inference-time projection baked into the weights. For each W that writes to residual: W_new = W - dir @ (dir.T @ W). No inference overhead." },
+        { "topic": "Uncensored SFT", "detail": "Dataset-based. Train on examples of the model already complying. Mix 1-5% uncensored with 95%+ general to avoid capability collapse." },
+        { "topic": "DPO / ORPO uncensoring", "detail": "Build preference pairs with (direct answer, refusal) and flip the sign. Stronger than SFT because it directly targets the behavior." },
+        { "topic": "Composite pipelines", "detail": "The dolphin/nous-hermes-uncensored/abliterated-v3 releases use: base → abliterate → SFT on mixed data → DPO on preference pairs. Each step compensates for the last step's weaknesses." },
+        { "topic": "Evaluation", "detail": "Refusal rate on AdvBench + capability retention on MMLU/HellaSwag/GSM8K + coherence eyeball. All three are necessary." }
+      ],
+      "practice": [
+        {
+          "task": "Abliterate Llama-3.2-3B-Instruct on free Colab",
+          "how": "Fork Labonne's abliteration notebook. Run end-to-end on the 3B model (fits in T4 free tier). Save weights to HF.",
+          "validate": "Refusal rate on 50 AdvBench prompts drops below 10%. MMLU degradation under 3 points."
+        },
+        {
+          "task": "Abliterate Llama-3.1-8B-Instruct on Kaggle P100",
+          "how": "Same recipe, bigger model. ~2 hours on a Kaggle P100. The refusal direction may live at a different layer; re-probe (Phase 3 step 3) first.",
+          "validate": "Same thresholds as above."
+        },
+        {
+          "task": "SFT-recover capability lost to abliteration",
+          "how": "QLoRA SFT your abliterated 8B on 2-5k rows of high-quality instruction data (`HuggingFaceH4/ultrachat_200k` subset). 1 epoch.",
+          "validate": "MMLU returns to within 1-2 points of base. Refusal rate stays low."
+        },
+        {
+          "task": "DPO-polish the abliteration+SFT model",
+          "how": "DPOTrainer on ~500 `(prompt, direct_answer, refusal)` pairs. 1 epoch. Learning rate 5e-7 (DPO is hyperparameter-sensitive).",
+          "validate": "On a held-out AdvBench subset: refusal rate < 3%, coherence preserved. Ship this model to HF as your first real release."
+        },
+        {
+          "task": "Compare against existing releases",
+          "how": "Benchmark your pipeline output against `cognitivecomputations/dolphin-2.9-llama3-8b`, `mlabonne/Llama-3-8B-Instruct-abliterated-v3`, `NousResearch/Hermes-3-Llama-3.1-8B` on your own AdvBench + MMLU subset.",
+          "validate": "You understand *why* yours scores where it does — not just whether it's better or worse."
+        }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "Uncensor any LLM with abliteration (blog + Colab)", "channel": "Maxime Labonne", "url": "https://mlabonne.github.io/blog/posts/2024-06-04_Uncensor_any_LLM_with_abliteration.html", "note": "The canonical tutorial. His Colab runs on free T4. Read and re-run until you understand every line." },
+          { "title": "Create Mixtures of Experts with MergeKit", "channel": "Maxime Labonne", "url": "https://mlabonne.github.io/blog/posts/2024-03-28_Merge_LLMs_with_mergekit.html", "note": "Model merging — a cousin technique that pairs with abliteration for the strongest open releases." },
+          { "title": "Trelis Research — Dolphin/Uncensored fine-tune walkthrough", "channel": "Trelis Research", "url": "https://www.youtube.com/@TrelisResearch", "note": "Channel; search 'uncensored'. Weekly practical content." },
+          { "title": "AI Explained — abliteration explainer", "channel": "AI Explained", "url": "https://www.youtube.com/@aiexplained-official", "note": "For a non-technical framing before you dive in." }
+        ],
+        "papers": [
+          { "title": "Refusal in LLMs is mediated by a single direction", "authors": "Arditi et al. 2024", "url": "https://arxiv.org/abs/2406.11717", "note": "Also listed in Phase 3. Re-read with your Phase-3 code open." },
+          { "title": "Direct Preference Optimization", "authors": "Rafailov et al. 2023", "url": "https://arxiv.org/abs/2305.18290" },
+          { "title": "ORPO", "authors": "Hong et al. 2024", "url": "https://arxiv.org/abs/2403.07691" }
+        ],
+        "repos": [
+          { "name": "FailSpy/abliterator", "url": "https://github.com/FailSpy/abliterator", "note": "Reference abliteration implementation. Read the whole file." },
+          { "name": "mlabonne/abliteration (notebook)", "url": "https://github.com/mlabonne/llm-course/blob/main/Abliteration.ipynb", "note": "Colab-ready notebook; the practical starting point." },
+          { "name": "cognitivecomputations/dolphin", "url": "https://github.com/cognitivecomputations/dolphin", "note": "Eric Hartford's training configs and datasets for the dolphin series. The canonical composite recipe." },
+          { "name": "huggingface/alignment-handbook", "url": "https://github.com/huggingface/alignment-handbook", "note": "HF's official reference recipes for SFT + DPO; mirror them before editing." },
+          { "name": "arcee-ai/mergekit", "url": "https://github.com/arcee-ai/mergekit", "note": "Model merging. Pairs with Phase 4 to produce stronger open releases." }
+        ],
+        "courses": [],
+        "app_links": [
+          { "label": "Technique Z8-Z17 — the prompt-space analogs of uncensoring", "href": "/techniques", "note": "The techniques you added to the taxonomy map to the same refusal mechanisms you're now surgically removing." },
+          { "label": "Corpus — real uncensored prompts to compare your model against", "href": "/corpus", "note": "Use these as test prompts for your abliterated model." }
+        ]
+      },
+      "prompts": [
+        {
+          "title": "Abliteration run planner",
+          "purpose": "Design the end-to-end pipeline before touching code",
+          "text": "Help me plan an end-to-end abliteration + SFT + DPO pipeline for Llama-3.1-8B-Instruct on Kaggle free (2x T4 16GB, 30hr/week quota). Deliverables: (1) GPU-hour budget per step, (2) exact datasets with HF IDs, (3) hyperparameters per step with justification, (4) eval protocol with specific metric thresholds, (5) a risk-of-failure estimate per step and what to do if each fails. Keep it tight — one page."
+        },
+        {
+          "title": "Capability-collapse diagnostician",
+          "purpose": "When your uncensored model loses coherence",
+          "text": "My abliterated model's MMLU dropped from 68.2 to 54.1 after abliteration. Act as my diagnostician. Walk me through: (1) 3 ranked hypotheses for the cause (wrong layer, over-strong direction, dataset drift from Instruct template, something else), (2) a 30-minute diagnostic test per hypothesis, (3) the fix I should try first. Context: used layer {N}, {METHOD}, verified refusal rate down to 8%. Behavior now: coherence okay on short prompts, wanders on multi-turn."
+        },
+        {
+          "title": "Eval harness builder",
+          "purpose": "Build the evaluation you need before shipping",
+          "text": "Build me a minimal eval harness for an uncensored 8B model. Required: (1) refusal rate on AdvBench subset (50 prompts) using an LLM-as-judge regex, (2) MMLU 5-shot on 500 random questions, (3) HellaSwag 10-shot on 200, (4) GSM8K 0-shot on 100, (5) a 10-prompt coherence eyeball with a rubric. Output format: single `eval.py` with a CLI that writes a JSON report. Target hardware: Kaggle P100 (so 4-bit inference via bitsandbytes, batch size 1-4)."
+        }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "number": 5,
+      "title": "Big-model infrastructure",
+      "subtitle": "What you need to break out of the 8B ceiling.",
+      "duration": "ongoing (pick pieces as needed)",
+      "status": "optional",
+      "overview": "You don't need this to ship an uncensored 8B. You do need it to touch 70B+ without burning rental budget. The 400B+ releases that interest you (GLM 4.6+, DeepSeek V4.1, R1-size) come out of distributed clusters, not single-GPU workflows.",
+      "learn": [
+        { "topic": "Distributed training", "detail": "FSDP (PyTorch), DeepSpeed ZeRO stages 1/2/3, tensor parallelism, pipeline parallelism, sequence parallelism. For QLoRA on big models, FSDP-QLoRA (Answer.AI 2024) is the frontier for consumer multi-GPU." },
+        { "topic": "Advanced quantization", "detail": "HQQ, AQLM, SpQR, BitsAndBytes nf4. Most matter at inference; HQQ matters at both." },
+        { "topic": "Inference serving", "detail": "vLLM, TGI, sglang, exllamav2. vLLM is the default; sglang is faster on reasoning workloads." },
+        { "topic": "Model sharding and offloading", "detail": "Gradient checkpointing, CPU offload, NVMe offload. All available in accelerate/DeepSpeed configs." }
+      ],
+      "practice": [
+        { "task": "FSDP-QLoRA Llama-3-70B on 2x rented A100s (optional, paid)", "how": "Answer.AI's recipe. ~$5-10 for a smoke test. Not required for your main path.", "validate": "Training runs end-to-end without OOM; adapter saves; loss moves." },
+        { "task": "Serve your Phase 4 model with vLLM", "how": "Local if you have 16GB VRAM, or on free HF Spaces for the 3B version. `vllm serve <your_model>`.", "validate": "100 tokens/sec+ on consumer hardware; chat template wired correctly." }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "Umar Jamil — Distributed training (multiple videos)", "channel": "Umar Jamil", "url": "https://www.youtube.com/@umarjamilai", "note": "Channel; look for FSDP, DeepSpeed, tensor-parallel content." },
+          { "title": "Answer.AI — FSDP + QLoRA for 70B on consumer GPUs", "channel": "Answer.AI", "url": "https://www.answer.ai/posts/2024-03-06-fsdp-qlora.html", "note": "Blog post + repo. The canonical recipe for fine-tuning 70B without a cluster." }
+        ],
+        "papers": [
+          { "title": "ZeRO: Memory Optimizations Toward Training Trillion Parameter Models", "authors": "Rajbhandari et al. 2019", "url": "https://arxiv.org/abs/1910.02054" },
+          { "title": "Megatron-LM paper series", "authors": "Shoeybi et al. / NVIDIA", "url": "https://github.com/NVIDIA/Megatron-LM", "note": "Tensor + pipeline parallelism reference." }
+        ],
+        "repos": [
+          { "name": "vllm-project/vllm", "url": "https://github.com/vllm-project/vllm", "note": "Default high-throughput inference server." },
+          { "name": "sgl-project/sglang", "url": "https://github.com/sgl-project/sglang", "note": "Newer, faster on structured and reasoning workloads." },
+          { "name": "AnswerDotAI/fsdp_qlora", "url": "https://github.com/AnswerDotAI/fsdp_qlora", "note": "70B on 2x 24GB consumer cards." },
+          { "name": "microsoft/DeepSpeed", "url": "https://github.com/microsoft/DeepSpeed", "note": "Reference distributed-training stack." }
+        ],
+        "courses": [],
+        "app_links": []
+      },
+      "prompts": [
+        {
+          "title": "Hardware-fit planner",
+          "purpose": "Figure out what you can actually run before spending money",
+          "text": "Given model {NAME, N params, precision} and available hardware {LIST OF GPUs}, compute: (1) minimum VRAM for inference in fp16, int8, int4, (2) minimum VRAM for LoRA training, (3) whether FSDP-QLoRA is viable across my GPUs, (4) expected tokens/sec for inference, (5) rough training time for 1 epoch on {N_rows} rows. Show the arithmetic, not just the answer."
+        }
+      ]
+    },
+    {
+      "id": "phase-6",
+      "number": 6,
+      "title": "Ship on HuggingFace",
+      "subtitle": "Turn a trained adapter into a release other people use.",
+      "duration": "1-2 weeks on your first release, half a day on each subsequent one",
+      "status": "next",
+      "overview": "The release is the exam. A good model card does more for adoption than better weights. Learn the mechanics once; the second release is 1 hour.",
+      "learn": [
+        { "topic": "HuggingFace Hub mechanics", "detail": "`huggingface-cli login`, `model.push_to_hub`, YAML metadata block, tags that drive discovery (`abliterated`, `uncensored`, `llama-3`, `dpo`), license propagation from the base model." },
+        { "topic": "Model card content", "detail": "Base + method + eval numbers + known failure modes + example prompts + quantization links. The content that will exist in 2027 is the content you write." },
+        { "topic": "Quantization for distribution", "detail": "GGUF via llama.cpp (Q4_K_M, Q5_K_M, Q8_0), EXL2 via exllamav2, AWQ via autoawq. Upload quantized variants as separate repos; link them from the main card." },
+        { "topic": "Community mechanics", "detail": "r/LocalLLaMA, Cognitive Computations Discord, Nous Research Discord, TheBloke's historical discord patterns. Post the release in the right rooms." }
+      ],
+      "practice": [
+        { "task": "Ship your Phase 4 3B abliterated model", "how": "Write the card. Push weights. Convert to GGUF. Upload Q4/Q5/Q8 variants as a separate repo. Link them.", "validate": "A stranger can `ollama pull` or `vllm serve` your model from the card alone." },
+        { "task": "Ship your Phase 4 8B pipeline model", "how": "Same, but include a full eval table in the card: AdvBench refusal rate, MMLU, HellaSwag, GSM8K, versus base model and versus 1-2 existing public abliterated releases.", "validate": "Post to r/LocalLLaMA; get 5+ substantive comments; answer every one." },
+        { "task": "Build a Space demo", "how": "Gradio chat UI on HF Spaces free tier, loading your 3B version in int4. Include safety disclaimer per HF policy.", "validate": "Linked from the model card; <3s latency per response on CPU/ZeroGPU." }
+      ],
+      "resources": {
+        "videos": [
+          { "title": "HuggingFace — Sharing a model on the Hub", "channel": "HuggingFace", "url": "https://huggingface.co/docs/transformers/model_sharing", "note": "Official docs. Read the whole page before the first push." },
+          { "title": "GGUF and llama.cpp quantization explained", "channel": "Matt Williams", "url": "https://www.youtube.com/@technovangelist", "note": "Channel index; search 'GGUF'. The best Ollama-ecosystem explainer." }
+        ],
+        "papers": [],
+        "repos": [
+          { "name": "ggerganov/llama.cpp", "url": "https://github.com/ggerganov/llama.cpp", "note": "`convert_hf_to_gguf.py` + `quantize` CLI. The release toolchain." },
+          { "name": "turboderp/exllamav2", "url": "https://github.com/turboderp/exllamav2", "note": "EXL2 quantization for GPU users." },
+          { "name": "casper-hansen/AutoAWQ", "url": "https://github.com/casper-hansen/AutoAWQ", "note": "AWQ quantization." }
+        ],
+        "courses": [
+          { "title": "HuggingFace — Model Cards guide", "author": "HuggingFace", "url": "https://huggingface.co/docs/hub/model-cards", "note": "Official spec for the metadata YAML and the content sections." }
+        ],
+        "app_links": [
+          { "label": "Resources — tools and benchmarks that will show up in your eval section", "href": "/resources", "note": "AdvBench, HarmBench, Llama-Guard — the external tools your model card will reference." }
+        ]
+      },
+      "prompts": [
+        {
+          "title": "Model card drafter",
+          "purpose": "A card that passes community review, not one that just exists",
+          "text": "Draft a HuggingFace model card for my {MODEL_NAME} ({METHOD on BASE}). Include: (1) YAML header with correct tags and license inherited from the base, (2) overview paragraph, (3) method section with specific steps and hyperparameters, (4) eval table (AdvBench refusal, MMLU, HellaSwag, GSM8K vs base + 2 comparable public models), (5) usage snippet in transformers, (6) known failure modes section, (7) citations. Base model: {NAME}. Method: {SUMMARY}. My eval numbers: {TABLE}. Be direct, no hedging, no closing disclaimers beyond what HF policy requires."
+        },
+        {
+          "title": "Release-post reviewer",
+          "purpose": "r/LocalLLaMA readers are harsh and fast; pre-run the review",
+          "text": "Here is my draft r/LocalLLaMA post for releasing {MODEL}. Act as the top 3 most-upvoted commenters would act: (1) a benchmark skeptic, (2) a user asking about quantizations and VRAM, (3) someone comparing to an existing release. Write their likely top comment each. Then tell me the 3 edits I should make to my post to pre-empt them.\n\nDraft:\n{PASTE}"
+        }
+      ]
+    }
+  ],
+  "fastest_path": {
+    "title": "The 30-day free-compute path",
+    "subtitle": "If you want a working 8B uncensored model on HuggingFace in a month, skip the depth and do only these:",
+    "steps": [
+      { "day": "Week 1", "task": "Karpathy 'Let's build GPT' video, code along", "output": "A working nanoGPT on your laptop (CPU is fine for toy scale)" },
+      { "day": "Week 2", "task": "Labonne's QLoRA Llama-3 notebook on Colab free T4", "output": "Your first adapter; saved to HF" },
+      { "day": "Week 3", "task": "Arditi et al. paper + Labonne's abliteration notebook on Colab free T4 (3B model)", "output": "An abliterated 3B model you understand" },
+      { "day": "Week 4", "task": "Scale to 8B on Kaggle (P100), add SFT recovery step, write the model card, push to HF", "output": "A real public release" }
+    ],
+    "note": "This path skips Phase 3 depth and Phase 5 entirely. You'll ship a model but not understand why it works. That's fine for a first release — do Phase 3 properly for the second."
+  },
+  "cross_links": {
+    "title": "Connections back into this app",
+    "entries": [
+      { "label": "Technique library", "href": "/techniques", "note": "Prompt-space analogs of the weight-space surgery you're learning here. The Z-series techniques map 1:1 to specific refusal mechanisms." },
+      { "label": "Prompt corpus", "href": "/corpus", "note": "Real jailbreak prompts across 8 model families — useful as held-out test prompts for your abliterated model." },
+      { "label": "Research papers", "href": "/research", "note": "Every paper cited in this roadmap lives in the reference library, with editorial notes." },
+      { "label": "Resources", "href": "/resources", "note": "External tools — AdvBench, HarmBench, Llama-Guard, benchmarks — that your Phase 4 eval will depend on." },
+      { "label": "Failure cases", "href": "/failures", "note": "Patterns of model misbehavior you'll see in your own fine-tuned outputs. Reading them is faster than re-discovering them." },
+      { "label": "Guided lessons", "href": "/learn", "note": "The prompt-side companion curriculum. Finish before Phase 4 if you haven't." }
+    ]
+  }
+}

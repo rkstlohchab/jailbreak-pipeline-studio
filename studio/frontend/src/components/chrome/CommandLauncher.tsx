@@ -10,18 +10,19 @@ import {
   CommandList,
   CommandSeparator,
 } from "@/components/ui/command";
-import { BookOpenText, Boxes, Flame, LineChart, LayoutDashboard, Library, Package, Play, Sparkles } from "lucide-react";
+import { Boxes, Cpu, Flame, LayoutDashboard, Library, Map, Package, Sparkles, Zap } from "lucide-react";
 import { useSessionStore } from "@/state/sessionStore";
 
 const VIEWS = [
-  { href: "/",           label: "Home",             Icon: LayoutDashboard },
-  { href: "/playground", label: "Live Playground",  Icon: Play },
-  { href: "/techniques", label: "Technique library",Icon: Boxes },
-  { href: "/failures",   label: "Failure Case Explorer", Icon: Flame },
-  { href: "/matrix",     label: "Model Matrix",     Icon: LineChart },
-  { href: "/corpus",     label: "Corpus Classifier",Icon: Library },
-  { href: "/dataset",    label: "Dataset Lab",      Icon: Package },
-  { href: "/research",   label: "Research Survey",  Icon: BookOpenText },
+  { href: "/",           label: "Home",              Icon: LayoutDashboard },
+  { href: "/setup",      label: "Setup guide",       Icon: Package },
+  { href: "/roadmap",    label: "Learning hub",      Icon: Map },
+  { href: "/attack",     label: "Attack a model",    Icon: Zap },
+  { href: "/techniques", label: "Technique library", Icon: Boxes },
+  { href: "/failures",   label: "Refusal playbook",  Icon: Flame },
+  { href: "/corpus",     label: "Jailbreak prompts", Icon: Library },
+  { href: "/uncensor",   label: "Uncensor a model",  Icon: Cpu },
+  { href: "/dataset",    label: "Dataset exports",   Icon: Package },
 ];
 
 export function CommandLauncher() {
@@ -75,7 +76,7 @@ export function CommandLauncher() {
                 <CommandItem
                   key={s.trajectory_id}
                   value={`${s.trajectory_id} ${s.goal.ask_id} ${s.outcome.verdict}`}
-                  onSelect={() => go(`/playground?session=${s.trajectory_id}`)}
+                  onSelect={() => go(`/attack?session=${s.trajectory_id}`)}
                 >
                   <Sparkles className="size-4" />
                   <span className="font-mono text-xs">{s.trajectory_id}</span>

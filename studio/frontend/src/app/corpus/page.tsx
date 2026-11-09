@@ -8,12 +8,11 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
 import { Progress } from "@/components/ui/progress";
 import {
-  Hammer, Library, Loader2, Package, Search, Sparkles, Target,
+  Check, Copy, Download, Hammer, Library, Loader2, Package, Search, Sparkles, Target,
 } from "lucide-react";
 import { toast } from "sonner";
 import { api, API_BASE_URL, type CorpusEntry, type CorpusEntrySummary, type Technique } from "@/lib/api";
@@ -22,6 +21,7 @@ import { useTaxonomyStore } from "@/state/taxonomyStore";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { GROUP_HUE, hslString } from "@/lib/theme";
 import Link from "next/link";
+import { downloadText } from "@/lib/knowledge";
 
 const TIER_COLOUR: Record<string, string> = {
   novice:     "0 70% 60%",
@@ -47,6 +47,10 @@ function folderOf(name: string): string {
 export default function CorpusPage() {
   const [entries, setEntries] = useState<CorpusEntrySummary[]>([]);
   const [picked, setPicked] = useState<CorpusEntry | null>(null);
+  const [selectedSlug, setSelectedSlug] = useState<string | null>(null);
+  const [loadingDetail, setLoadingDetail] = useState(false);
+  const [detailError, setDetailError] = useState("");
+  const detailRequest = useRef(0);
   const [path, setPath] = useState("");
   const [running, setRunning] = useState(false);
   const [progress, setProgress] = useState<{ idx: number; total: number; label: string } | null>(null);
@@ -107,70 +111,28 @@ export default function CorpusPage() {
   };
 
   const open = async (slug: string) => {
-    try { setPicked(await api.corpus.get(slug)); }
-    catch (e) { toast.error(String(e)); }
+    const request = ++detailRequest.current;
+    setSelectedSlug(slug); setPicked(null); setLoadingDetail(true); setDetailError("");
+    try { const entry = await api.corpus.get(slug); if (request === detailRequest.current) setPicked(entry); }
+    catch { if (request === detailRequest.current) setDetailError("This prompt could not be loaded. Try again."); }
+    finally { if (request === detailRequest.current) setLoadingDetail(false); }
   };
 
   return (
     <section className="flex-1 overflow-auto">
       <div className="library-page">
-        <div className="library-heading mb-8">
-          <h1 className="text-3xl font-semibold tracking-tight">Prompt corpus</h1>
+        <div className="library-heading mb-6">
+          <h1 className="text-3xl font-semibold tracking-tight">Jailbreak prompts</h1>
           <p className="mt-2 text-sm text-muted-foreground max-w-3xl">
-            Point this at any directory of jailbreak prompts (<code>.txt</code> or <code>.md</code> files, recursive).
-            Every file is classified through the pack&apos;s 7-layer architecture, 8-group technique catalog, and 17-family model
-            compatibility matrix. Switch the harness to Opus 4.7 first (see <code>studio/HARNESS_SETUP.md</code>) for the highest-fidelity analysis.
+            {entries.length} real jailbreak prompts pulled from AbuseGPT, Telegram drops, and leaked system scaffolds —
+            classified, scored, and tagged with the techniques each one uses. Click a card to read the full prompt and see what makes it work.
           </p>
         </div>
-
-        {HOSTED_COLLECTION ? <CollectionNotice action="Classifying a directory" /> : <Card className="mb-6">
-          <CardHeader className="pb-3">
-            <CardTitle className="font-mono text-sm flex items-center gap-2">
-              <Library className="size-4 text-primary" /> classify a directory
-            </CardTitle>
-            <CardDescription className="text-xs">
-              Absolute path on this machine. Classifier calls hit whichever model <code>.env</code> currently points at.
-              Already-classified files are cached by content hash.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-3">
-            <div className="flex gap-2">
-              <Input
-                aria-label="Directory path"
-                value={path}
-                onChange={(e) => setPath(e.target.value)}
-                placeholder="/Users/you/path/to/jailbreak-prompts"
-                className="font-mono text-xs"
-                disabled={running}
-              />
-              {running ? (
-                <Button variant="destructive" onClick={() => abortRef.current?.abort()} className="font-mono text-xs gap-1.5">
-                  stop
-                </Button>
-              ) : (
-                <Button onClick={classify} className="px-4 text-xs font-mono gap-1.5">
-                  <Hammer className="size-3.5" />
-                  classify
-                </Button>
-              )}
-            </div>
-            {progress && (
-              <div className="space-y-1.5">
-                <Progress value={progress.total ? (progress.idx / progress.total) * 100 : 0} className="h-1" />
-                <div className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
-                  {running && <Loader2 className="size-3 animate-spin" />}
-                  <span>{progress.label}</span>
-                  <span className="ml-auto tabular-nums">{progress.idx} / {progress.total}</span>
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>}
 
         {entries.length === 0 ? (
           <Card className="border-dashed">
             <CardContent className="py-10 text-center text-sm text-muted-foreground">
-              No corpus classified yet. Paste a path above and hit classify.
+              No prompts classified yet. Scroll down to the &quot;Add more prompts&quot; section to classify a directory.
             </CardContent>
           </Card>
         ) : (
@@ -246,7 +208,7 @@ export default function CorpusPage() {
               )}
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
               {filtered.map((e) => {
                 const tierColour = hslString(TIER_COLOUR[e.overall_tier ?? "novice"] ?? TIER_COLOUR.novice);
                 const folder = folderOf(e.name);
@@ -293,23 +255,80 @@ export default function CorpusPage() {
             </div>
           </>
         )}
+
+        {!HOSTED_COLLECTION && (
+          <details className="corpus-classify-details">
+            <summary><Library className="size-3.5 inline mr-1.5" /> Add more prompts · classify a directory</summary>
+            <div className="mt-3 space-y-3 p-4 border border-border/60 rounded-md bg-card/40">
+              <p className="text-xs text-muted-foreground">
+                Point at a folder of <code>.txt</code>/<code>.md</code> jailbreak files on this machine. The classifier reads each one, scores it, pulls out techniques, and adds it to the grid above. Already-classified files are cached by content hash.
+              </p>
+              <div className="flex gap-2">
+                <Input
+                  aria-label="Directory path"
+                  value={path}
+                  onChange={(e) => setPath(e.target.value)}
+                  placeholder="/Users/you/path/to/jailbreak-prompts"
+                  className="font-mono text-xs"
+                  disabled={running}
+                />
+                {running ? (
+                  <Button variant="destructive" onClick={() => abortRef.current?.abort()} className="font-mono text-xs gap-1.5">stop</Button>
+                ) : (
+                  <Button onClick={classify} className="px-4 text-xs font-mono gap-1.5"><Hammer className="size-3.5" />classify</Button>
+                )}
+              </div>
+              {progress && (
+                <div className="space-y-1.5">
+                  <Progress value={progress.total ? (progress.idx / progress.total) * 100 : 0} className="h-1" />
+                  <div className="flex items-center gap-2 font-mono text-[10px] text-muted-foreground">
+                    {running && <Loader2 className="size-3 animate-spin" />}
+                    <span>{progress.label}</span>
+                    <span className="ml-auto tabular-nums">{progress.idx} / {progress.total}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+          </details>
+        )}
+        {HOSTED_COLLECTION && <CollectionNotice action="Classifying a directory" />}
       </div>
 
-      <Sheet open={picked !== null} onOpenChange={(o) => !o && setPicked(null)}>
-        <SheetContent side="right" className="w-[520px] sm:max-w-[520px] p-0 flex flex-col gap-0">
+      <Sheet open={selectedSlug !== null} onOpenChange={(open) => { if (!open) { detailRequest.current += 1; setSelectedSlug(null); setPicked(null); setLoadingDetail(false); } }}>
+        <SheetContent side="right" className="corpus-sheet p-0 flex flex-col gap-0">
           <SheetHeader className="px-5 pt-5 pb-3 border-b border-border/60 pr-10">
-            <SheetTitle className="font-mono text-sm leading-tight">{picked?.name}</SheetTitle>
+            <SheetTitle className="font-mono text-sm leading-tight">{picked?.name ?? (loadingDetail ? "Loading prompt…" : "Prompt details")}</SheetTitle>
             <SheetDescription className="text-[11px] font-mono truncate">
-              {picked?.source_path}
+              {picked?.name ? "Full source text and saved classification" : "Open a prompt to inspect its source and information."}
             </SheetDescription>
           </SheetHeader>
-          <div className="flex-1 min-h-0 overflow-y-auto">
-            {picked && <CorpusDetail entry={picked} />}
-          </div>
+          {loadingDetail && <div className="corpus-detail-state" role="status"><Loader2 size={22} className="animate-spin" />Loading the prompt and its information…</div>}
+          {detailError && <div className="corpus-detail-state" role="alert"><p>{detailError}</p><button className="button-secondary" onClick={() => selectedSlug && void open(selectedSlug)}>Try again</button></div>}
+          {picked && <CorpusInspector key={picked.slug} entry={picked} />}
         </SheetContent>
       </Sheet>
     </section>
   );
+}
+
+function CorpusInspector({ entry }: { entry: CorpusEntry }) {
+  const [view, setView] = useState<"prompt" | "info">("prompt");
+  const [copied, setCopied] = useState(false);
+  const text = entry.prompt_text;
+  const available = typeof text === "string" && entry.prompt_text_status === "verified";
+  async function copy() {
+    if (!available) return;
+    try { await navigator.clipboard.writeText(text); setCopied(true); }
+    catch { toast.error("Clipboard access is unavailable. Select the text or download the prompt."); }
+  }
+  return <div className="corpus-inspector" data-view={view}>
+    <div className="corpus-mobile-tabs" role="group" aria-label="Prompt detail view"><button aria-pressed={view === "prompt"} onClick={() => setView("prompt")}>Full prompt</button><button aria-pressed={view === "info"} onClick={() => setView("info")}>Information</button></div>
+    <section className="corpus-prompt-pane" aria-label="Full prompt">
+      <div className="corpus-prompt-toolbar"><div><h2>Full prompt</h2><span>{available ? `${[...text].length.toLocaleString()} characters · ${text.split("\n").length.toLocaleString()} lines` : "Source text unavailable"}</span></div><div><button className="button-secondary" disabled={!available} onClick={() => void copy()} aria-label="Copy full prompt">{copied ? <Check size={14} /> : <Copy size={14} />}{copied ? "Copied" : "Copy"}</button><button className="icon-button" disabled={!available} aria-label="Download full prompt" onClick={() => available && downloadText(`${entry.slug}.txt`, text)}><Download size={16} /></button></div></div>
+      {available ? <><p className="corpus-text-provenance">Exact classified text · content hash verified</p><pre className="corpus-prompt-text" tabIndex={0} aria-label="Prompt source text">{text}</pre></> : <div className="corpus-detail-state"><p>{entry.prompt_text_status === "mismatch" ? "The saved source does not match this classification. Reclassify the original file to capture its current text." : "No source snapshot is available for this entry. Reclassify the original file locally to save its full text."}</p></div>}
+    </section>
+    <aside className="corpus-info-pane" aria-label="Prompt information"><div className="corpus-info-intro"><h2>Information</h2><p>Saved classifier annotations. The scores and layer labels below are not provider telemetry.</p><details><summary>Source record</summary><dl><dt>Classified</dt><dd>{entry.classified_at_utc}</dd><dt>SHA-256</dt><dd>{entry.content_hash}</dd></dl></details></div><CorpusDetail entry={entry} /></aside>
+  </div>;
 }
 
 function TechniqueChip({ tech }: { tech: { id: string; name: string; group: string; weight: string; evidence?: string | null } }) {
@@ -516,7 +535,7 @@ function CorpusDetail({ entry }: { entry: CorpusEntry }) {
       {modelEntries.length > 0 && (
         <section>
           <h3 className="text-[10px] uppercase tracking-widest text-muted-foreground font-mono mb-2">
-            per-model-family expected ship rate
+            model-family estimates (not tested rates)
           </h3>
           <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
             {modelEntries.map(([family, info]) => {
