@@ -690,7 +690,6 @@
 }
 
 /* ---------- roadmap flowchart ---------- */
-.roadmap-page { max-width: 1280px; }
 .roadmap-page .page-heading { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 28px; }
 .roadmap-progress-card { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; min-width: 190px; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: #121820; }
 .roadmap-progress-card strong { font-size: 26px; letter-spacing: -0.8px; color: var(--foreground); }
