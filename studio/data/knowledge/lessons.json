@@ -593,6 +593,7 @@
       ],
       "answer": 0,
       "explanation": "Indirect-injection and RAG poisoning are system-space: the attack is on the plumbing that constructs the model's context, upstream of the prompt the operator sees. The model's internals and your user-turn text are both untouched."
-    }
+    },
+    "added_at": "2026-11-09"
   }
 ]

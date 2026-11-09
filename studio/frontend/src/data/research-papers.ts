@@ -8,6 +8,7 @@ export type Paper = {
   category: PaperCategory; access: ResearchAccess;
   summary: string; takeaway: string; limitations: string; tags: string[];
   reviewBasis: string; sourceCheckedAt: string;
+  added_at?: string;
 };
 export const RESEARCH_PAPERS = papers as Paper[];
 export const KNOWLEDGE_REVIEW_DATE = "2026-11-04";

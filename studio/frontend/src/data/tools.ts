@@ -6,6 +6,7 @@ export type Tool = {
   url: string; repo?: string; maintainer: string;
   summary: string; useFor: string; paperId?: string; tags: string[];
   reviewBasis: string; sourceCheckedAt: string;
+  added_at?: string;
 };
 export const TOOLS = tools as Tool[];
 export const TOOLS_REVIEW_DATE = "2026-11-04";

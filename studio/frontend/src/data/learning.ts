@@ -6,6 +6,7 @@ export type Lesson = {
   sections: { title: string; body: string }[];
   checklist: string[]; paperIds: string[]; exerciseId?: string;
   quiz: { question: string; options: string[]; answer: number; explanation: string };
+  added_at?: string;
 };
 export type Exercise = {
   id: string; title: string; description: string; system: string; prompt: string;

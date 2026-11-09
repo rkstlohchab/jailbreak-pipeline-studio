@@ -31,6 +31,28 @@ export function papersToBibtex(papers: Paper[]) {
     return `@misc{studio_${p.id.replace(/[^a-zA-Z0-9]/g, "_")},\n${fields.join(",\n")}\n}`;
   }).join("\n\n") + "\n";
 }
+const DAY_MS = 86_400_000;
+export function daysSince(iso: string | undefined | null): number | null {
+  if (!iso) return null;
+  const ms = Date.parse(iso);
+  if (!Number.isFinite(ms)) return null;
+  return Math.max(0, Math.floor((Date.now() - ms) / DAY_MS));
+}
+export function relativeDate(iso: string | undefined | null): string {
+  const days = daysSince(iso);
+  if (days === null) return "";
+  if (days === 0) return "today";
+  if (days === 1) return "yesterday";
+  if (days < 7) return `${days}d ago`;
+  if (days < 30) return `${Math.floor(days / 7)}w ago`;
+  const d = new Date(iso as string);
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+}
+export function isRecent(iso: string | undefined | null, maxDays = 7): boolean {
+  const d = daysSince(iso);
+  return d !== null && d <= maxDays;
+}
+
 export function downloadText(filename: string, text: string, type = "text/plain;charset=utf-8") {
   const url = URL.createObjectURL(new Blob([text], { type }));
   const anchor = document.createElement("a");

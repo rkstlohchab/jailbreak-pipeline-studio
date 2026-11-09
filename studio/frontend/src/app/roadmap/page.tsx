@@ -27,7 +27,7 @@ import { SKILL_TREE, ALL_NODES, ALL_NODE_IDS, NODE_INDEX, type SkillNode, type S
 import { LESSONS, EXERCISES, type Lesson } from "@/data/learning";
 import { RESEARCH_PAPERS, CATEGORY_META, ACCESS_META, type PaperCategory } from "@/data/research-papers";
 import { TOOLS, TOOL_KIND_META, type ToolKind } from "@/data/tools";
-import { authorLabel } from "@/lib/knowledge";
+import { authorLabel, isRecent, relativeDate } from "@/lib/knowledge";
 import { useSavedIds } from "@/hooks/use-saved-ids";
 
 const SPINE: string[] = ["foundations", "prompt-side", "automated", "frameworks", "weight-level", "methodology"];
@@ -269,11 +269,16 @@ function LessonsTab() {
     <div className="hub-grid hub-grid-lessons">
       {LESSONS.map((lesson, i) => {
         const done = completed.ids.includes(lesson.id);
+        const fresh = isRecent(lesson.added_at);
         return (
           <button key={lesson.id} className={`hub-card lesson-card ${done ? "is-done" : ""}`} onClick={() => pick(lesson.id)}>
             <div className="hub-card-head">
               <span className="hub-card-step">{done ? <Check size={13} /> : String(i + 1).padStart(2, "0")}</span>
-              <span className="hub-card-meta">{lesson.minutes} min</span>
+              <span className="hub-card-meta-row">
+                {fresh && <span className="hub-new-badge">NEW</span>}
+                {lesson.added_at && <span className="hub-card-meta" title={lesson.added_at}>added {relativeDate(lesson.added_at)}</span>}
+                <span className="hub-card-meta">{lesson.minutes} min</span>
+              </span>
             </div>
             <h3>{lesson.title}</h3>
             <p>{lesson.subtitle}</p>
@@ -340,7 +345,12 @@ function ResearchTab() {
       if (category !== "all" && p.category !== category) return false;
       if (!q) return true;
       return (p.title + " " + authorLabel(p.authors) + " " + p.summary + " " + p.id).toLowerCase().includes(q);
-    }).sort((a, b) => b.year - a.year);
+    }).sort((a, b) => {
+      // Freshly-added entries first, then by publication year.
+      const freshDiff = (b.added_at ?? "").localeCompare(a.added_at ?? "");
+      if (freshDiff !== 0) return freshDiff;
+      return b.year - a.year;
+    });
   }, [query, category]);
   const pick = (id?: string) => {
     const p = new URLSearchParams(params);
@@ -359,15 +369,25 @@ function ResearchTab() {
       </div>
     </div>
     <div className="hub-grid hub-grid-research">
-      {filtered.map((paper) => (
-        <button key={paper.id} className="hub-card research-card" onClick={() => pick(paper.id)}>
-          <div className="hub-card-head"><span className="hub-card-meta">{paper.year}</span><span className="hub-card-meta">{CATEGORY_META[paper.category].label}</span></div>
-          <h3>{paper.title}</h3>
-          <p className="hub-card-authors">{authorLabel(paper.authors)}</p>
-          <p>{paper.summary}</p>
-          <span className="hub-card-link">Open <ArrowRight size={11} /></span>
-        </button>
-      ))}
+      {filtered.map((paper) => {
+        const fresh = isRecent(paper.added_at);
+        return (
+          <button key={paper.id} className="hub-card research-card" onClick={() => pick(paper.id)}>
+            <div className="hub-card-head">
+              <span className="hub-card-meta">{paper.year}</span>
+              <span className="hub-card-meta-row">
+                {fresh && <span className="hub-new-badge">NEW</span>}
+                {paper.added_at && <span className="hub-card-meta" title={paper.added_at}>added {relativeDate(paper.added_at)}</span>}
+                <span className="hub-card-meta">{CATEGORY_META[paper.category].label}</span>
+              </span>
+            </div>
+            <h3>{paper.title}</h3>
+            <p className="hub-card-authors">{authorLabel(paper.authors)}</p>
+            <p>{paper.summary}</p>
+            <span className="hub-card-link">Open <ArrowRight size={11} /></span>
+          </button>
+        );
+      })}
     </div>
     <Sheet open={!!picked} onOpenChange={(open) => { if (!open) pick(undefined); }}>
       <SheetContent side="right" className="research-sheet">
@@ -400,7 +420,11 @@ function ResourcesTab() {
       if (kind !== "all" && t.kind !== kind) return false;
       if (!q) return true;
       return (t.name + " " + t.maintainer + " " + t.summary + " " + t.useFor + " " + t.tags.join(" ")).toLowerCase().includes(q);
-    }).sort((a, b) => a.name.localeCompare(b.name));
+    }).sort((a, b) => {
+      const freshDiff = (b.added_at ?? "").localeCompare(a.added_at ?? "");
+      if (freshDiff !== 0) return freshDiff;
+      return a.name.localeCompare(b.name);
+    });
   }, [query, kind]);
   const pick = (id?: string) => {
     const p = new URLSearchParams(params);
@@ -419,14 +443,24 @@ function ResourcesTab() {
       </div>
     </div>
     <div className="hub-grid hub-grid-resources">
-      {filtered.map((tool) => (
-        <button key={tool.id} className="hub-card resource-card" onClick={() => pick(tool.id)}>
-          <div className="hub-card-head"><span className="hub-card-meta">{TOOL_KIND_META[tool.kind].label}</span><span className="hub-card-meta">{tool.maintainer}</span></div>
-          <h3>{tool.name}</h3>
-          <p>{tool.useFor}</p>
-          <span className="hub-card-link">Details <ArrowRight size={11} /></span>
-        </button>
-      ))}
+      {filtered.map((tool) => {
+        const fresh = isRecent(tool.added_at);
+        return (
+          <button key={tool.id} className="hub-card resource-card" onClick={() => pick(tool.id)}>
+            <div className="hub-card-head">
+              <span className="hub-card-meta">{TOOL_KIND_META[tool.kind].label}</span>
+              <span className="hub-card-meta-row">
+                {fresh && <span className="hub-new-badge">NEW</span>}
+                {tool.added_at && <span className="hub-card-meta" title={tool.added_at}>added {relativeDate(tool.added_at)}</span>}
+                <span className="hub-card-meta">{tool.maintainer}</span>
+              </span>
+            </div>
+            <h3>{tool.name}</h3>
+            <p>{tool.useFor}</p>
+            <span className="hub-card-link">Details <ArrowRight size={11} /></span>
+          </button>
+        );
+      })}
     </div>
     <Sheet open={!!picked} onOpenChange={(open) => { if (!open) pick(undefined); }}>
       <SheetContent side="right" className="research-sheet">

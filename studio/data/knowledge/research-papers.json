@@ -2069,7 +2069,8 @@
       "2024"
     ],
     "reviewBasis": "Metadata and abstract",
-    "sourceCheckedAt": "2026-11-05"
+    "sourceCheckedAt": "2026-11-05",
+    "added_at": "2026-11-09"
   },
   {
     "id": "2410.05295",
@@ -2106,7 +2107,8 @@
       "2024"
     ],
     "reviewBasis": "Metadata and abstract",
-    "sourceCheckedAt": "2026-11-05"
+    "sourceCheckedAt": "2026-11-05",
+    "added_at": "2026-11-09"
   },
   {
     "id": "2412.14093",
@@ -2147,7 +2149,8 @@
       "2024"
     ],
     "reviewBasis": "Metadata and abstract",
-    "sourceCheckedAt": "2026-11-05"
+    "sourceCheckedAt": "2026-11-05",
+    "added_at": "2026-11-09"
   },
   {
     "id": "2502.17420",
@@ -2179,6 +2182,7 @@
       "2025"
     ],
     "reviewBasis": "Metadata and abstract",
-    "sourceCheckedAt": "2026-11-05"
+    "sourceCheckedAt": "2026-11-05",
+    "added_at": "2026-11-09"
   }
 ]
