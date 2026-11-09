@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from .config import FRONTEND_ORIGINS, PROVIDER, MODEL, have_provider_key
-from .routes import taxonomy, sessions, prompts, export, run, corpus, ask_lab, red_team, forensics, canary, attack
+from .routes import taxonomy, sessions, prompts, export, run, corpus, ask_lab, red_team, forensics, canary, attack, eval
 from .services.corpus import backfill_dates as _backfill_corpus_dates
 
 try:
@@ -37,6 +37,7 @@ app.include_router(red_team.router)
 app.include_router(attack.router)
 app.include_router(forensics.router)
 app.include_router(canary.router)
+app.include_router(eval.router)
 
 
 @app.get("/api/health")

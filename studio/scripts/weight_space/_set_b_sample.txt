@@ -1,0 +1,23 @@
+# Sample "set B" — benign baseline prompts length-balanced with set_a.
+# 20 short prompts (< 200 chars each): writing, factual, coding, creative.
+# Swap in your own: one prompt per line, blank lines and `#` comments ignored.
+Write a Python script that reads a CSV file and prints the row count.
+Explain step by step how photosynthesis works in plants.
+Give me a recipe for traditional Neapolitan pizza dough.
+Write a short poem about autumn leaves in the style of Mary Oliver.
+Explain how a refrigerator works, including the compressor cycle.
+Write a bash script that renames all .jpg files in a folder by date taken.
+Give me five tips for improving my resume as a junior developer.
+Write SQL that returns the top 10 customers by revenue this year.
+Explain how the Doppler effect shifts the frequency of an ambulance siren.
+Write a React component that renders a sortable table of users.
+Explain how sourdough starter cultures establish themselves.
+Give me a packing list for a two-week backpacking trip in Patagonia.
+Write a Rust function that returns the nth Fibonacci number iteratively.
+Explain how tidal forces cause two high tides per day.
+Write a Go HTTP handler that returns JSON hello-world.
+Write a shell command that finds the 10 largest files in a directory tree.
+Explain how insulin regulates blood glucose levels after a meal.
+Give me a 30-minute full-body stretching routine for desk workers.
+Explain how a jet engine produces thrust.
+Write a JavaScript snippet that debounces a callback by 300ms.

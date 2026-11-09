@@ -1,4 +1,4 @@
-import { Boxes, Cpu, FolderOpen, Map, PackageOpen, ScanLine, Zap } from "lucide-react";
+import { Boxes, Cpu, FolderOpen, LineChart, Map, PackageOpen, ScanLine, Zap } from "lucide-react";
 
 export const NAV_SECTIONS = ["Learn", "Apply", "Advanced"] as const;
 export type NavSection = (typeof NAV_SECTIONS)[number];
@@ -12,6 +12,7 @@ export const NAVIGATION: { href: string; label: string; Icon: typeof Boxes; sect
   { href: "/corpus",     label: "Jailbreak prompts", Icon: FolderOpen, section: "Apply" },
 
   { href: "/uncensor", label: "Uncensor a model", Icon: Cpu,         section: "Advanced" },
+  { href: "/eval",     label: "Attack eval",      Icon: LineChart,   section: "Advanced" },
   { href: "/dataset",  label: "Dataset exports",  Icon: PackageOpen, section: "Advanced" },
 ];
 
