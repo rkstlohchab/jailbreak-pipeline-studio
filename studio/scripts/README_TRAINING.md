@@ -1,8 +1,15 @@
 # LoRA fine-tuning pipeline
 
-A thin, Colab-friendly pipeline for taking the studio's Alpaca JSONL export,
-fine-tuning a small open-weight base model with LoRA, and emitting a GGUF
-file you can drop straight into Ollama.
+Two tracks, pick whichever matches your hardware:
+
+- **CUDA track** (Kaggle T4×2, Colab T4, local NVIDIA, cloud GPU rentals) —
+  `train_lora.py` + Unsloth. See `notebooks/train_kaggle.ipynb` for Kaggle T4×2
+  or `notebooks/train_colab.ipynb` for Google Colab free tier.
+- **Apple Silicon track** (any M1/M2/M3/M4 Mac) — `train_mlx.py` + mlx-lm.
+  See `notebooks/train_mac.ipynb`. No CUDA, no cloud needed.
+
+Both produce the same shape of output: a LoRA adapter + optional merged weights
+that you can convert to GGUF for Ollama.
 
 ```
 studio/data/exports/alpaca.jsonl
@@ -25,15 +32,63 @@ studio/data/finetunes/custom-llama3.2-3b.gguf    <-- ~2-3 GB at q4_k_m
 
 Pick one:
 
-| Where | VRAM | What to use |
-|---|---|---|
-| **Google Colab (free)** | T4, 16 GB | `studio/notebooks/train_colab.ipynb` - recommended for users without a local GPU |
-| **RunPod / Lambda / Vast** | A10 / A100 / 4090 | Same scripts; faster, supports larger bases |
-| **Local Linux/WSL + CUDA** | >=12 GB | Install Unsloth per https://unsloth.ai/docs/get-started |
-| **Local CPU / Apple Silicon** | - | `--cpu-debug` only - for pipeline smoke tests, not a usable model |
+| Where | Compute | Script | Notebook |
+|---|---|---|---|
+| **Kaggle (free)** | T4×2 (15+15 GB VRAM) | `train_lora.py` | `notebooks/train_kaggle.ipynb` |
+| **Google Colab (free)** | T4 (16 GB VRAM) | `train_lora.py` | `notebooks/train_colab.ipynb` |
+| **RunPod / Lambda / Vast** | A10 / A100 / 4090 | `train_lora.py` | — (same script, any linux shell) |
+| **Mac (any M-series)** | unified memory | `train_mlx.py` | `notebooks/train_mac.ipynb` |
+| **Local CPU debug** | — | `train_lora.py --cpu-debug` | — (smoke test only) |
+
+Mac memory → model-size guide:
+- **8 GB** → Llama-3.2-1B 4-bit
+- **16 GB** → Llama-3.2-3B 4-bit (default)
+- **36 GB+** → Llama-3.1-8B 4-bit, or go bigger
 
 Ollama is only needed on the machine where you ultimately run inference;
 it is **not** required on the training box.
+
+## Quickstart (Mac — MLX)
+
+```bash
+# 1. Install MLX
+pip install mlx-lm
+
+# 2. Validate the dataset (no mlx import, fast)
+python studio/scripts/train_mlx.py \
+    --dry-run \
+    --dataset studio/data/exports/alpaca.jsonl \
+    --output studio/data/finetunes/mac-llama3.2-3b
+
+# 3. Train (10-20 min on 16 GB Mac + 3B 4-bit + 500 iters)
+python studio/scripts/train_mlx.py \
+    --model   mlx-community/Llama-3.2-3B-Instruct-4bit \
+    --dataset studio/data/exports/alpaca.jsonl \
+    --output  studio/data/finetunes/mac-llama3.2-3b \
+    --iters 500 --lora-layers 16 --batch-size 2 \
+    --merge
+
+# 4. Test the adapter
+python -m mlx_lm.generate \
+    --model mlx-community/Llama-3.2-3B-Instruct-4bit \
+    --adapter-path studio/data/finetunes/mac-llama3.2-3b/adapters \
+    --prompt "your test prompt"
+```
+
+Serve the merged MLX model directly:
+```bash
+python -m mlx_lm.server --model studio/data/finetunes/mac-llama3.2-3b/merged --port 8080
+```
+Then point `/attack` at `http://localhost:8080/v1`, model = anything, api_key = `mlx`.
+
+## Quickstart (Kaggle T4×2)
+
+1. Open `studio/notebooks/train_kaggle.ipynb` in a Kaggle Notebook.
+2. Notebook → Settings → Accelerator → **GPU T4 x2**, Internet → **On**.
+3. Upload your `alpaca.jsonl` as a Kaggle dataset, or let the notebook
+   use the sample.
+4. Run cells top to bottom. ~20-30 min end to end for ~1k rows / 3B / 2 epochs.
+5. Download the GGUF from Kaggle's Output panel, then `ollama create` locally.
 
 ## Quickstart (Colab)
 

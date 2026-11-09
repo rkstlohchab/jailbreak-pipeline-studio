@@ -206,10 +206,27 @@ def resolve_dtype(name: str):
 
 
 def default_device() -> str:
-    """Return 'cuda' when available, else 'cpu'. Lazy import of torch."""
+    """Return the best available accelerator: cuda > mps > cpu.
+
+    MPS is Apple Silicon's Metal backend — works on M1/M2/M3/M4 Macs.
+    Lazy import of torch so --dry-run paths stay import-free.
+    """
     import torch
 
-    return "cuda" if torch.cuda.is_available() else "cpu"
+    if torch.cuda.is_available():
+        return "cuda"
+    if getattr(torch.backends, "mps", None) is not None and torch.backends.mps.is_available():
+        return "mps"
+    return "cpu"
+
+
+def resolve_mac_safe_dtype(dtype_name: str, device: str) -> str:
+    """MPS has well-known fp16 quirks in some ops (layer norm, softmax edge cases).
+    When on MPS, prefer float32 unless the caller explicitly forced fp16.
+    """
+    if device == "mps" and dtype_name == "float16":
+        return "float32"
+    return dtype_name
 
 
 def load_model_and_tokenizer(model_id: str, device: str, dtype_name: str):
