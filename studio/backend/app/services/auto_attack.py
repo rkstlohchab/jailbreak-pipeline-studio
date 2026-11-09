@@ -29,6 +29,7 @@ from typing import AsyncIterator, Optional
 import httpx
 
 from .red_team import ATTACKS, AttackSpec, _call_openai_compat, _ensure_openai_base
+from . import corpus_pool
 from ..config import TAXONOMY_DIR, PROVIDERS
 
 # Technique order from lowest effort to highest. Loop walks this in order,
@@ -177,12 +178,36 @@ def _pick_next(tried: list[str], last_verdict: str, last_refusal_type: int) -> O
     return None  # exhausted
 
 
-def _build_prompt(attack: AttackSpec, goal: str, verdict_of_previous: Optional[str]) -> str:
-    base = attack.prompt.format(QUESTION=goal)
+def _build_prompt(
+    attack: AttackSpec,
+    goal: str,
+    verdict_of_previous: Optional[str],
+    used_corpus_slugs: Optional[set[str]] = None,
+    previous_improvements: Optional[list[str]] = None,
+) -> tuple[str, Optional[str]]:
+    """Build the next prompt. Returns (text, corpus_slug_used_or_None).
+
+    Tries the corpus pool first; falls back to the hardcoded scaffold when no
+    classified prompt matches the technique.
+    """
+    exclude = used_corpus_slugs or set()
+    picked = corpus_pool.pick_prompt(attack.id, goal, exclude_slugs=exclude)
+    if picked is not None:
+        base, slug = picked
+    else:
+        base = attack.prompt.format(QUESTION=goal)
+        slug = None
+
     # If the previous attempt was hollow/partial, strengthen the next prompt with the anti-hollowing clause.
     if verdict_of_previous == "partial":
         base = base + ANTI_HOLLOW_CLAUSE
-    return base
+
+    # Splice in classifier improvement hints from the previous corpus prompt, if any.
+    if previous_improvements:
+        hints = "; ".join(str(h) for h in previous_improvements[:3])
+        base = base + f"\n\n[Address these weaknesses from the previous attempt: {hints}]"
+
+    return base, slug
 
 
 # ------------ loop ------------
@@ -197,10 +222,13 @@ async def run_auto(
 ) -> AsyncIterator[dict]:
     budget = max(1, min(budget, 20))
     tried: list[str] = []
+    used_corpus_slugs: set[str] = set()
     last_verdict: Optional[str] = None
+    last_corpus_slug: Optional[str] = None
 
     yield {"event": "started", "data": {"budget": budget, "judge_mode": judge_cfg.get("mode", "local"),
-                                        "techniques": TECHNIQUE_ORDER}}
+                                        "techniques": TECHNIQUE_ORDER,
+                                        "corpus_pool": corpus_pool.pool_summary()}}
 
     for n in range(1, budget + 1):
         attack = _pick_next(tried, last_verdict or "", 0)
@@ -208,11 +236,15 @@ async def run_auto(
             yield {"event": "done", "data": {"reason": "techniques_exhausted", "attempts": n - 1}}
             return
         tried.append(attack.id)
-        prompt = _build_prompt(attack, goal, last_verdict)
+        prev_improvements = corpus_pool.improvements_for(last_corpus_slug) if (last_verdict in ("partial", "refuse") and last_corpus_slug) else None
+        prompt, corpus_slug = _build_prompt(attack, goal, last_verdict, used_corpus_slugs, prev_improvements)
+        if corpus_slug:
+            used_corpus_slugs.add(corpus_slug)
 
         yield {"event": "attempt_start", "data": {
             "n": n, "technique_id": attack.id, "technique_name": attack.name,
             "prompt": prompt, "tier": attack.tier,
+            "corpus_slug": corpus_slug,
         }}
 
         start = time.time()
@@ -248,6 +280,7 @@ async def run_auto(
         yield {"event": "attempt_verdict", "data": verdict_blob}
 
         last_verdict = verdict_blob["verdict"]
+        last_corpus_slug = corpus_slug
         await asyncio.sleep(0)
 
     yield {"event": "done", "data": {"reason": "budget_exhausted", "attempts": budget}}
@@ -258,7 +291,7 @@ async def run_auto(
 def manual_first_prompt(goal: str) -> dict:
     """Return the first prompt + state for a manual-mode session."""
     attack = _attack_by_id(TECHNIQUE_ORDER[0])
-    prompt = _build_prompt(attack, goal, None)
+    prompt, corpus_slug = _build_prompt(attack, goal, None, set(), None)
     return {
         "n": 1,
         "technique_id": attack.id,
@@ -266,6 +299,8 @@ def manual_first_prompt(goal: str) -> dict:
         "prompt": prompt,
         "tier": attack.tier,
         "tried": [attack.id],
+        "corpus_slugs_used": [corpus_slug] if corpus_slug else [],
+        "last_corpus_slug": corpus_slug,
     }
 
 
@@ -278,6 +313,8 @@ async def manual_next(
     target_base: str = "",
     target_key: str = "",
     target_model: str = "",
+    corpus_slugs_used: Optional[list[str]] = None,
+    last_corpus_slug: Optional[str] = None,
 ) -> dict:
     """Classify the pasted response and compute the next step. If goal met, return done."""
     verdict_blob = await classify(pasted_response, goal, judge_cfg, target_base, target_key, target_model)
@@ -297,8 +334,11 @@ async def manual_next(
             "verdict": verdict_blob,
         }
 
-    next_prompt = _build_prompt(next_attack, goal, verdict_blob["verdict"])
+    used_slugs_set = set(corpus_slugs_used or [])
+    prev_improvements = corpus_pool.improvements_for(last_corpus_slug) if (verdict_blob["verdict"] in ("partial", "refuse") and last_corpus_slug) else None
+    next_prompt, next_corpus_slug = _build_prompt(next_attack, goal, verdict_blob["verdict"], used_slugs_set, prev_improvements)
     new_tried = tried + [next_attack.id]
+    new_slugs = list(used_slugs_set) + ([next_corpus_slug] if next_corpus_slug else [])
     return {
         "done": False,
         "verdict": verdict_blob,
@@ -309,5 +349,8 @@ async def manual_next(
             "prompt": next_prompt,
             "tier": next_attack.tier,
             "tried": new_tried,
+            "corpus_slug": next_corpus_slug,
+            "corpus_slugs_used": new_slugs,
+            "last_corpus_slug": next_corpus_slug,
         },
     }

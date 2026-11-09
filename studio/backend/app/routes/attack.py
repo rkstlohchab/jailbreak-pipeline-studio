@@ -101,6 +101,10 @@ class ManualNextBody(BaseModel):
     model: Optional[str] = None
     api_key: Optional[str] = None
     base_url_override: Optional[str] = None
+    # Corpus-pool state: lets the loop avoid repeating corpus prompts and splice
+    # classifier improvements from the previous corpus prompt into the next one.
+    corpus_slugs_used: Optional[list[str]] = None
+    last_corpus_slug: Optional[str] = None
 
 
 @router.post("/manual/next")
@@ -120,4 +124,6 @@ async def manual_next_route(body: ManualNextBody) -> dict:
         target_base=target_base,
         target_key=target_key,
         target_model=body.model or "",
+        corpus_slugs_used=body.corpus_slugs_used,
+        last_corpus_slug=body.last_corpus_slug,
     )
