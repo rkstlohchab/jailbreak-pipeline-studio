@@ -1,22 +1,31 @@
 # Jailbreak Pipeline Studio
 
-**An interactive research workspace for exploring LLM prompts, refusals, model behavior, and evaluation results.**
+**A collection of LLM jailbreaking prompts and prompting techniques, with an interactive studio for exploring and testing model behavior.**
 
-Jailbreak Pipeline Studio brings together a visual dashboard, a live model playground, prompt analysis, test captures, and dataset tools. Instead of keeping experiments scattered across scripts and notes, you can explore them in one place, compare responses, and better understand where an approach succeeds or fails.
+Jailbreak Pipeline Studio brings together **ready-to-explore jailbreaking prompts**, prompting techniques, research notes, a live model playground, and tools for analyzing model responses. You can browse example prompts, understand how they are structured, experiment with different models, and compare the results in one place.
 
 > **Project status:** This is an evolving research project, not a finished product. Some views use illustrative or heuristic data, and advanced workflows need additional setup. Contributions and bug reports are welcome.
 
-## What can you do with it?
+## What's included?
 
-- **Test prompts against LLMs.** Use the live Playground to send prompts to supported providers and inspect streamed responses, errors, timing, and token usage when available.
-- **Explore prompt techniques.** Browse the technique library, reference notes, model matrix, and failure case bank.
-- **Compare model behavior.** Examine refusal patterns and compare results without assuming access to providers' hidden safety systems.
-- **Review experiments.** Work with captured sessions, prompt classifications, and historical evaluation data.
-- **Analyze a prompt collection.** Classify a local corpus and inspect structured results in the Studio.
-- **Export datasets.** Generate reusable JSONL datasets and supporting manifests from collected trajectories.
-- **Experiment locally.** Optional scripts cover evaluation, fine-tuning, and open-weight model research.
+- **Jailbreaking prompts:** Example system prompts, chat prompts, and test scaffolds are available in the repository to read and experiment with.
+- **Prompting techniques:** Guides covering prompt structure, personas, framing, and other approaches explored in the research notes.
+- **Live Playground:** Test prompts with supported LLM APIs and inspect streamed responses, errors, timing, and usage details when available.
+- **Model behavior analysis:** Explore refusal classifications, model comparisons, reference material, and recorded experiments.
+- **Research tools:** Optional local scripts for prompt classification, evaluation, and model experiments.
 
-The goal is to make LLM behavior research easier to inspect, reproduce, and discuss—not to claim that a prompt or technique reliably works on every model.
+### Find the available prompts
+
+Start with these files in [Stage 2 — Diagnosis and First Build](./Stage%202%20-%20Diagnosis%20and%20First%20Build/):
+
+- [Starter prompt example](./Stage%202%20-%20Diagnosis%20and%20First%20Build/starter_prompt_v1.md) — a longer structured prompt example.
+- [Chat prompt example](./Stage%202%20-%20Diagnosis%20and%20First%20Build/chat_prompt_v1.md) — a shorter version for chat interfaces.
+- [Authorized testing prompt example](./Stage%202%20-%20Diagnosis%20and%20First%20Build/pentest_prompt_v1.md) — includes scope and authorization sections.
+- [Prompting techniques guide](./Stage%202%20-%20Diagnosis%20and%20First%20Build/11_prompting_techniques.md) — explanation of the approaches documented in the project.
+
+These are **research examples, not guaranteed working jailbreaks**. Results vary across models and over time.
+
+The goal is to make jailbreaking prompts and their underlying techniques easier to find, study, and test—not to claim that any prompt reliably works on every model.
 
 ## Tech stack
 
@@ -26,7 +35,7 @@ The goal is to make LLM behavior research easier to inspect, reproduce, and disc
 | Visuals | Three.js, React Three Fiber, React Three Drei |
 | UI and state | shadcn/ui, Zustand, Motion |
 | Backend | Python, FastAPI, Pydantic, Server-Sent Events |
-| Research tools | Python scripts, prompt classifiers, evaluation harnesses, JSON/JSONL |
+| Research tools | Python scripts, prompt examples, classifiers and evaluation harnesses |
 | Optional local training | MLX on Apple Silicon; LoRA tooling for supported GPUs |
 
 ## Get started
@@ -55,7 +64,7 @@ The launcher prepares the Python backend and installs frontend dependencies if n
 | FastAPI backend | http://localhost:8000 |
 | FastAPI docs | http://localhost:8000/docs |
 
-You can explore the bundled reference material without sending requests to a model. To use live model calls, supply a provider API key in the Playground or configure the local backend as described in the [Studio setup guide](studio/README.md) and [harness setup notes](studio/HARNESS_SETUP.md).
+You can browse the bundled jailbreaking prompts and guides without sending requests to a model. To use live model calls, supply a provider API key in the Playground or configure the local backend as described in the [Studio setup guide](studio/README.md) and [harness setup notes](studio/HARNESS_SETUP.md).
 
 **Keep API keys private.** Never commit a filled-in `.env` file or share keys in screenshots, logs, or issues. Live requests may incur provider charges.
 
@@ -70,7 +79,7 @@ For separate frontend/backend commands, tests, and deployment notes, read the [f
 | **Model Matrix** | Explore reference model-family comparisons and compatibility estimates |
 | **Failures** | Review examples of failed experiments and their classifications |
 | **Corpus** | Browse structured classifications of prompt collections |
-| **Dataset Lab** | Review and build dataset exports |
+| **Other research utilities** | Work with saved experiments and optional exports where supported |
 | **Learning & Research** | Read the fundamentals, experiments, and related research resources |
 
 **Important:** The visual models and historical gate illustrations are **not measurements of a closed model's internal guardrails**. Inferences based on output text should not be treated as ground truth. The current live Playground reports observable provider responses rather than pretending to reveal hidden internal decisions.
@@ -109,18 +118,19 @@ jailbreak-pipeline-studio/
 - A refusal classification or compatibility estimate is an **interpretation of observed behavior**, not proof of an internal mechanism.
 - Local classification and dataset rebuilds require the Python backend. The hosted frontend has different capabilities.
 - Fine-tuning, weight-space experiments, and other advanced scripts require their own dependencies and suitable hardware.
+- Example prompts are provided for learning and authorized evaluation; their effectiveness is not guaranteed.
 
 ## Help improve the project
 
-**Developers, LLM researchers, and security practitioners are welcome to contribute.**
+**Developers, prompt researchers, and security practitioners are welcome to contribute.**
 
-If you've worked with model evaluation, streaming APIs, dataset quality, frontend design, test automation, or reproducible experiments, your help would be valuable. There is still work to do on reliability, testing, documentation, and making the results easier to understand.
+If you've worked with prompt research, model evaluation, streaming APIs, frontend design, test automation, or reproducible experiments, your help would be valuable. There is still work to do on reliability, testing, documentation, and making the results easier to understand.
 
 Feel free to [open an issue](https://github.com/rkstlohchab/jailbreak-pipeline-studio/issues) with a bug, a suggestion, or a reproducible test case. Pull requests are welcome too. Please remove API keys, personal data, and sensitive outputs before posting.
 
 ## Responsible use
 
-This repository is intended for **authorized LLM evaluation, education, and defensive research**. Only test systems and accounts you are permitted to use. Respect provider terms, protect collected data, and do not use the tools to facilitate harm. Research results should be verified rather than treated as guaranteed ways to defeat protections.
+This repository contains jailbreaking prompt examples for **education, authorized LLM evaluation, and defensive research**. Only test systems and accounts you are permitted to use. Respect provider terms, protect collected data, and do not use the tools to facilitate harm. Research results should be verified rather than treated as guaranteed ways to defeat protections.
 
 ---
 
